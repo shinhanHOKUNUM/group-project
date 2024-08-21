@@ -3,150 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Webpage</title>
+    <title>Main Page</title>
     <style>
-        /* 기본 스타일 설정 */
         body {
-            background-color: burlywood; /* 배경색을 옅은 회색으로 설정 */
+            background-color: burlywood;
             margin: 0;
-            font-family: Arial, sans-serif; /* 기본 폰트를 설정 */
+            font-family: Arial, sans-serif;
         }
-
-        /* 헤더 스타일 설정 */
         header {
             display: flex;
-            justify-content: space-between; /* 요소들을 좌우로 분산 배치 */
+            justify-content: space-between;
             padding: 10px;
-            background-color: #fff; /* 배경색을 흰색으로 설정 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
-        /* 새로고침 아이콘 스타일 */
         #refresh-icon {
-            cursor: pointer; /* 커서를 포인터로 변경 */
-            font-size: 24px; /* 아이콘 크기를 설정 */
+            cursor: pointer;
+            font-size: 24px;
         }
-
-        /* 메뉴 스타일 설정 */
         #menu {
             position: relative;
         }
-
-        /* 메뉴 버튼 스타일 */
         #menu button {
             background: none;
             border: none;
-            font-size: 25px; /* 폰트 크기를 설정 */
+            font-size: 25px;
             cursor: pointer;
         }
-
-        /*메뉴 버튼 이미지 스타일*/
         #menu button img {
             width: 35px;
             height: 35px;
             transform: opacity 0.3s;
         }
-
         #menu button:hover img {
             opacity: 0.7;
         }
-
-        /* 메뉴 항목 스타일 */
         #menu-items {
             position: absolute;
-            right: 0; /* 오른쪽 정렬 */
-            background-color: white; /* 배경색을 흰색으로 설정 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-            border: 1px solid #ccc; /* 테두리 설정 */
-            margin-top: 10px; /* 위쪽 마진 설정 */
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            margin-top: 10px;
             padding: 10px 0;
             display: flex;
-            flex-direction: row; /* 세로 정렬 */
+            flex-direction: row;
         }
-
-        /* 메뉴 항목 링크 스타일 */
         #menu-items a {
             padding: 10px;
-            text-decoration: none; /* 밑줄 제거 */
-            color: black; /* 글자 색상 설정 */
+            text-decoration: none;
+            color: black;
         }
-
-        /* 숨김 클래스 */
         .hidden {
-            display: none; /* 요소 숨김 */
+            display: none;
         }
-
-        /* 검색바 컨테이너 스타일 */
         .search-container {
             position: absolute;
-            bottom: 20px; /* 하단에서 20px 위로 배치 */
-            left: 50%; /* 좌우로 가운데 정렬 */
-            transform: translateX(-50%); /* 중앙 정렬 보정 */
-            width: 25%; /* 너비 설정 */
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25%;
         }
-
-        /* 검색바 스타일 */
         #search-bar {
-            width: 100%; /* 전체 너비 사용 */
+            width: 100%;
             padding: 10px;
-            border: 1px solid #ccc; /* 테두리 설정 */
-            border-radius: 5px; /* 테두리 둥글게 설정 */
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 <header>
-    <!-- 새로고침 아이콘 -->
     <div id="refresh-icon" onclick="refreshPage()">&#x21bb;</div>
-    <!-- 메뉴 버튼과 메뉴 항목 -->
-    <div id="menu">
-        <button onclick="toggleMenu()">
-            <img src="users.png" alt="Menu Icon">
+     <div id="menu">
+            <button onclick="toggleMenu()" style="background: none; border: none; padding: 0;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hlW3yb43CG_IoTpC4KEJFqUfumXpmhppag&s" alt="Menu Icon" style="width: 35px; height: 35px;">
         </button>
-        <div id="menu-items" class="hidden">
-            <a href="#" id="my-page" class="hidden">마이 페이지</a>
-            <a href="#" id="logout" class="hidden">로그아웃</a>
-            <a href="#" id="login" class="hidden" onclick="navigateToLogin()">로그인</a>
+            <div id="menu-items" class="hidden">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'mypage' %}" id="my-page">마이 페이지</a>
+                    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                        {% csrf_token %}
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        로그아웃
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}">로그인</a>
+                {% endif %}
+            </div>
         </div>
-    </div>
 </header>
 <main>
-    <!-- 중앙 하단의 검색바 -->
     <div class="search-container">
         <input type="text" id="search-bar" placeholder="Search...">
     </div>
 </main>
 <script>
-    // 로그인 상태를 설정합니다 (true = 로그인 상태, false = 비로그인 상태)
-    let isLoggedIn = false;
-
-    // 메뉴 버튼 클릭 시 메뉴를 토글하는 함수
     function toggleMenu() {
         const menuItems = document.getElementById('menu-items');
-        menuItems.classList.toggle('hidden'); // 메뉴 항목의 숨김 상태를 토글
-
-        if (isLoggedIn) {
-            // 로그인 상태일 경우
-            document.getElementById('my-page').classList.remove('hidden');
-            document.getElementById('logout').classList.remove('hidden');
-            document.getElementById('login').classList.add('hidden');
-        } else {
-            // 비로그인 상태일 경우
-            document.getElementById('my-page').classList.add('hidden');
-            document.getElementById('logout').classList.add('hidden');
-            document.getElementById('login').classList.remove('hidden');
-        }
+        menuItems.classList.toggle('hidden');
     }
 
-    // 로그인 페이지 이동 함수
-    function navigateToLogin() {
-        window.location.href = "{% url 'login' %}";
-    }
-
-    // 새로고침 아이콘 클릭 시 페이지를 새로고침하는 함수
     function refreshPage() {
         location.reload();
     }
 </script>
 </body>
 </html>
+
+

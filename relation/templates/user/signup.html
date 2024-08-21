@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 페이지</title>
     <style>
+         .helptext {
+            display: none; /* 모든 도움말 텍스트 숨기기 */
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
@@ -128,97 +131,12 @@
 <body>
 <div class="form-container">
     <h2>회원가입</h2>
-    <form id="signup-form" action="#" method="POST">
-        <label for="name">이름:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">이메일:</label>
-        <input type="email" id="email" name="email" required>
-        <!-- 아이콘을 이메일 밑에 위치 -->
-        <span class="info-icon-container">
-                <span class="info-icon">❗
-                    <span class="tooltip">비밀번호는 최소 8자리 이상입니다.</span>
-                </span>
-            </span>
-
-        <label for="password">비밀번호:</label>
-        <input type="password" id="password" name="password" required>
-
-        <label for="confirm-password">비밀번호 확인:</label>
-        <input type="password" id="confirm-password" name="confirm-password" required>
-
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">회원가입</button>
     </form>
     <p>이미 계정이 있으신가요? <a href="{% url 'login' %}">로그인</a></p>
 </div>
-
-<script>
-    // 비밀번호 확인 유효성 검사 및 성공 시 로그인 페이지로 이동
-    document.getElementById('signup-form').addEventListener('submit', function (event) {
-        var password = document.getElementById('password').value;
-        var confirmPassword = document.getElementById('confirm-password').value;
-
-        if (password !== confirmPassword) {
-            event.preventDefault(); // 폼 제출 막기
-            document.getElementById('confirm-password').classList.add('error-border');
-            alert('비밀번호가 일치하지 않습니다.');
-        } else {
-            document.getElementById('confirm-password').classList.remove('error-border');
-            // 회원가입 성공 시 login.html로 이동
-            window.location.href = "{% url 'login' %}";
-        }
-    });
-</script>
-
-<script>
-    // 서버 측 코드
-    const express = require('express');
-    const bodyParser = require('body-parser');
-    const sqlite3 = require('sqlite3').verbose();
-    const db = new sqlite3.Database(':memory:'); // 임시 메모리 데이터베이스 사용
-
-    const app = express();
-    const port = 3000;
-
-    app.use(bodyParser.urlencoded({extended: false}));
-
-    // 데이터베이스 초기화
-    db.serialize(() => {
-        db.run("CREATE TABLE users (name TEXT, email TEXT, password TEXT)");
-        db.run("INSERT INTO users (name, email, password) VALUES ('testuser', 'test@example.com', 'password123')");
-    });
-
-    app.post('/signup', (req, res) => {
-        const {name, email, password} = req.body;
-
-        db.run("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, password], (err) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send('서버 오류');
-            } else {
-                res.send('회원가입 성공');
-            }
-        });
-    });
-
-    app.post('/login', (req, res) => {
-        const {email, password} = req.body;
-
-        db.get("SELECT * FROM users WHERE email = ? AND password = ?", [email, password], (err, row) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send('서버 오류');
-            } else if (row) {
-                res.send('로그인 성공');
-            } else {
-                res.status(401).send('아이디 또는 비밀번호가 틀립니다.');
-            }
-        });
-    });
-
-    app.listen(port, () => {
-        console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);
-    });
-</script>
 </body>
 </html>

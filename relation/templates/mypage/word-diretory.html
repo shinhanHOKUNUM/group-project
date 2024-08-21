@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Directory</title>
+    <style>
+        /* CSS 스타일을 HTML 파일 내부에 포함시킴 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #word-list-container {
+            width: 20%;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+
+        .word-item {
+            margin: 5px 0;
+            padding: 5px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        .word-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        #word-details-container {
+            width: 50%;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .word-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .word-description {
+            margin-bottom: 10px;
+        }
+
+        .related-words {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .delete-btn {
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: none;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff1a1a;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 왼쪽 단어 목록 영역 -->
+    <div id="word-list-container">
+        <div class="word-item" onclick="showWordDetails('머신러닝', '머신러닝은 인공지능의 하위 집합으로 많은 양의 데이터를 제공하여 명시적으로 프로그래밍하지 않고 신경망과 딥 러닝을 사용하여 시스템이 자율적으로 학습하고 개선할 수 있게 한다, 머신러닝을 통해 컴퓨터 시스템은 더 많은 경험을 쌓으면서 스스로 지속적으로 조정하고 향상시킬 수 있습니다 따라서 처리할 더 크고 다양한 데이터 세트를 제공함으로써 이러한 시스템의 성능을 향상 시킬 수 있습니다', '딥 러닝, 지도학습, 비지도 학습')">
+            머신러닝
+        </div>
+        <div class="word-item" onclick="showWordDetails('딥 러닝', '딥 러닝은 인간의 두뇌에서 영감을 얻은 방식으로 데이터를 처리하도록 컴퓨터를 가르치는 인공 지능(AI) 방식입니다. 딥 러닝 모델은 그림, 텍스트, 사운드, 및 기타 데이터의 복잡한 패턴을 인식하여 정확한 인사이트와 예측을 생성 할 수 있습니다.', '머신러닝, 인공지능')">
+            딥 러닝
+        </div>
+        <!-- 추가 단어 항목을 여기에 추가하세요 -->
+        <div class="word-item" onclick="showWordDetails('NLP(Natural Language Proceesing)', 'NLP는 인간의 언어를 해석, 조작 및 이해하는 능력을 컴퓨터에 부여하는 기계 학습 기술 입니다. 오늘날 조직은 이메일, 문자 메시지, 소셜 미디어 뉴스피트 동영상, 오디오 등 다양한 커뮤니케이션 채널에서 생성되는 대량의 음석 및 텍스트 데이터를 보유하고 있습니다', 'Related word A, Related word B')">
+            NLP
+        </div>
+        <div class="word-item" onclick="showWordDetails('CV(Computer Vision)', 'CV는 컴퓨터가 이미지와 비디오에서 개체와 사람을 식별하고 파악할 수 있도록 지원하는 컴퓨터 과학 분야 입니다. 다른 종류의 AI와 마찬가지로 CV도 사람의 능력 복제하는 작업을 수행하고 자동화 합니다.', 'Related word A, Related word B')">
+            CV
+        </div>
+        <div class="word-item" onclick="showWordDetails('Res(Recommender System)', 'Res란 사용자의 과거 행동 데이터를 바탕으로 사용자에게 필요한 정보나 제품을 제시하는 시스템.', 'Related word A, Related word B')">
+            Res
+        </div>
+    </div>
+
+    <!-- 오른쪽 단어 세부 정보 영역 -->
+    <div id="word-details-container">
+        <div class="word-title" id="word-title">저장된 단어 목록</div>
+        <div class="word-description" id="word-description">단어의 자세한 설명이 필요하다면 단어를 클릭해주세요.</div>
+        <div class="related-words" id="related-words"></div>
+        <button class="delete-btn" id="delete-btn" onclick="deleteCurrentWord()">삭제</button>
+    </div>
+
+    <script>
+        let currentElement = null; // 현재 선택된 단어 항목
+
+        function showWordDetails(title, description, relatedWords, element) {
+            // 단어 제목, 설명, 관계 단어를 업데이트합니다.
+            document.getElementById("word-title").innerText = title;
+            document.getElementById("word-description").innerText = description;
+            document.getElementById("related-words").innerText = `관련 단어: ${relatedWords}`;
+
+            // 현재 선택된 단어 항목을 설정합니다.
+            currentElement = element;
+            document.getElementById("delete-btn").style.display = "block"; // 삭제 버튼 표시
+        }
+
+        function deleteCurrentWord() {
+            // 현재 선택된 단어 항목을 삭제합니다.
+            if (currentElement) {
+                currentElement.remove();
+                currentElement = null;
+
+                // 세부 정보 영역을 초기화합니다.
+                document.getElementById("word-title").innerText = "저장된 단어 목록";
+                document.getElementById("word-description").innerText = "단어의 자세한 설명이 필요하다면 단어를 클릭해주세요.";
+                document.getElementById("related-words").innerText = "";
+                document.getElementById("delete-btn").style.display = "none"; // 삭제 버튼 숨기기
+            }
+        }
+    </script>
+</body>
+
+</html>

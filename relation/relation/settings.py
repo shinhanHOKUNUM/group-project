@@ -9,8 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -58,7 +57,7 @@ ROOT_URLCONF = 'relation.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -126,3 +125,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user.CustomUser'
+
+# 세션 만료를 브라우저가 닫힐 때로 설정
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# 세션의 기본 지속 시간 설정 (초 단위)
+SESSION_COOKIE_AGE = 1200  # 예: 20분
+
+LOGOUT_REDIRECT_URL = '/'
+
+# 로그인 URL 설정
+LOGIN_URL = '/login/'

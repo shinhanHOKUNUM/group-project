@@ -66,18 +66,24 @@
             padding: 10px;
             display: none;
             flex-direction: column;
-            align-items: flex-end; /* 버튼을 오른쪽으로 정렬 */
+            align-items: flex-end;
             gap: 10px;
+            z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
         }
 
-        #menu-items a {
+        #menu-items a, #menu-items button {
             text-decoration: none;
             color: black;
             background: none;
             border: none;
             cursor: pointer;
             font-size: 16px;
-            text-align: right; /* 텍스트를 오른쪽 정렬 */
+            text-align: right;
+            width: 100%; /* 버튼이 부모 요소의 너비를 채우도록 설정 */
+            padding: 10px;
+            background-color: transparent; /* 배경색 투명 */
+            border-radius: 4px; /* 버튼에 약간의 테두리 둥글기를 추가 */
+            display: block; /* 버튼이 블록 요소로 표시되도록 설정 */
         }
 
         /* 노드 팝업 스타일 */
@@ -127,14 +133,17 @@
     <div id="refresh-icon" onclick="refreshPage()">&#x21bb;</div>
     <!-- 메뉴 버튼과 메뉴 항목 -->
     <div id="menu">
-        <button onclick="toggleMenu()">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hlW3yb43CG_IoTpC4KEJFqUfumXpmhppag&s" alt="Menu Icon" style="width: 35px; height: 35px;">
-        </button>
-        <div id="menu-items" class="hidden">
-            <a href="#" id="my-page">마이 페이지</a>
-            <a href="#" id="logout" onclick="logout()">로그아웃</a>
-        </div>
+    <button onclick="toggleMenu()">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hlW3yb43CG_IoTpC4KEJFqUfumXpmhppag&s" alt="Menu Icon" style="width: 35px; height: 35px;">
+    </button>
+    <div id="menu-items" class="hidden">
+        <a href="{% url 'mypage' %}" id="mypage">마이페이지</a>
+        <form id="logout-form" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="logout">로그아웃</button>
+        </form>
     </div>
+</div>
 </header>
 <main>
     <div class="content">
@@ -160,29 +169,10 @@
     function refreshPage() {
         location.reload();
     }
-
-    // 로그인 페이지로 이동
-    function navigateToLogin() {
-        window.location.href = "{% url 'login' %}";
-    }
-
-    // 로그아웃 요청을 보내는 함수
+    
+    // 로그아웃 함수
     function logout() {
-        console.log("Logout button clicked"); // 디버깅을 위해 로그 추가
-        fetch("{% url 'logout' %}", {
-            method: "POST",
-            headers: {
-                "X-CSRFToken": "{{ csrf_token }}",
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                window.location.href = "{% url 'welcome' %}"; // 로그아웃 후 welcome 페이지로 이동
-            } else {
-                alert("Logout failed.");
-            }
-        })
-        .catch(error => console.error("Error:", error));
+        document.getElementById('logout-form').submit();
     }
 
     // Vis.js를 사용하여 네트워크 그래프를 동적으로 생성
@@ -252,7 +242,7 @@
                                     min: 10,
                                     max: 30
                                 },
-                                borderwidth: 5
+                                borderWidth: 1
                             },
                             physics: {
                                 enabled: true

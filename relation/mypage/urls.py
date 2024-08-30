@@ -1,6 +1,6 @@
 from django.urls import path
-from django.shortcuts import render
+from .views import word_directory_view
 
 urlpatterns = [
-    path('directory/', lambda request: render(request, 'mypage/word-diretory.html'), name='mypage'),
+    path('word-directory/', word_directory_view, name='mypage'),
 ]

@@ -119,7 +119,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -138,3 +144,5 @@ LOGOUT_REDIRECT_URL = '/'
 
 # 로그인 URL 설정
 LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/main/'  # 로그인 후 리디렉션할 URL 설정

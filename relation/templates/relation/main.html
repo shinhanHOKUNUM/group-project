@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Graph</title>
+    <style>
+        /* 기본 스타일 설정 */
+        body {
+            background-color: rgb(0, 0, 0);
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 헤더 스타일 설정 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #network {
+            width: 100%;
+            height: 800px;
+            border: 1px solid rgb(61, 57, 57);
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* 새로고침 아이콘 스타일 */
+        #refresh-icon {
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* 메뉴 스타일 설정 */
+        #menu {
+            position: relative;
+        }
+
+        #menu button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        #menu button img {
+            width: 35px;
+            height: 35px;
+        }
+
+        #menu button:hover img {
+            opacity: 0.7;
+        }
+
+        #menu-items {
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ccc;
+            margin-top: 10px;
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+        }
+
+        #menu-items a, #menu-items button {
+            text-decoration: none;
+            color: black;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: right;
+            width: 100%; /* 버튼이 부모 요소의 너비를 채우도록 설정 */
+            padding: 10px;
+            background-color: transparent; /* 배경색 투명 */
+            border-radius: 4px; /* 버튼에 약간의 테두리 둥글기를 추가 */
+            display: block; /* 버튼이 블록 요소로 표시되도록 설정 */
+        }
+
+        /* 노드 팝업 스타일 */
+        #node-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        #node-popup h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        #node-popup p {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+        }
+
+        /* 검색바 컨테이너 스타일 */
+        .search-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25%;
+        }
+
+        #search-bar {
+            width: 100%;
+            padding: 10px;
+            border: 3px solid #00000098;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <!-- 새로고침 아이콘 -->
+    <div id="refresh-icon" onclick="refreshPage()">&#x21bb;</div>
+    <!-- 메뉴 버튼과 메뉴 항목 -->
+    <div id="menu">
+    <button onclick="toggleMenu()">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hlW3yb43CG_IoTpC4KEJFqUfumXpmhppag&s" alt="Menu Icon" style="width: 35px; height: 35px;">
+    </button>
+    <div id="menu-items" class="hidden">
+        <a href="{% url 'mypage' %}" id="mypage">마이페이지</a>
+        <form id="logout-form" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="logout">로그아웃</button>
+        </form>
+    </div>
+</div>
+</header>
+<main>
+    <div class="content">
+        <!-- 네트워크 그래프를 표시할 div -->
+        <div id="network"></div>
+        <div id="node-popup">
+            <h2 id="node-title">Node Title</h2>
+            <p id="node-description">Node description will be shown here.</p>
+        </div>
+    </div>
+    <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Search...">
+    </div>
+<script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+<script>
+    // 메뉴 버튼 클릭 시 메뉴를 토글하는 함수
+    function toggleMenu() {
+        const menuItems = document.getElementById('menu-items');
+        menuItems.style.display = menuItems.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // 새로고침 아이콘 클릭 시 페이지를 새로고침하는 함수
+    function refreshPage() {
+        location.reload();
+    }
+    
+    // 로그아웃 함수
+    function logout() {
+        document.getElementById('logout-form').submit();
+    }
+
+    // Vis.js를 사용하여 네트워크 그래프를 동적으로 생성
+    function showNetwork() {
+        fetch('/static/json/nodes2.json')
+            .then(response => response.json())
+            .then(nodes => {
+                fetch('/static/json/edges2.json')
+                    .then(response => response.json())
+                    .then(edges => {
+                        var container = document.getElementById('network');
+                        var data = {
+                            nodes: new vis.DataSet(nodes),
+                            edges: new vis.DataSet(edges)
+                        };
+                        var options = {
+                            physics: {
+                                enabled: true,
+                                repulsion: {
+                                    centralGravity: -1,
+                                    springLength: 10000,
+                                    springConstant: 0.01,
+                                    nodeDistance: 15000,
+                                    damping: 0.1
+                                },
+                                maxVelocity: 50,
+                                minVelocity: 0.1,
+                                solver: 'repulsion',
+                            },
+                            layout: {
+                                improvedLayout: true,
+                                randomSeed: 42
+                            },
+                            edges: {
+                                scaling: {
+                                    min: 1,
+                                    max: 10
+                                },
+                                color: { 
+                                    color: '#FFFFFF',
+                                    highlight: '#87CEFA', //하늘색
+                                    hover: '#FFFFFF'
+                                 },
+                                smooth: true
+                            },
+                            nodes: {
+                                shape: 'dot',
+                                size: 8, // 노드 크기
+                                color: {
+                                    border: '#FFFFFF',
+                                    background: '#000000',
+                                    highlight: {
+                                        border: '#2B7CE9',
+                                        background: '#D2E5FF'
+                                    },
+                                    hover: {
+                                        border: '#2B7CE9',
+                                        background: '#D2E5FF'
+                                    }
+                                },
+                                font: {
+                                    color: '#FFFFFF',
+                                    size: 7,
+                                    face: 'Arial',
+                                    align: 'center',
+                                    vadjust: 9, //노드와 텍스트 사이 거리
+                                    strokeWidth: 3, // 글자 테두리 두께
+                                    strokeColor: '#000000'
+                                },
+                                scaling: {
+                                    min: 10,
+                                    max: 30
+                                },
+                                borderWidth: 1
+                            },
+                            physics: {
+                                enabled: true
+                            }
+                        };
+                        var network = new vis.Network(container, data, options);
+
+                        // 노드 클릭 시 해당 노드를 중심으로 확대
+                        network.on("click", function (params) {
+                            if (params.nodes.length > 0) {
+                                var nodeId = params.nodes[0];
+                                network.focus(nodeId, {
+                                    scale: 2.0,
+                                    animation: {
+                                        duration: 1000,
+                                        easingFunction: "easeInOutQuad"
+                                    }
+                                });
+                            } else {
+                                network.fit({
+                                    animation: {
+                                        duration: 1000,
+                                        easingFunction: "easeInOutQuad"
+                                    }
+                                });
+                            }
+                        });
+                    });
+            });
+    }
+
+    // 페이지 로드 시 네트워크 그래프 생성 함수 호출
+    window.onload = function () {
+        showNetwork();
+    };
+</script>
+</body>
+</html>

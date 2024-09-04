@@ -170,112 +170,95 @@
     function refreshPage() {
         location.reload();
     }
-    
-    // 로그아웃 함수
-    function logout() {
-        document.getElementById('logout-form').submit();
-    }
 
-    // Vis.js를 사용하여 네트워크 그래프를 동적으로 생성
+    // 네트워크 그래프 생성
     function showNetwork() {
-        fetch('/static/json/nodes2.json')
+        // 서버에서 노드 및 엣지 데이터를 가져옴
+        fetch('/get_network_data/')
             .then(response => response.json())
-            .then(nodes => {
-                fetch('/static/json/edges2.json')
-                    .then(response => response.json())
-                    .then(edges => {
-                        var container = document.getElementById('network');
-                        var data = {
-                            nodes: new vis.DataSet(nodes),
-                            edges: new vis.DataSet(edges)
-                        };
-                        var options = {
-                            physics: {
-                                enabled: true,
-                                repulsion: {
-                                    centralGravity: -1,
-                                    springLength: 10000,
-                                    springConstant: 0.01,
-                                    nodeDistance: 15000,
-                                    damping: 0.1
-                                },
-                                maxVelocity: 50,
-                                minVelocity: 0.1,
-                                solver: 'repulsion',
-                            },
-                            layout: {
-                                improvedLayout: true,
-                                randomSeed: 42
-                            },
-                            edges: {
-                                scaling: {
-                                    min: 1,
-                                    max: 10
-                                },
-                                color: { 
-                                    color: '#FFFFFF',
-                                    highlight: '#87CEFA', //하늘색
-                                    hover: '#FFFFFF'
-                                 },
-                                smooth: true
-                            },
-                            nodes: {
-                                shape: 'dot',
-                                size: 8, // 노드 크기
-                                color: {
-                                    border: '#FFFFFF',
-                                    background: '#000000',
-                                    highlight: {
-                                        border: '#2B7CE9',
-                                        background: '#D2E5FF'
-                                    },
-                                    hover: {
-                                        border: '#2B7CE9',
-                                        background: '#D2E5FF'
-                                    }
-                                },
-                                font: {
-                                    color: '#FFFFFF',
-                                    size: 7,
-                                    face: 'Arial',
-                                    align: 'center',
-                                    vadjust: 9, //노드와 텍스트 사이 거리
-                                    strokeWidth: 3, // 글자 테두리 두께
-                                    strokeColor: '#000000'
-                                },
-                                scaling: {
-                                    min: 10,
-                                    max: 30
-                                },
-                                borderWidth: 1
-                            },
-                            physics: {
-                                enabled: true
-                            }
-                        };
-                        var network = new vis.Network(container, data, options);
+            .then(data => {
+                var container = document.getElementById('network');
+                var nodes = new vis.DataSet(data.nodes.map(node => ({
+                    id: node.id,
+                    label: node.label,
+                    x: node.x * 1000,  // 좌표 값이 작을 수 있으니 적절히 스케일 조정
+                    y: node.y * 1000,  // 좌표 값 스케일 조정
+                    fixed: true  // 노드의 위치를 고정
+                })));
 
-                        // 노드 클릭 시 해당 노드를 중심으로 확대
-                        network.on("click", function (params) {
-                            if (params.nodes.length > 0) {
-                                var nodeId = params.nodes[0];
-                                network.focus(nodeId, {
-                                    scale: 2.0,
-                                    animation: {
-                                        duration: 1000,
-                                        easingFunction: "easeInOutQuad"
-                                    }
-                                });
-                            } else {
-                                network.fit({
-                                    animation: {
-                                        duration: 1000,
-                                        easingFunction: "easeInOutQuad"
-                                    }
-                                });
+                var edges = new vis.DataSet(data.edges);
+                
+                var options = {
+                    physics: {
+                        enabled: false  // 물리 엔진을 비활성화하여 고정된 좌표 사용
+                    },
+                    interaction: {
+                        dragNodes: true,  // 노드를 드래그할 수 있도록 설정
+                        hover: true       // 노드에 마우스 올리면 강조
+                    },
+                    edges: {
+                        color: { 
+                            color: '#FFFFFF',
+                            highlight: '#87CEFA',
+                            hover: '#FFFFFF'
+                        },
+                        smooth: {
+                            type: 'dynamic',  // 엣지를 부드럽게 보여줌
+                        }
+                    },
+                    nodes: {
+                        shape: 'dot',
+                        size: 8,
+                        color: {
+                            border: '#FFFFFF',
+                            background: '#000000',
+                            highlight: {
+                                border: '#2B7CE9',
+                                background: '#D2E5FF'
+                            },
+                            hover: {
+                                border: '#2B7CE9',
+                                background: '#D2E5FF'
+                            }
+                        },
+                        font: {
+                            color: '#FFFFFF',
+                            size: 7,
+                            face: 'Arial',
+                            align: 'center',
+                            strokeWidth: 3,
+                            strokeColor: '#000000'
+                        },
+                        scaling: {
+                            min: 10,
+                            max: 30
+                        },
+                        borderWidth: 1
+                    }
+                };
+
+                var network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
+
+                // 노드 클릭 시 해당 노드를 중심으로 확대
+                network.on("click", function (params) {
+                    if (params.nodes.length > 0) {
+                        var nodeId = params.nodes[0];
+                        network.focus(nodeId, {
+                            scale: 2.0,
+                            animation: {
+                                duration: 1000,
+                                easingFunction: "easeInOutQuad"
                             }
                         });
-                    });
+                    } else {
+                        network.fit({
+                            animation: {
+                                duration: 1000,
+                                easingFunction: "easeInOutQuad"
+                            }
+                        });
+                    }
+                });
             });
     }
 

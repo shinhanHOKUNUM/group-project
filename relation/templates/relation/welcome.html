@@ -84,6 +84,18 @@
             animation: fade-up 4s;
         }
 
+        /* sign in 스타일 */
+        #welcome-message a {
+            color: blue;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none; /* 밑줄 제거 */
+        }
+
+        #welcome-message a:hover {
+            text-decoration: underline; /* 마우스 오버 시 밑줄 표시 */
+        }
+
         /* 애니메이션 */
         @keyframes fade-up {
             0% {
@@ -124,7 +136,7 @@
     <!-- Welcome 메시지 -->
     <div id="welcome-message">
         <h1>Welcome NetworkX!</h1>
-        <p>Please, sign in</p>
+        <p>Please, <a onclick="navigateToLogin()">sign in</a></p> <!-- 클릭 가능한 sign in -->
     </div>
 </main>
 <script>

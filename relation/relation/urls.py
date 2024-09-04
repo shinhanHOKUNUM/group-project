@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 from .views import main_view, CustomLoginView, SignupView, welcome_view  # welcome_view를 추가
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,4 +13,5 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('mypage/', include('mypage.urls')),
     path('logout/', LogoutView.as_view(next_page='welcome'), name='logout'),  # 로그아웃 후 welcome으로 이동
+    path('get_network_data/', views.get_network_data, name='get_network_data'),
 ]

@@ -11,6 +11,8 @@ import pandas as pd
 from django.http import JsonResponse
 from django.conf import settings
 import networkx as nx
+from relation.models import AIDictionary  # 모델을 불러옴
+
 
 from relation.forms import CustomUserCreationForm
 
@@ -41,41 +43,35 @@ def welcome_view(request):
 def main_view(request):
     return render(request, 'relation/main.html')
 
-# AI_dictionary.csv로 노드랑 엣지 만들기
 def get_network_data(request):
-    # AI_dictionary.csv 파일 경로 지정
-    file_path = os.path.join(settings.BASE_DIR, 'relation', 'static', 'AI_dictionary.csv')
-
-    # CSV 파일 읽기
-    df = pd.read_csv(file_path)
+    # 데이터베이스에서 데이터를 가져오기
+    ai_terms = AIDictionary.objects.all()
 
     # 그래프 객체 생성
     G = nx.Graph()
 
-    # 노드 추가 (term-kor 기준)
-    for index, row in df.iterrows():
-        G.add_node(index, label=row['term-kor'])
+    # 노드 추가 (term-kor와 searchkeyword 기준)
+    for term in ai_terms:
+        G.add_node(term.id, label=term.term_kor, searchkeyword=term.term)  # 각 노드에 searchkeyword로 term 추가
 
     # 엣지 추가 (연결 조건은 필요에 따라 조정)
-    for i, row in df.iterrows():
-        current_term = row['term']
-        current_content = f"{row['mean']} {row['detail_mean']}"
+    for i, current_term in enumerate(ai_terms):
+        current_content = f"{current_term.mean} {current_term.detail_mean}"
 
-        for j, other_row in df.iterrows():
+        for j, other_term in enumerate(ai_terms):
             if i != j:
-                other_term = other_row['term']
-                term_en = other_row['term-en']
-                term_kor = other_row['term-kor']
+                term_en = other_term.term_en
+                term_kor = other_term.term_kor
 
                 # term-en 또는 term-kor이 mean이나 detail_mean에 등장하는 경우 엣지 추가
                 if term_en in current_content or term_kor in current_content:
-                    G.add_edge(i, j)
+                    G.add_edge(current_term.id, other_term.id)
 
     # Kamada-Kawai 레이아웃 적용 (노드 좌표 계산)
     pos = nx.kamada_kawai_layout(G)
 
     # 노드 데이터 (좌표 포함)
-    nodes = [{'id': n, 'label': G.nodes[n]['label'], 'x': pos[n][0], 'y': pos[n][1]} for n in G.nodes()]
+    nodes = [{'id': n, 'label': G.nodes[n]['label'], 'searchkeyword': G.nodes[n]['searchkeyword'], 'x': pos[n][0], 'y': pos[n][1]} for n in G.nodes()]
 
     # 엣지 데이터
     edges = [{'from': u, 'to': v} for u, v in G.edges()]

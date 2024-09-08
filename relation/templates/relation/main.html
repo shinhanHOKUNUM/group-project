@@ -155,11 +155,15 @@
             <p id="node-description">Node description will be shown here.</p>
         </div>
     </div>
-    <div class="search-container">
-        <input type="text" id="search-bar" placeholder="Search...">
+    <div class="search-container" style="position: absolute; bottom: 2%; left: 50%; transform: translateX(-50%); width: 25%;">
+        <ul id="suggestions" style="display: none; background-color: white; border: 1px solid #ccc; list-style: none; padding: 0; position: absolute; bottom: 110%; width: 100%;"></ul>
+        <input type="text" id="search-bar" placeholder="Search..." style="width: 100%; padding: 10px; border: 3px solid #00000098; border-radius: 5px;">
     </div>
-<script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
 <script>
+    var nodes;  // 전역 변수로 선언하여 검색에서도 접근 가능하게 함
+    var network;  // 전역 변수로 선언하여 검색에서도 접근 가능하게 함
+
     // 메뉴 버튼 클릭 시 메뉴를 토글하는 함수
     function toggleMenu() {
         const menuItems = document.getElementById('menu-items');
@@ -178,7 +182,7 @@
             .then(response => response.json())
             .then(data => {
                 var container = document.getElementById('network');
-                var nodes = new vis.DataSet(data.nodes.map(node => ({
+                nodes = new vis.DataSet(data.nodes.map(node => ({
                     id: node.id,
                     label: node.label,
                     searchkeyword: node.label.toLowerCase(),  // 검색을 위해 사용
@@ -238,7 +242,7 @@
                     }
                 };
 
-                var network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
+                network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
 
                 // 노드 클릭 시 해당 노드를 중심으로 확대
                 network.on("click", function (params) {
@@ -267,6 +271,55 @@
     window.onload = function () {
         showNetwork();
     };
+
+    // 검색창에 입력이 있을 때 유사한 노드 목록을 표시하는 이벤트 처리
+    document.getElementById('search-bar').addEventListener('input', function() {
+        var query = this.value.toLowerCase(); // 입력값을 소문자로 변환하여 검색
+        showSuggestions(query);
+    });
+
+    function showSuggestions(query) {
+        var suggestionBox = document.getElementById('suggestions');
+        suggestionBox.innerHTML = ''; // 기존 목록 초기화
+        if (query.length === 0) {
+            suggestionBox.style.display = 'none';
+            return;
+        }
+
+        // 검색어와 일치하는 최대 5개의 노드 찾기
+        var matches = nodes.get().filter(n => n.searchkeyword.includes(query)).slice(0, 5);
+
+        if (matches.length > 0) {
+            suggestionBox.style.display = 'block';
+            matches.forEach(node => {
+                var li = document.createElement('li');
+                li.textContent = node.label;
+                li.style.padding = '10px';
+                li.style.cursor = 'pointer';
+                li.onclick = function() {
+                    focusNode(node.id); // 클릭 시 해당 노드로 포커스
+                    suggestionBox.style.display = 'none'; // 목록 숨김
+                    document.getElementById('search-bar').value = node.label; // 검색창에 선택한 노드명 표시
+                };
+                suggestionBox.appendChild(li);
+            });
+        } else {
+            suggestionBox.style.display = 'none';
+        }
+    }
+
+    function focusNode(nodeId) {
+        // 노드 선택 시 확대
+        network.focus(nodeId, {
+            scale: 2.0,
+            animation: {
+                duration: 1000,
+                easingFunction: "easeInOutQuad"
+            }
+        });
+    }
+
+    </script>
 </script>
 </body>
 </html>

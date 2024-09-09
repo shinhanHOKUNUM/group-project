@@ -14,4 +14,5 @@ urlpatterns = [
     path('mypage/', include('mypage.urls')),
     path('logout/', LogoutView.as_view(next_page='welcome'), name='logout'),  # 로그아웃 후 welcome으로 이동
     path('get_network_data/', views.get_network_data, name='get_network_data'),
+    path('get_node_data/<int:node_id>/', views.get_node_data, name='get_node_data'),
 ]

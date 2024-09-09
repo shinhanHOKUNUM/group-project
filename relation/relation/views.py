@@ -12,7 +12,8 @@ from django.http import JsonResponse
 from django.conf import settings
 import networkx as nx
 from relation.models import AIDictionary  # 모델을 불러옴
-
+from django.http import JsonResponse
+from .models import AIDictionary
 
 from relation.forms import CustomUserCreationForm
 
@@ -83,3 +84,15 @@ def get_network_data(request):
     }
 
     return JsonResponse(data)
+
+def get_node_data(request, node_id):
+    try:
+        node = AIDictionary.objects.get(id=node_id)
+        data = {
+            'id': node.id,
+            'label': node.term,
+            'mean': node.mean
+        }
+        return JsonResponse(data)
+    except AIDictionary.DoesNotExist:
+        return JsonResponse({'error': 'Node not found'}, status=404)

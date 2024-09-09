@@ -140,6 +140,24 @@
             margin-bottom: 20px;
         }
 
+        #save-button {
+            position: absolute;
+            bottom: 90px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50; /* 버튼 배경색 */
+            color: white;
+            border: none;
+            border-radius: 10px; /* 모서리를 둥글게 */
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        #save-button:hover {
+            background-color: #45a049; /* 호버 시 배경색 */
+        }
+
+
         /* 검색바 컨테이너 스타일 */
         .search-container {
             position: absolute;
@@ -182,6 +200,7 @@
         <div id="side-panel">
             <h2 id="panel-title">Node Title</h2>
             <p id="panel-description">Node description will be shown here.</p>
+            <button id="save-button">저장</button>
         </div>
     </div>
     <div class="search-container" style="position: absolute; bottom: 2%; left: 50%; transform: translateX(-50%); width: 25%;">
@@ -274,19 +293,26 @@
 
                 network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
 
-                // 노드 클릭 시 해당 노드 정보를 사이드 패널에 표시하고 슬라이드 애니메이션 실행
+                // 노드 클릭 시 해당 노드 정보를 사이드 패널에 표시
                 network.on("click", function (params) {
                     if (params.nodes.length > 0) {
                         var nodeId = params.nodes[0];
-                        var node = nodes.get(nodeId);
-                        showSidePanel(node);
-                        network.focus(nodeId, {
-                            scale: 2.0,
-                            animation: {
-                                duration: 1000,
-                                easingFunction: "easeInOutQuad"
-                            }
-                        });
+                        fetch(`/get_node_data/${nodeId}/`)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.error) {
+                                    console.error(data.error);
+                                } else {
+                                    showSidePanel(data);
+                                    network.focus(nodeId, {
+                                        scale: 2.0,
+                                        animation: {
+                                            duration: 1000,
+                                            easingFunction: "easeInOutQuad"
+                                        }
+                                    });
+                                }
+                            });
                     } else {
                         hideSidePanel();
                         network.fit({
@@ -305,14 +331,15 @@
         showNetwork();
     };
 
-    // 사이드 패널을 보여주는 함수 (오른쪽에서 왼쪽으로 슬라이드)
-    function showSidePanel(node) {
+    // 사이드 패널을 보여주는 함수
+    function showSidePanel(nodeData) {
         var sidePanel = document.getElementById('side-panel');
-        document.getElementById('panel-title').textContent = node.label;
-        document.getElementById('panel-description').textContent = "This is a description for " + node.label;
+        document.getElementById('panel-title').textContent = nodeData.label;
+        document.getElementById('panel-description').textContent = nodeData.mean; // DB에서 가져온 'mean' 값 표시
 
         sidePanel.style.right = '0'; // 슬라이드 애니메이션을 위한 위치 변경
     }
+
 
     // 사이드 패널을 숨기는 함수
     function hideSidePanel() {

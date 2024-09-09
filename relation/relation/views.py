@@ -51,9 +51,9 @@ def get_network_data(request):
     # 그래프 객체 생성
     G = nx.Graph()
 
-    # 노드 추가 (term-kor와 searchkeyword 기준)
+    # 노드 추가 (term-kor, term, term-en 기준)
     for term in ai_terms:
-        G.add_node(term.id, label=term.term_kor, searchkeyword=term.term)  # 각 노드에 searchkeyword로 term 추가
+        G.add_node(term.id, label_kor=term.term_kor, label_full=term.term, label_en=term.term_en)
 
     # 엣지 추가 (연결 조건은 필요에 따라 조정)
     for i, current_term in enumerate(ai_terms):
@@ -72,7 +72,14 @@ def get_network_data(request):
     pos = nx.kamada_kawai_layout(G)
 
     # 노드 데이터 (좌표 포함)
-    nodes = [{'id': n, 'label': G.nodes[n]['label'], 'searchkeyword': G.nodes[n]['searchkeyword'], 'x': pos[n][0], 'y': pos[n][1]} for n in G.nodes()]
+    nodes = [{
+        'id': n,
+        'label_kor': G.nodes[n]['label_kor'],
+        'label_full': G.nodes[n]['label_full'],
+        'label_en': G.nodes[n]['label_en'],
+        'x': pos[n][0],
+        'y': pos[n][1]
+    } for n in G.nodes()]
 
     # 엣지 데이터
     edges = [{'from': u, 'to': v} for u, v in G.edges()]
@@ -84,6 +91,7 @@ def get_network_data(request):
     }
 
     return JsonResponse(data)
+
 
 def get_node_data(request, node_id):
     try:

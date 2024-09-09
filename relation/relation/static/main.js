@@ -14,15 +14,16 @@ function refreshPage() {
 
 // 네트워크 그래프 생성
 function showNetwork() {
-    // 서버에서 노드 및 엣지 데이터를 가져옴
     fetch('/get_network_data/')
         .then(response => response.json())
         .then(data => {
             var container = document.getElementById('network');
             nodes = new vis.DataSet(data.nodes.map(node => ({
                 id: node.id,
-                label: node.label,
-                searchkeyword: node.label.toLowerCase(),  // 검색을 위해 사용
+                label: node.label_kor,  // 노드에 표시할 이름을 label_kor로 설정
+                label_kor: node.label_kor,
+                label_full: node.label_full,
+                label_en: node.label_en,
                 x: node.x * 1000,  // 좌표 값이 작을 수 있으니 적절히 스케일 조정
                 y: node.y * 1000,  // 좌표 값 스케일 조정
                 fixed: true  // 노드의 위치를 고정
@@ -31,13 +32,11 @@ function showNetwork() {
             var edges = new vis.DataSet(data.edges);
 
             var options = {
-                physics: {
-                    enabled: false  // 물리 엔진을 비활성화하여 고정된 좌표 사용
-                },
+                physics: { enabled: false },
                 interaction: {
-                    dragNodes: true,  // 노드를 드래그할 수 있도록 설정
-                    hover: true,      // 노드에 마우스 올리면 강조
-                    selectable: true, // 노드를 선택할 수 있음
+                    dragNodes: true,
+                    hover: true,
+                    selectable: true,
                 },
                 edges: {
                     color: {
@@ -45,9 +44,7 @@ function showNetwork() {
                         highlight: '#87CEFA',
                         hover: '#FFFFFF'
                     },
-                    smooth: {
-                        type: 'dynamic',  // 엣지를 부드럽게 보여줌
-                    }
+                    smooth: { type: 'dynamic' }
                 },
                 nodes: {
                     shape: 'dot',
@@ -55,27 +52,17 @@ function showNetwork() {
                     color: {
                         border: '#FFFFFF',
                         background: '#000000',
-                        highlight: {
-                            border: '#2B7CE9',
-                            background: '#D2E5FF'
-                        },
-                        hover: {
-                            border: '#2B7CE9',
-                            background: '#D2E5FF'
-                        }
+                        highlight: { border: '#2B7CE9', background: '#D2E5FF' },
+                        hover: { border: '#2B7CE9', background: '#D2E5FF' }
                     },
                     font: {
                         color: '#FFFFFF',
                         size: 7,
                         face: 'Arial',
-                        align: 'center',
                         strokeWidth: 3,
                         strokeColor: '#000000'
                     },
-                    scaling: {
-                        min: 10,
-                        max: 30
-                    },
+                    scaling: { min: 10, max: 30 },
                     borderWidth: 1
                 }
             };
@@ -95,23 +82,13 @@ function showNetwork() {
                                 showSidePanel(data);
                                 network.focus(nodeId, {
                                     scale: 2.0,
-                                    animation: {
-                                        duration: 1000,
-                                        easingFunction: "easeInOutQuad"
-                                    }
+                                    animation: { duration: 1000, easingFunction: "easeInOutQuad" }
                                 });
                             }
                         });
                 } else {
                     hideSidePanel();
-                    network.fit({
-                        animation: {
-                            duration: 1000,
-                            easingFunction: "easeInOutQuad"
-                        }
-                    });
-
-                    // 검색창 비우기
+                    network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
                     document.getElementById('search-bar').value = '';  // 검색창 내용 초기화
                 }
             });
@@ -128,10 +105,8 @@ function showSidePanel(nodeData) {
     var sidePanel = document.getElementById('side-panel');
     document.getElementById('panel-title').textContent = nodeData.label;
     document.getElementById('panel-description').textContent = nodeData.mean; // DB에서 가져온 'mean' 값 표시
-
     sidePanel.style.right = '0'; // 슬라이드 애니메이션을 위한 위치 변경
 }
-
 
 // 사이드 패널을 숨기는 함수
 function hideSidePanel() {
@@ -139,46 +114,56 @@ function hideSidePanel() {
     sidePanel.style.right = '-100%'; // 다시 오른쪽으로 슬라이드
 }
 
+// 검색창에서 'Enter' 키를 눌렀을 때, 검색된 노드를 포커스하는 기능
 document.getElementById('search-bar').addEventListener('keyup', function(event) {
     if (event.key === "Enter") {
-        var query = this.value.toLowerCase(); // 검색어를 소문자로 변환하여 가져오기
-        var exactMatch = nodes.get().find(n => n.searchkeyword === query); // 정확히 일치하는 노드 찾기
+        var query = this.value.toLowerCase();  // 입력값을 소문자로 변환하여 검색
+        var exactMatch = nodes.get().find(n =>
+            n.label_kor.toLowerCase() === query ||
+            n.label_full.toLowerCase() === query ||
+            n.label_en.toLowerCase() === query
+        );  // label_kor, label_full, label_en 중 일치하는 노드 찾기
 
         if (exactMatch) {
-            focusNode(exactMatch.id); // 일치하는 노드가 있으면 해당 노드로 포커스
+            focusNode(exactMatch.id);  // 일치하는 노드가 있으면 해당 노드로 포커스
+            document.getElementById('suggestions').style.display = 'none';  // 추천 목록 상자를 숨김
         } else {
-            alert('해당하는 키워드가 없습니다, 정확하게 입력해주세요!'); // 정확히 일치하는 노드가 없을 경우
+            alert('해당하는 키워드가 없습니다. 정확하게 입력해주세요!');  // 일치하는 노드가 없을 경우
         }
     }
 });
 
-// 검색창에 입력이 있을 때 유사한 노드 목록을 표시하는 이벤트 처리
+
+// 검색창에 입력이 있을 때 유사한 노드 목록을 표시하는 함수
 document.getElementById('search-bar').addEventListener('input', function() {
-    var query = this.value.toLowerCase(); // 입력값을 소문자로 변환하여 검색
+    var query = this.value.toLowerCase();  // 입력값을 소문자로 변환하여 검색
     showSuggestions(query);
 });
 
 function showSuggestions(query) {
     var suggestionBox = document.getElementById('suggestions');
-    suggestionBox.innerHTML = ''; // 기존 목록 초기화
+    suggestionBox.innerHTML = '';  // 기존 목록 초기화
 
     if (query.length === 0) {
         suggestionBox.style.display = 'none';
         return;
     }
 
-    // 검색어와 일치하는 최대 5개의 노드 찾기
-    var matches = nodes.get().filter(n => n.searchkeyword.includes(query)).slice(0, 5);
+    // 검색어와 일치하는 최대 5개의 노드 찾기 (label_kor 또는 label_full 기준)
+    var matches = nodes.get().filter(n =>
+        n.label_kor.toLowerCase().includes(query) ||
+        n.label_full.toLowerCase().includes(query)
+    ).slice(0, 5);
 
     if (matches.length > 0) {
         suggestionBox.style.display = 'block';
         matches.forEach(node => {
             var li = document.createElement('li');
-            li.textContent = node.label;
+            li.textContent = node.label_full;  // 추천 목록에는 label_full 사용
             li.onclick = function() {
-                focusNode(node.id); // 클릭 시 해당 노드로 포커스
-                suggestionBox.style.display = 'none'; // 목록 숨김
-                document.getElementById('search-bar').value = node.label; // 검색창에 선택한 노드명 표시
+                focusNode(node.id);  // 클릭 시 해당 노드로 포커스
+                suggestionBox.style.display = 'none';  // 목록 숨김
+                document.getElementById('search-bar').value = node.label_full;  // 검색창에 label_full 표시
             };
             suggestionBox.appendChild(li);
         });
@@ -187,25 +172,16 @@ function showSuggestions(query) {
     }
 }
 
+// 노드에 포커스하여 확대하고 사이드 패널 열기
 function focusNode(nodeId) {
-    // 노드 선택 시 확대 및 사이드 패널 열기
     fetch(`/get_node_data/${nodeId}/`)
     .then(response => response.json())
     .then(data => {
         if (data.error) {
             console.error(data.error);
         } else {
-            // 노드 데이터를 받은 후 사이드 패널에 표시
-            showSidePanel(data);
-
-            // 네트워크 상의 노드로 포커스
-            network.focus(nodeId, {
-                scale: 2.0,
-                animation: {
-                    duration: 1000,
-                    easingFunction: "easeInOutQuad"
-                }
-            });
+            showSidePanel(data);  // 사이드 패널에 노드 데이터 표시
+            network.focus(nodeId, { scale: 2.0, animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
         }
     })
     .catch(error => console.error('Error fetching node data:', error));

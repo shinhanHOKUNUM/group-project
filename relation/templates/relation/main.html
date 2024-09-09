@@ -20,6 +20,8 @@
             padding: 10px;
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1100; /* 메뉴바가 사이드바보다 위에 위치 */
+            position: relative; /* 메뉴바를 최상단에 고정 */
         }
 
         #network {
@@ -111,6 +113,33 @@
             font-size: 16px;
         }
 
+        /* 사이드 페이지 스타일 */
+        #side-panel {
+            position: fixed;
+            top: 0;
+            right: -100%; /* 처음에는 화면 밖에 위치 */
+            width: 25%;
+            height: 100%;
+            background-color: #222;
+            color: white;
+            transition: right 0.7s ease; /* 슬라이드 효과 */
+            z-index: 1000;
+            margin-top: 40px;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 사이드 패널 내용 */
+        #side-panel h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #side-panel p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
         /* 검색바 컨테이너 스타일 */
         .search-container {
             position: absolute;
@@ -150,9 +179,9 @@
     <div class="content">
         <!-- 네트워크 그래프를 표시할 div -->
         <div id="network"></div>
-        <div id="node-popup">
-            <h2 id="node-title">Node Title</h2>
-            <p id="node-description">Node description will be shown here.</p>
+        <div id="side-panel">
+            <h2 id="panel-title">Node Title</h2>
+            <p id="panel-description">Node description will be shown here.</p>
         </div>
     </div>
     <div class="search-container" style="position: absolute; bottom: 2%; left: 50%; transform: translateX(-50%); width: 25%;">
@@ -199,7 +228,8 @@
                     },
                     interaction: {
                         dragNodes: true,  // 노드를 드래그할 수 있도록 설정
-                        hover: true       // 노드에 마우스 올리면 강조
+                        hover: true,      // 노드에 마우스 올리면 강조
+                        selectable: true, // 노드를 선택할 수 있음
                     },
                     edges: {
                         color: { 
@@ -244,10 +274,12 @@
 
                 network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
 
-                // 노드 클릭 시 해당 노드를 중심으로 확대
+                // 노드 클릭 시 해당 노드 정보를 사이드 패널에 표시하고 슬라이드 애니메이션 실행
                 network.on("click", function (params) {
                     if (params.nodes.length > 0) {
                         var nodeId = params.nodes[0];
+                        var node = nodes.get(nodeId);
+                        showSidePanel(node);
                         network.focus(nodeId, {
                             scale: 2.0,
                             animation: {
@@ -256,6 +288,7 @@
                             }
                         });
                     } else {
+                        hideSidePanel();
                         network.fit({
                             animation: {
                                 duration: 1000,
@@ -271,6 +304,21 @@
     window.onload = function () {
         showNetwork();
     };
+
+    // 사이드 패널을 보여주는 함수 (오른쪽에서 왼쪽으로 슬라이드)
+    function showSidePanel(node) {
+        var sidePanel = document.getElementById('side-panel');
+        document.getElementById('panel-title').textContent = node.label;
+        document.getElementById('panel-description').textContent = "This is a description for " + node.label;
+
+        sidePanel.style.right = '0'; // 슬라이드 애니메이션을 위한 위치 변경
+    }
+
+    // 사이드 패널을 숨기는 함수
+    function hideSidePanel() {
+        var sidePanel = document.getElementById('side-panel');
+        sidePanel.style.right = '-100%'; // 다시 오른쪽으로 슬라이드
+    }
 
     // 검색창에 입력이 있을 때 유사한 노드 목록을 표시하는 이벤트 처리
     document.getElementById('search-bar').addEventListener('input', function() {
@@ -309,7 +357,10 @@
     }
 
     function focusNode(nodeId) {
-        // 노드 선택 시 확대
+        // 노드 선택 시 확대 및 사이드 패널 열기
+        var node = nodes.get(nodeId);
+        showSidePanel(node);  // 검색으로 노드를 선택했을 때도 사이드바 열기
+
         network.focus(nodeId, {
             scale: 2.0,
             animation: {
@@ -319,7 +370,6 @@
         });
     }
 
-    </script>
 </script>
 </body>
 </html>

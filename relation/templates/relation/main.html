@@ -347,6 +347,18 @@
         sidePanel.style.right = '-100%'; // 다시 오른쪽으로 슬라이드
     }
 
+    document.getElementById('search-bar').addEventListener('keyup', function(event) {
+    if (event.key === "Enter") {
+        var query = this.value.toLowerCase(); // 검색어를 소문자로 변환하여 가져오기
+        var exactMatch = nodes.get().find(n => n.searchkeyword === query); // 정확히 일치하는 노드 찾기
+
+        if (exactMatch) {
+            focusNode(exactMatch.id); // 일치하는 노드가 있으면 해당 노드로 포커스
+        } else {
+            alert('해당하는 키워드가 없습니다, 정확하게 입력해주세요!'); // 정확히 일치하는 노드가 없을 경우
+        }
+    }
+});
     // 검색창에 입력이 있을 때 유사한 노드 목록을 표시하는 이벤트 처리
     document.getElementById('search-bar').addEventListener('input', function() {
         var query = this.value.toLowerCase(); // 입력값을 소문자로 변환하여 검색
@@ -385,16 +397,26 @@
 
     function focusNode(nodeId) {
         // 노드 선택 시 확대 및 사이드 패널 열기
-        var node = nodes.get(nodeId);
-        showSidePanel(node);  // 검색으로 노드를 선택했을 때도 사이드바 열기
+        fetch(`/get_node_data/${nodeId}/`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error(data.error);
+            } else {
+                // 노드 데이터를 받은 후 사이드 패널에 표시
+                showSidePanel(data);
 
-        network.focus(nodeId, {
-            scale: 2.0,
-            animation: {
-                duration: 1000,
-                easingFunction: "easeInOutQuad"
+                // 네트워크 상의 노드로 포커스
+                network.focus(nodeId, {
+                    scale: 2.0,
+                    animation: {
+                        duration: 1000,
+                        easingFunction: "easeInOutQuad"
+                    }
+                });
             }
-        });
+        })
+        .catch(error => console.error('Error fetching node data:', error));
     }
 
     

@@ -1,0 +1,99 @@
+/* 전체 페이지 레이아웃과 폰트 설정 */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: black;
+}
+
+/* 헤더 스타일 설정 */
+header {
+    width: 100%;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 메인 콘텐츠 영역 스타일 설정 */
+.main-content {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 60px);
+}
+
+/* 왼쪽 단어 목록 영역 스타일 설정 */
+#word-list-container {
+    width: 65%;
+    padding: 50px;
+    background-color: #000000;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+    text-align: center;
+}
+
+/* 오른쪽 단어 세부 정보 영역 스타일 설정 */
+#word-details-container {
+    width: 35%;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 단어 목록 항목 스타일 설정 */
+.word-item {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+/* 단어 목록 항목 마우스 오버 스타일 */
+.word-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* 단어 제목 스타일 설정 */
+.word-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 단어 설명 스타일 설정 */
+.word-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* 관련 단어 스타일 설정 */
+.related-words {
+    font-size: 14px;
+    color: #555;
+}
+
+/* 삭제 버튼 스타일 설정 */
+#delete-btn {
+    margin-top: 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    display: none;
+}
+
+/* 삭제 버튼 마우스 오버 스타일 */
+#delete-btn:hover {
+    background-color: #e60000;
+}

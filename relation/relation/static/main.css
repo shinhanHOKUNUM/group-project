@@ -1,0 +1,186 @@
+/* 기본 스타일 설정 */
+body {
+    background-color: rgb(0, 0, 0);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* 상하좌우 스크롤바 비활성화 */
+}
+
+/* 헤더 스타일 설정 */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1100;
+    position: relative;
+}
+
+#network {
+    width: 100vw;
+    height: calc(100vh - 50px);
+    border: 1px solid rgb(61, 57, 57);
+    margin: 0 auto;
+    display: block;
+}
+
+/* 새로고침 아이콘 스타일 */
+#refresh-icon {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+/* 메뉴 스타일 설정 */
+#menu {
+    position: relative;
+}
+
+#menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+#menu button img {
+    width: 35px;
+    height: 35px;
+}
+
+#menu button:hover img {
+    opacity: 0.7;
+}
+
+#menu-items {
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ccc;
+    margin-top: 10px;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    z-index: 1000;
+}
+
+#menu-items a, #menu-items button {
+    text-decoration: none;
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: right;
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 4px;
+    display: block;
+}
+
+/* 노드 팝업 스타일 */
+#node-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+#node-popup h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+#node-popup p {
+    margin: 10px 0 0 0;
+    font-size: 16px;
+}
+
+/* 사이드 패널 스타일 */
+#side-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 25%;
+    height: 100%;
+    background-color: #222;
+    color: white;
+    transition: right 0.7s ease;
+    z-index: 1000;
+    margin-top: 40px;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 사이드 패널 내용 */
+#side-panel h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#side-panel p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+#save-button {
+    position: absolute;
+    bottom: 90px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#save-button:hover {
+    background-color: #45a049;
+}
+
+/* 검색바 컨테이너 스타일 */
+.search-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25%;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 10px;
+    border: 3px solid #00000098;
+    border-radius: 5px;
+}
+
+#suggestions {
+    position: absolute;
+    width: 106.5%; /* 검색창과 동일한 너비 */
+    background-color: #fff; /* 배경색 흰색 */
+    border: 1px solid #ccc; /* 경계선 */
+    list-style-type: none; /* 말머리 제거 */
+    margin: 0; /* 기본 마진 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+    bottom: 110%; /* 검색창 바로 위에 위치하도록 설정 */
+}
+
+#suggestions li {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff; /* 각 리스트 항목 배경색 */
+    border-bottom: 1px solid #ccc; /* 리스트 항목 사이 경계선 */
+}

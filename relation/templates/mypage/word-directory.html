@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Word Directory</title>
     <style>
         /* 전체 페이지 레이아웃과 폰트 설정 */
@@ -110,7 +111,15 @@
 
 <body>
     <!-- 헤더 영역: 페이지 상단에 고정된 제목 -->
-    <header>My Vocabulary Book</header>
+    <header style="display: flex; align-items: center; justify-content: space-between;">
+        <button id="main-page-btn" onclick="navigateToMain()" style="background: none; border: none; color: white; cursor: pointer; font-size: 24px;">
+            <i class="fas fa-home"></i> <!-- Font Awesome 홈 아이콘 -->
+        </button>
+        <div style="flex-grow: 1; text-align: center; font-size: 24px; font-weight: bold; color: white;">
+            My Vocabulary Book
+        </div>
+    </header>
+    
 
     <!-- 메인 콘텐츠 영역: 왼쪽 단어 목록과 오른쪽 단어 세부 정보 영역을 포함 -->
     <div class="main-content">
@@ -126,7 +135,7 @@
                 딥 러닝
             </div>
             <!-- 추가 단어 항목을 여기에 추가하세요 -->
-            <div class="word-item" onclick="showWordDetails('NLP(Natural Language Proceesing)', 'NLP는 인간의 언어를 해석, 조작 및 이해하는 능력을 컴퓨터에 부여하는 기계 학습 기술 입니다. 오늘날 조직은 이메일, 문자 메시지, 소셜 미디어 뉴스피트 동영상, 오디오 등 다양한 커뮤니케이션 채널에서 생성되는 대량의 음석 및 텍스트 데이터를 보유하고 있습니다'
+            <div class="word-item" onclick="showWordDetails('NLP(Natural Language Processing)', 'NLP는 인간의 언어를 해석, 조작 및 이해하는 능력을 컴퓨터에 부여하는 기계 학습 기술 입니다. 오늘날 조직은 이메일, 문자 메시지, 소셜 미디어 뉴스피트 동영상, 오디오 등 다양한 커뮤니케이션 채널에서 생성되는 대량의 음석 및 텍스트 데이터를 보유하고 있습니다'
         , 'Related word A, Related word B')">
                 NLP
             </div>
@@ -150,6 +159,9 @@
     </div>
 
     <script>
+        function navigateToMain() {
+            window.location.href = "{% url 'main' %}"; // main.html로 이동
+        }
         let currentElement = null; // 현재 선택된 단어 항목을 저장하는 변수
 
         // 단어 세부 정보를 표시하는 함수

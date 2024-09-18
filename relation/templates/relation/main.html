@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Network Graph</title>
     <style>
         /* 기본 스타일 설정 */
@@ -18,18 +19,20 @@
             display: flex;
             justify-content: space-between;
             padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #black;
+            box-shadow: none;
             z-index: 1100; /* 메뉴바가 사이드바보다 위에 위치 */
             position: relative; /* 메뉴바를 최상단에 고정 */
+            margin-bottom: 0;
         }
 
         #network {
             width: 100vw; /* 뷰포트 너비에 맞춤 */
             height: calc(100vh - 50px); /* 뷰포트 높이에서 헤더 높이를 뺀 값 */
-            border: 1px solid rgb(61, 57, 57);
+            border: none;
             margin: 0 auto;
             display: block;
+            background-color: #000;
         }
 
         /* 새로고침 아이콘 스타일 */
@@ -87,6 +90,7 @@
             background-color: transparent; /* 배경색 투명 */
             border-radius: 4px; /* 버튼에 약간의 테두리 둥글기를 추가 */
             display: block; /* 버튼이 블록 요소로 표시되도록 설정 */
+            white-space: nowrap; /* 텍스트가 가로로 표시되도록 설정 */
         }
 
         /* 노드 팝업 스타일 */
@@ -176,23 +180,28 @@
     </style>
 </head>
 <body>
-<header>
-    <!-- 새로고침 아이콘 -->
-    <div id="refresh-icon" onclick="refreshPage()">&#x21bb;</div>
-    <!-- 메뉴 버튼과 메뉴 항목 -->
-    <div id="menu">
-    <button onclick="toggleMenu()">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hlW3yb43CG_IoTpC4KEJFqUfumXpmhppag&s" alt="Menu Icon" style="width: 35px; height: 35px;">
-    </button>
-    <div id="menu-items" class="hidden">
-        <a href="{% url 'mypage' %}" id="mypage">마이페이지</a>
-        <form id="logout-form" action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" id="logout">로그아웃</button>
-        </form>
-    </div>
-</div>
-</header>
+    <header>
+        <!-- 새로고침 아이콘 -->
+        <div id="refresh-icon" onclick="refreshPage()">&#x21bb;</div>
+        <!-- 메뉴 버튼과 메뉴 항목 -->
+        <div id="menu">
+            <button onclick="toggleMenu()">
+                <i class="fas fa-bars" style="font-size: 35px; color: white;"></i> <!-- Font Awesome 아이콘 사용 -->
+            </button>
+            <div id="menu-items" class="hidden">
+                <!-- 로그인 상태에 따라 메뉴 표시 -->
+                {% if user.is_authenticated %}
+                    <a href="{% url 'mypage' %}" id="mypage">마이페이지</a>
+                    <form id="logout-form" action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" id="logout">로그아웃</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" id="login">로그인</a> <!-- 비로그인 상태에서 로그인 메뉴 표시 -->
+                {% endif %}
+            </div>
+        </div>
+    </header>
 <main>
     <div class="content">
         <!-- 네트워크 그래프를 표시할 div -->
@@ -328,7 +337,17 @@
 
     // 페이지 로드 시 네트워크 그래프 생성 함수 호출
     window.onload = function () {
-        showNetwork();
+        // 세션에서 로그인 상태를 확인
+        const isLoggedIn = sessionStorage.getItem('is_logged_in');
+
+        if (isLoggedIn === 'false') {
+            // 비로그인 상태로 처리
+            // 추가적인 로직이 필요하면 여기에 작성
+        } else {
+            // 로그인 상태에서 처리할 내용
+        }
+
+        showNetwork(); // 그래프 표시 함수 호출
     };
 
     // 사이드 패널을 보여주는 함수
@@ -414,6 +433,7 @@
                         easingFunction: "easeInOutQuad"
                     }
                 });
+                network.selectNodes([nodeId]);
             }
         })
         .catch(error => console.error('Error fetching node data:', error));

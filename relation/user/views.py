@@ -10,6 +10,8 @@ def signup_view(request):
             user = form.save()
             # 로그인을 바로 시키지 않고, 로그인 페이지로 리디렉션
             return redirect('login')  # 회원가입 후 로그인 페이지로 리디렉션
+        else:
+            print(form.errors)  # 폼 오류 메시지를 서버 로그에 출력
     else:
         form = SignUpForm()
     return render(request, 'user/signup.html', {'form': form})

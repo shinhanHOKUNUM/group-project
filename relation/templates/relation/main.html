@@ -173,10 +173,13 @@
 
         #search-bar {
             width: 100%;
-            padding: 10px;
+            padding: 5px;
             border: 3px solid #00000098;
             border-radius: 5px;
         }
+        
+
+        
     </style>
 </head>
 <body>
@@ -213,7 +216,7 @@
         </div>
     </div>
     <div class="search-container" style="position: absolute; bottom: 2%; left: 50%; transform: translateX(-50%); width: 25%;">
-        <ul id="suggestions" style="display: none; background-color: white; border: 1px solid #ccc; list-style: none; padding: 0; position: absolute; bottom: 110%; width: 100%;"></ul>
+        <ul id="suggestions" style="display: none; background-color: white; border: 1px solid #ccc; list-style: none; padding: 0; position: absolute; bottom: 70%; width: 105%;"></ul>
         <input type="text" id="search-bar" placeholder="Search..." style="width: 100%; padding: 10px; border: 3px solid #00000098; border-radius: 5px;">
     </div>
     <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
@@ -242,7 +245,7 @@
                 nodes = new vis.DataSet(data.nodes.map(node => ({
                     id: node.id,
                     label: node.label,
-                    searchkeyword: node.label.toLowerCase(),  // 검색을 위해 사용
+                    searchkeyword: node.searchkeyword.toLowerCase(),  // 검색을 위해 사용
                     x: node.x * 1000,  // 좌표 값이 작을 수 있으니 적절히 스케일 조정
                     y: node.y * 1000,  // 좌표 값 스케일 조정
                     fixed: true  // 노드의 위치를 고정
@@ -399,13 +402,13 @@
             suggestionBox.style.display = 'block';
             matches.forEach(node => {
                 var li = document.createElement('li');
-                li.textContent = node.label;
+                li.textContent = node.searchkeyword;
                 li.style.padding = '10px';
                 li.style.cursor = 'pointer';
                 li.onclick = function() {
                     focusNode(node.id); // 클릭 시 해당 노드로 포커스
                     suggestionBox.style.display = 'none'; // 목록 숨김
-                    document.getElementById('search-bar').value = node.label; // 검색창에 선택한 노드명 표시
+                    document.getElementById('search-bar').value = node.searchkeyword; // 검색창에 선택한 노드명 표시
                 };
                 suggestionBox.appendChild(li);
             });
@@ -439,7 +442,6 @@
         .catch(error => console.error('Error fetching node data:', error));
     }
 
-    
 </script>
 </body>
 </html>

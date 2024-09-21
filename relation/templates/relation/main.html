@@ -178,6 +178,25 @@
             border-radius: 5px;
         }
         
+        #suggestions {
+            background-color: white;  /* 추천 목록 배경 색상 */
+            border: 1px solid #ccc;   /* 테두리 */
+            list-style: none;         /* 목록 스타일 제거 */
+            padding: 0;               /* 패딩 제거 */
+            position: absolute;       /* 위치 고정 */
+            bottom: 70%;              /* 위치 설정 */
+            width: 105%;              /* 추천 목록 너비 */
+        }
+        
+        #suggestions li {
+            padding: 10px;            /* 목록 항목에 패딩 추가 */
+            cursor: pointer;          /* 마우스 커서 변경 */
+        }
+        
+        #suggestions li:hover {
+            background-color: #f0f0f0; /* 마우스 오버 시 배경 색상 */
+        }
+        
 
         
     </style>
@@ -237,15 +256,16 @@
 
     // 네트워크 그래프 생성
     function showNetwork() {
-        // 서버에서 노드 및 엣지 데이터를 가져옴
         fetch('/get_network_data/')
             .then(response => response.json())
             .then(data => {
                 var container = document.getElementById('network');
                 nodes = new vis.DataSet(data.nodes.map(node => ({
                     id: node.id,
-                    label: node.label,
-                    searchkeyword: node.searchkeyword.toLowerCase(),  // 검색을 위해 사용
+                    label: node.label_kor,  // 노드에 표시할 이름을 label_kor로 설정
+                    label_kor: node.label_kor,
+                    label_full: node.label_full,
+                    label_en: node.label_en,
                     x: node.x * 1000,  // 좌표 값이 작을 수 있으니 적절히 스케일 조정
                     y: node.y * 1000,  // 좌표 값 스케일 조정
                     fixed: true  // 노드의 위치를 고정
@@ -369,46 +389,57 @@
         sidePanel.style.right = '-100%'; // 다시 오른쪽으로 슬라이드
     }
 
+    // 검색창에서 'Enter' 키를 눌렀을 때, 검색된 노드를 포커스하는 기능
     document.getElementById('search-bar').addEventListener('keyup', function(event) {
-    if (event.key === "Enter") {
-        var query = this.value.toLowerCase(); // 검색어를 소문자로 변환하여 가져오기
-        var exactMatch = nodes.get().find(n => n.searchkeyword === query); // 정확히 일치하는 노드 찾기
+            if (event.key === "Enter") {
+                var query = this.value.toLowerCase();  // 입력값을 소문자로 변환하여 검색
+                var exactMatch = nodes.get().find(n =>
+                    n.label_kor.toLowerCase() === query ||
+                    n.label_full.toLowerCase() === query ||
+                    n.label_en.toLowerCase() === query
+                );  // label_kor, label_full, label_en 중 일치하는 노드 찾기
 
-        if (exactMatch) {
-            focusNode(exactMatch.id); // 일치하는 노드가 있으면 해당 노드로 포커스
-        } else {
-            alert('해당하는 키워드가 없습니다, 정확하게 입력해주세요!'); // 정확히 일치하는 노드가 없을 경우
-        }
-    }
-});
-    // 검색창에 입력이 있을 때 유사한 노드 목록을 표시하는 이벤트 처리
+                if (exactMatch) {
+                    focusNode(exactMatch.id);  // 일치하는 노드가 있으면 해당 노드로 포커스
+                    network.selectNodes([exactMatch.id]); // 노드를 선택해서 hover/클릭 스타일 적용
+                    document.getElementById('suggestions').style.display = 'none';  // 추천 목록 상자를 숨김
+                } else {
+                    alert('해당하는 키워드가 없습니다. 정확하게 입력해주세요!');  // 일치하는 노드가 없을 경우
+                }
+            }
+        });
+
+    // 검색창에 입력이 있을 때 유사한 노드 목록을 표시하는 함수
     document.getElementById('search-bar').addEventListener('input', function() {
-        var query = this.value.toLowerCase(); // 입력값을 소문자로 변환하여 검색
+        var query = this.value.toLowerCase();  // 입력값을 소문자로 변환하여 검색
         showSuggestions(query);
     });
 
     function showSuggestions(query) {
         var suggestionBox = document.getElementById('suggestions');
-        suggestionBox.innerHTML = ''; // 기존 목록 초기화
+        suggestionBox.innerHTML = '';  // 기존 목록 초기화
+
         if (query.length === 0) {
             suggestionBox.style.display = 'none';
             return;
         }
 
-        // 검색어와 일치하는 최대 5개의 노드 찾기
-        var matches = nodes.get().filter(n => n.searchkeyword.includes(query)).slice(0, 5);
+        // 검색어와 일치하는 최대 5개의 노드 찾기 (label_kor 또는 label_full 기준)
+        var matches = nodes.get().filter(n =>
+            n.label_kor.toLowerCase().includes(query) ||
+            n.label_full.toLowerCase().includes(query)
+        ).slice(0, 5);
 
         if (matches.length > 0) {
             suggestionBox.style.display = 'block';
             matches.forEach(node => {
                 var li = document.createElement('li');
-                li.textContent = node.searchkeyword;
-                li.style.padding = '10px';
-                li.style.cursor = 'pointer';
+                li.textContent = node.label_full;  // 추천 목록에는 label_full 사용
                 li.onclick = function() {
-                    focusNode(node.id); // 클릭 시 해당 노드로 포커스
-                    suggestionBox.style.display = 'none'; // 목록 숨김
-                    document.getElementById('search-bar').value = node.searchkeyword; // 검색창에 선택한 노드명 표시
+                    network.selectNodes([node.id]);  // 노드를 선택해서 hover/클릭 스타일 적용
+                    focusNode(node.id);  // 클릭 시 해당 노드로 포커스
+                    suggestionBox.style.display = 'none';  // 목록 숨김
+                    document.getElementById('search-bar').value = node.label_full;  // 검색창에 label_full 표시
                 };
                 suggestionBox.appendChild(li);
             });
@@ -418,29 +449,31 @@
     }
 
     function focusNode(nodeId) {
-        // 노드 선택 시 확대 및 사이드 패널 열기
         fetch(`/get_node_data/${nodeId}/`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
                 console.error(data.error);
             } else {
-                // 노드 데이터를 받은 후 사이드 패널에 표시
-                showSidePanel(data);
-
-                // 네트워크 상의 노드로 포커스
-                network.focus(nodeId, {
-                    scale: 2.0,
-                    animation: {
-                        duration: 1000,
-                        easingFunction: "easeInOutQuad"
-                    }
-                });
-                network.selectNodes([nodeId]);
+                showSidePanel(data);  // 사이드 패널에 노드 데이터 표시
+                network.focus(nodeId, { scale: 2.0, animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
             }
         })
         .catch(error => console.error('Error fetching node data:', error));
     }
+    
+    // 검색창 외의 여백을 클릭하면 검색창을 비우는 기능
+    document.addEventListener('click', function(event) {
+        var searchBar = document.getElementById('search-bar');
+        var suggestionBox = document.getElementById('suggestions');
+
+        // 클릭한 대상이 검색창 또는 제안 목록이 아니면 검색창 비우기
+        if (!searchBar.contains(event.target) && !suggestionBox.contains(event.target)) {
+            searchBar.value = ''; // 검색창 비우기
+            suggestionBox.style.display = 'none'; // 제안 목록 숨기기
+        }
+    });
+
 
 </script>
 </body>

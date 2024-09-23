@@ -65,7 +65,9 @@ def get_node_data(request, node_label):
         node = ITKeyword.objects.get(term_ko__iexact=node_label)
         data = {
             'id': node.id,
-            'label': node.term_ko,  # 'term_ko' 필드를 label로 사용
+            'label_kor': node.term_ko,  # 'term_ko' 필드를 label로 사용
+            'label_en': node.term_en,
+            'label_full': node.term,
             'mean': node.mean       # 설명을 mean으로 반환
         }
         return JsonResponse(data)

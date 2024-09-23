@@ -3,1530 +3,4403 @@
         {
             "id": 0,
             "label": "인공지능",
+            "label_full": "Artificial Intelligence (AI)(인공지능)",
+            "label_en": "Artificial Intelligence (AI)",
+            "label_ko": "인공지능",
+            "connected_labels": [
+                "사물인터넷",
+                "혼합 현실",
+                "코딩 AI",
+                "AI 금융",
+                "클라우드 컴퓨팅",
+                "엣지 컴퓨팅",
+                "기계 지능",
+                "법률 자동화"
+            ],
             "x": 0.4916547839160517,
             "y": 0.3686223534225048
         },
         {
             "id": 1,
             "label": "사물인터넷",
+            "label_full": "Internet of Things (IoT)(사물인터넷)",
+            "label_en": "Internet of Things (IoT)",
+            "label_ko": "사물인터넷",
+            "connected_labels": [
+                "인공지능",
+                "산업용 사물인터넷",
+                "클라우드 컴퓨팅",
+                "혼합 현실",
+                "엣지 컴퓨팅"
+            ],
             "x": 0.7092680096166901,
             "y": 0.2953799007194864
         },
         {
             "id": 2,
             "label": "블록체인",
+            "label_full": "Blockchain(블록체인)",
+            "label_en": "Blockchain",
+            "label_ko": "블록체인",
+            "connected_labels": [
+                "블록체인 금융",
+                "양자 암호화",
+                "스마트 계약",
+                "지능형 필터링",
+                "다중 인증",
+                "바이오 인증",
+                "암호화폐 지갑 보안",
+                "원격 진료",
+                "무선 전력 전송"
+            ],
             "x": -0.16357810261954342,
             "y": -0.44872542987082015
         },
         {
             "id": 3,
             "label": "클라우드 컴퓨팅",
+            "label_full": "Cloud Computing(클라우드 컴퓨팅)",
+            "label_en": "Cloud Computing",
+            "label_ko": "클라우드 컴퓨팅",
+            "connected_labels": [
+                "사물인터넷",
+                "인프라 자동화",
+                "데이터 시각화",
+                "인공지능",
+                "양자 컴퓨팅",
+                "법률 자동화"
+            ],
             "x": 0.5441882378725659,
             "y": 0.5044404117882234
         },
         {
             "id": 4,
             "label": "양자 컴퓨팅",
+            "label_full": "Quantum Computing(양자 컴퓨팅)",
+            "label_en": "Quantum Computing",
+            "label_ko": "양자 컴퓨팅",
+            "connected_labels": [
+                "혼합 현실",
+                "클라우드 컴퓨팅",
+                "뇌-컴퓨터 인터페이스",
+                "엣지 컴퓨팅"
+            ],
             "x": 0.3783033386475881,
             "y": 0.7599599170548103
         },
         {
             "id": 5,
             "label": "엣지 컴퓨팅",
+            "label_full": "Edge Computing(엣지 컴퓨팅)",
+            "label_en": "Edge Computing",
+            "label_ko": "엣지 컴퓨팅",
+            "connected_labels": [
+                "양자 컴퓨팅",
+                "혼합 현실",
+                "인공지능",
+                "사물인터넷",
+                "포그 컴퓨팅",
+                "데이터 레이블링"
+            ],
             "x": 0.25858348172083434,
             "y": 0.594065498772063
         },
         {
             "id": 6,
             "label": "증강 현실",
+            "label_full": "Augmented Reality (AR)(증강현실)",
+            "label_en": "Augmented Reality (AR)",
+            "label_ko": "증강 현실",
+            "connected_labels": [
+                "메타버스",
+                "가상 현실",
+                "가상 세계",
+                "엣지 AI"
+            ],
             "x": 0.6093380785344049,
             "y": 0.37042182487267206
         },
         {
             "id": 7,
             "label": "가상 현실",
+            "label_full": "Virtual Reality (VR)(가상 현실)",
+            "label_en": "Virtual Reality (VR)",
+            "label_ko": "가상 현실",
+            "connected_labels": [
+                "증강 현실",
+                "게임 테크",
+                "코딩 AI",
+                "가상 세계",
+                "AI 창작"
+            ],
             "x": 0.47215543847278746,
             "y": 0.043752087323405
         },
         {
             "id": 8,
             "label": "혼합 현실",
+            "label_full": "Mixed Reality (MR)(혼합 현실)",
+            "label_en": "Mixed Reality (MR)",
+            "label_ko": "혼합 현실",
+            "connected_labels": [
+                "인공지능",
+                "사물인터넷",
+                "양자 컴퓨팅",
+                "엣지 컴퓨팅",
+                "법률 자동화"
+            ],
             "x": 0.6333943176235479,
             "y": 0.6003449920325914
         },
         {
             "id": 9,
             "label": "디지털 트윈",
+            "label_full": "Digital Twin(디지털 트윈)",
+            "label_en": "Digital Twin",
+            "label_ko": "디지털 트윈",
+            "connected_labels": [
+                "엣지 AI",
+                "인프라 자동화",
+                "동형 암호화",
+                "침입 방지 시스템"
+            ],
             "x": -0.08923531440438465,
             "y": 0.40082736526187907
         },
         {
             "id": 10,
             "label": "빅데이터",
+            "label_full": "Big Data(빅데이터)",
+            "label_en": "Big Data",
+            "label_ko": "빅데이터",
+            "connected_labels": [
+                "데이터 분석",
+                "데이터 중심 비즈니스",
+                "코딩 AI",
+                "자동화 투자"
+            ],
             "x": 0.4414272034107518,
             "y": 0.37153435580268623
         },
         {
             "id": 11,
             "label": "머신러닝",
+            "label_full": "Machine Learning (ML)(머신러닝)",
+            "label_en": "Machine Learning (ML)",
+            "label_ko": "머신러닝",
+            "connected_labels": [
+                "자연어 처리",
+                "AI 가속기",
+                "딥러닝",
+                "AI 콘텐츠 추천"
+            ],
             "x": 0.07025361364262256,
             "y": 0.3024207704920878
         },
         {
             "id": 12,
             "label": "딥러닝",
+            "label_full": "Deep Learning(딥러닝)",
+            "label_en": "Deep Learning",
+            "label_ko": "딥러닝",
+            "connected_labels": [
+                "머신러닝",
+                "AI 창작",
+                "비디오 분석",
+                "지능형 필터링",
+                "AI 가속기",
+                "5G 네트워크",
+                "6G 네트워크",
+                "유전자 편집",
+                "실시간 분석",
+                "스마트 러닝"
+            ],
             "x": 0.1267651558360548,
             "y": -0.17738071910059583
         },
         {
             "id": 13,
             "label": "자연어 처리",
+            "label_full": "Natural Language Processing (NLP)(자연어 처리)",
+            "label_en": "Natural Language Processing (NLP)",
+            "label_ko": "자연어 처리",
+            "connected_labels": [
+                "머신러닝",
+                "감정 인식 AI",
+                "소셜 AI",
+                "뇌-컴퓨터 인터페이스",
+                "딥페이크 탐지"
+            ],
             "x": 0.14609332462825486,
             "y": 0.680260264024058
         },
         {
             "id": 14,
             "label": "제로 트러스트 보안",
+            "label_full": "Zero Trust Security(제로 트로스트 보안)",
+            "label_en": "Zero Trust Security",
+            "label_ko": "제로 트러스트 보안",
+            "connected_labels": [
+                "데이터 중복 제거",
+                "양자 암호화",
+                "프라이버시 강화 기술",
+                "보안 정보 및 이벤트 관리",
+                "6G 네트워크"
+            ],
             "x": -0.49037945619141243,
             "y": -0.34421877379613075
         },
         {
             "id": 15,
             "label": "랜섬웨어",
+            "label_full": "Ransomware(랜섬웨어)",
+            "label_en": "Ransomware",
+            "label_ko": "랜섬웨어",
+            "connected_labels": [
+                "디도스",
+                "제로 데이 공격",
+                "버그 바운티",
+                "암호화",
+                "멀웨어 탐지",
+                "블랙 해킹"
+            ],
             "x": -0.847124362215003,
             "y": -0.29578871294577885
         },
         {
             "id": 16,
             "label": "디도스",
+            "label_full": "Distributed Denial of Service (DDoS)(디도스)",
+            "label_en": "Distributed Denial of Service (DDoS)",
+            "label_ko": "디도스",
+            "connected_labels": [
+                "랜섬웨어",
+                "제로 데이 공격",
+                "암호화",
+                "버그 바운티",
+                "사이버 보험"
+            ],
             "x": -0.532242660925615,
             "y": -0.412657421140366
         },
         {
             "id": 17,
             "label": "암호화",
+            "label_full": "Encryption(암호화)",
+            "label_en": "Encryption",
+            "label_ko": "암호화",
+            "connected_labels": [
+                "랜섬웨어",
+                "디도스",
+                "데이터 암호화",
+                "프라이버시 강화 기술",
+                "동형 암호화",
+                "자율 ID 관리",
+                "데이터 중복 제거",
+                "개인 정보 보호 강화 기술",
+                "양자 암호화",
+                "사이버 위협 인텔리전스",
+                "취약점 관리",
+                "애플리케이션 보안",
+                "데이터 무결성",
+                "보안 패치",
+                "양자 저항 암호화"
+            ],
             "x": -0.6161783405857164,
             "y": -0.0749017623613047
         },
         {
             "id": 18,
             "label": "다중 인증",
+            "label_full": "Multi-Factor Authentication (MFA)(다중인중)",
+            "label_en": "Multi-Factor Authentication (MFA)",
+            "label_ko": "다중 인증",
+            "connected_labels": [
+                "바이오 인증",
+                "패스워드 없는 인증",
+                "블록체인",
+                "양자 암호화"
+            ],
             "x": -0.4608871019549703,
             "y": -0.5625019352831669
         },
         {
             "id": 19,
             "label": "바이오 인증",
+            "label_full": "Biometric Authentication(바이오 인증)",
+            "label_en": "Biometric Authentication",
+            "label_ko": "바이오 인증",
+            "connected_labels": [
+                "다중 인증",
+                "신원 인증 기술",
+                "블록체인",
+                "생체 인식"
+            ],
             "x": -0.340349561886114,
             "y": -0.6338955274778264
         },
         {
             "id": 20,
             "label": "디지털 포렌식",
+            "label_full": "Digital Forensics(디지털 포렌식)",
+            "label_en": "Digital Forensics",
+            "label_ko": "디지털 포렌식",
+            "connected_labels": [
+                "지능형 필터링",
+                "모션 캡처 기술",
+                "디지털 아이덴티티",
+                "텍스트 마이닝",
+                "원격 진료"
+            ],
             "x": -0.1752584958356884,
             "y": -0.31914733124808775
         },
         {
             "id": 21,
             "label": "네트워크 슬라이싱",
+            "label_full": "Network Slicing(네트워크 슬라이싱)",
+            "label_en": "Network Slicing",
+            "label_ko": "네트워크 슬라이싱",
+            "connected_labels": [
+                "분산형 애플리케이션",
+                "마이크로서비스",
+                "데이터 웨어하우스",
+                "디지털 협업 도구"
+            ],
             "x": -0.45089957417262283,
             "y": 0.8797147368904004
         },
         {
             "id": 22,
             "label": "5G 네트워크",
+            "label_full": "5G Network(5G 네트워크)",
+            "label_en": "5G Network",
+            "label_ko": "5G 네트워크",
+            "connected_labels": [
+                "6G 네트워크",
+                "스마트 전력",
+                "딥러닝",
+                "메타버스"
+            ],
             "x": 0.17656756212612837,
             "y": -0.5593861964005874
         },
         {
             "id": 23,
             "label": "6G 네트워크",
+            "label_full": "6G Network(6G 네트워크)",
+            "label_en": "6G Network",
+            "label_ko": "6G 네트워크",
+            "connected_labels": [
+                "5G 네트워크",
+                "제로 트러스트 보안",
+                "무선 전력 전송",
+                "딥러닝"
+            ],
             "x": -0.10197936020399131,
             "y": -0.5481301737103279
         },
         {
             "id": 24,
             "label": "자율 주행",
+            "label_full": "Autonomous Driving(자율 주행)",
+            "label_en": "Autonomous Driving",
+            "label_ko": "자율 주행",
+            "connected_labels": [
+                "AI 창작",
+                "자율주행차",
+                "스마트 농업",
+                "산업용 사물인터넷"
+            ],
             "x": 0.7491391666007448,
             "y": -0.3186564538794271
         },
         {
             "id": 25,
             "label": "스마트 시티",
+            "label_full": "Smart City(스마트 시티)",
+            "label_en": "Smart City",
+            "label_ko": "스마트 시티",
+            "connected_labels": [
+                "스마트 빌딩",
+                "스마트 팩토리",
+                "스마트 플랜트",
+                "스마트 헬스케어"
+            ],
             "x": 0.5376645169714057,
             "y": -0.6791535108925388
         },
         {
             "id": 26,
             "label": "자율 드론",
+            "label_full": "Autonomous Drone(자율 드론)",
+            "label_en": "Autonomous Drone",
+            "label_ko": "자율 드론",
+            "connected_labels": [
+                "스마트 로봇",
+                "자율 농업",
+                "스마트 홈",
+                "스마트 가정"
+            ],
             "x": 0.38461627238310236,
             "y": -0.7792575161285534
         },
         {
             "id": 27,
             "label": "패스워드 없는 인증",
+            "label_full": "Passwordless Authentication(패스워드 없는 인증)",
+            "label_en": "Passwordless Authentication",
+            "label_ko": "패스워드 없는 인증",
+            "connected_labels": [
+                "다중 인증",
+                "침입 방지 시스템",
+                "디지털 아이덴티티",
+                "보안 자동화"
+            ],
             "x": -0.3988822051979501,
             "y": -0.33831307281785294
         },
         {
             "id": 28,
             "label": "데이터 레이블링",
+            "label_full": "Data Labeling(데이터 레이블링)",
+            "label_en": "Data Labeling",
+            "label_ko": "데이터 레이블링",
+            "connected_labels": [
+                "데이터 시각화",
+                "인프라 자동화",
+                "엣지 컴퓨팅",
+                "법률 자동화"
+            ],
             "x": 0.3783762520706828,
             "y": 0.6238786970068602
         },
         {
             "id": 29,
             "label": "엑소스켈레톤",
+            "label_full": "Exoskeleton(엑소스켈레톤)",
+            "label_en": "Exoskeleton",
+            "label_ko": "엑소스켈레톤",
+            "connected_labels": [
+                "디지털 아바타",
+                "지식 그래프",
+                "생산성 소프트웨어",
+                "뇌-컴퓨터 인터페이스"
+            ],
             "x": 0.007052421204316363,
             "y": 0.4725031690854829
         },
         {
             "id": 30,
             "label": "3D 프린팅",
+            "label_full": "3D Printing(3D 프린팅)",
+            "label_en": "3D Printing",
+            "label_ko": "3D 프린팅",
+            "connected_labels": [
+                "4D 프린팅",
+                "산업용 사물인터넷",
+                "스마트 농업",
+                "AI 창작"
+            ],
             "x": 0.628883722673749,
             "y": -0.3459412907187352
         },
         {
             "id": 31,
             "label": "유전자 편집",
+            "label_full": "Gene Editing(유전자 편집)",
+            "label_en": "Gene Editing",
+            "label_ko": "유전자 편집",
+            "connected_labels": [
+                "유전자 분석",
+                "디지털 콘텐츠 생성",
+                "딥러닝",
+                "양자 암호화",
+                "나노기술",
+                "생체 인식",
+                "유전체학"
+            ],
             "x": -0.0648954613966919,
             "y": -0.3415244773202452
         },
         {
             "id": 32,
             "label": "나노기술",
+            "label_full": "Nanotechnology(나노기술)",
+            "label_en": "Nanotechnology",
+            "label_ko": "나노기술",
+            "connected_labels": [
+                "오토메이션",
+                "모빌리티 서비스",
+                "유전자 편집",
+                "게임 테크"
+            ],
             "x": 0.10342949838455519,
             "y": -0.5836577328767135
         },
         {
             "id": 33,
             "label": "스마트 계약",
+            "label_full": "Smart Contract(스마트 계약)",
+            "label_en": "Smart Contract",
+            "label_ko": "스마트 계약",
+            "connected_labels": [
+                "블록체인",
+                "디지털 콘텐츠 생성",
+                "디지털 아이덴티티",
+                "분산 원장 기술",
+                "보안 운영 센터",
+                "공유 경제",
+                "블록체인 금융",
+                "사이버 보험",
+                "원격 진료",
+                "무선 전력 전송",
+                "디지털 주권"
+            ],
             "x": -0.02587512555286858,
             "y": -0.20897339595771816
         },
         {
             "id": 34,
             "label": "AI 트러스트",
+            "label_full": "AI Trust(AI 트러스트)",
+            "label_en": "AI Trust",
+            "label_ko": "AI 트러스트",
+            "connected_labels": [
+                "AI 윤리",
+                "코딩 AI",
+                "디지털 아이덴티티",
+                "AI 민주주의",
+                "AI 모델 해석성",
+                "데이터 거버넌스",
+                "지식 그래프",
+                "윤리적 AI",
+                "AI 지원 물류",
+                "디지털 윤리"
+            ],
             "x": 0.0966555153300998,
             "y": 0.12380439768517729
         },
         {
             "id": 35,
             "label": "AI 윤리",
+            "label_full": "AI Ethics(AI 윤리)",
+            "label_en": "AI Ethics",
+            "label_ko": "AI 윤리",
+            "connected_labels": [
+                "AI 트러스트",
+                "디지털 윤리",
+                "디지털 아이덴티티",
+                "AI 모델 해석성"
+            ],
             "x": -0.11495007241481038,
             "y": 0.22861624443818493
         },
         {
             "id": 36,
             "label": "AI 가속기",
+            "label_full": "AI Accelerator(AI 가속기)",
+            "label_en": "AI Accelerator",
+            "label_ko": "AI 가속기",
+            "connected_labels": [
+                "머신러닝",
+                "딥러닝",
+                "지능형 필터링",
+                "실시간 번역",
+                "지식 그래프",
+                "포그 컴퓨팅",
+                "실시간 분석",
+                "디지털 지갑",
+                "AI 콘텐츠 추천"
+            ],
             "x": -0.09967153794439194,
             "y": 0.04124453706176994
         },
         {
             "id": 37,
             "label": "AI 모델 해석성",
+            "label_full": "AI Model Interpretability(AI 모델 해석성)",
+            "label_en": "AI Model Interpretability",
+            "label_ko": "AI 모델 해석성",
+            "connected_labels": [
+                "AI 윤리",
+                "AI 트러스트",
+                "지식 그래프",
+                "금융 규제 기술",
+                "자동화 투자",
+                "딥페이크 탐지"
+            ],
             "x": 0.09851742555722455,
             "y": 0.39630048187357153
         },
         {
             "id": 38,
             "label": "엣지 AI",
+            "label_full": "Edge AI(엣지 AI)",
+            "label_en": "Edge AI",
+            "label_ko": "엣지 AI",
+            "connected_labels": [
+                "증강 현실",
+                "디지털 트윈",
+                "코딩 AI",
+                "AI 금융",
+                "AI 의사",
+                "AI 기반 학습"
+            ],
             "x": 0.3837423380538429,
             "y": 0.3554009427444828
         },
         {
             "id": 39,
             "label": "클라우드 네이티브",
+            "label_full": "Cloud Native(클라우드 네이티브)",
+            "label_en": "Cloud Native",
+            "label_ko": "클라우드 네이티브",
+            "connected_labels": [
+                "컨테이너화",
+                "도커",
+                "코딩 AI",
+                "위협 벡터",
+                "분산 원장 기술",
+                "멀티 클라우드",
+                "하이브리드 클라우드",
+                "포그 컴퓨팅",
+                "애드테크",
+                "하이브리드 업무 환경",
+                "생산성 소프트웨어"
+            ],
             "x": -0.10994520144374247,
             "y": 0.29702371364546026
         },
         {
             "id": 40,
             "label": "AI옵스",
+            "label_full": "AIOps(AI옵스)",
+            "label_en": "AIOps",
+            "label_ko": "AI옵스",
+            "connected_labels": [
+                "비디오 분석",
+                "지능형 필터링",
+                "AI 사이버 보안",
+                "코딩 AI",
+                "로보어드바이저",
+                "AI 기반 회계"
+            ],
             "x": 0.33557930463639146,
             "y": -0.13758924661284222
         },
         {
             "id": 41,
             "label": "서버리스 컴퓨팅",
+            "label_full": "Serverless Computing(서버리스 컴퓨팅)",
+            "label_en": "Serverless Computing",
+            "label_ko": "서버리스 컴퓨팅",
+            "connected_labels": [
+                "서비스형 인프라",
+                "인프라 코드로 관리",
+                "서비스형 플랫폼",
+                "컨테이너화"
+            ],
             "x": -0.5759332742302983,
             "y": 0.7303567197321059
         },
         {
             "id": 42,
             "label": "API 게이트웨이",
+            "label_full": "API Gateway(API 게이트웨이)",
+            "label_en": "API Gateway",
+            "label_ko": "API 게이트웨이",
+            "connected_labels": [
+                "쿠버네티스",
+                "도커",
+                "컨테이너화",
+                "멀티 클라우드",
+                "퍼플팀",
+                "클라우드 접근 보안 브로커"
+            ],
             "x": -0.7077362708168142,
             "y": 0.4593296316883059
         },
         {
             "id": 43,
             "label": "컨테이너화",
+            "label_full": "Containerization(컨테이너화)",
+            "label_en": "Containerization",
+            "label_ko": "컨테이너화",
+            "connected_labels": [
+                "클라우드 네이티브",
+                "서버리스 컴퓨팅",
+                "API 게이트웨이",
+                "도커",
+                "생산성 소프트웨어",
+                "마이크로서비스",
+                "인프라 코드로 관리",
+                "서비스형 소프트웨어",
+                "멀티 클라우드",
+                "동형 암호화",
+                "애드테크",
+                "결제 게이트웨이",
+                "화상회의 기술",
+                "분산형 애플리케이션",
+                "안전한 다자 연산"
+            ],
             "x": -0.3377267557263197,
             "y": 0.43435100538359334
         },
         {
             "id": 44,
             "label": "마이크로서비스",
+            "label_full": "Microservices(마이크로서비스)",
+            "label_en": "Microservices",
+            "label_ko": "마이크로서비스",
+            "connected_labels": [
+                "네트워크 슬라이싱",
+                "분산형 애플리케이션",
+                "안전한 다자 연산",
+                "컨테이너화",
+                "도커"
+            ],
             "x": -0.4302361726029878,
             "y": 0.7637320578186868
         },
         {
             "id": 45,
             "label": "쿠버네티스",
+            "label_full": "Kubernetes(쿠버네티스)",
+            "label_en": "Kubernetes",
+            "label_ko": "쿠버네티스",
+            "connected_labels": [
+                "API 게이트웨이",
+                "도커",
+                "로보틱 프로세스 자동화",
+                "포그 컴퓨팅"
+            ],
             "x": -0.5734228633834444,
             "y": 0.550035193063893
         },
         {
             "id": 46,
             "label": "도커",
+            "label_full": "Docker(도커)",
+            "label_en": "Docker",
+            "label_ko": "도커",
+            "connected_labels": [
+                "클라우드 네이티브",
+                "API 게이트웨이",
+                "컨테이너화",
+                "마이크로서비스",
+                "쿠버네티스",
+                "서비스형 소프트웨어",
+                "데이터 레이크",
+                "데이터 웨어하우스",
+                "생산성 소프트웨어"
+            ],
             "x": -0.3939991813702995,
             "y": 0.4694748166637333
         },
         {
             "id": 47,
             "label": "인프라 자동화",
+            "label_full": "Infrastructure Automation(인프라 자동화)",
+            "label_en": "Infrastructure Automation",
+            "label_ko": "인프라 자동화",
+            "connected_labels": [
+                "클라우드 컴퓨팅",
+                "디지털 트윈",
+                "데이터 레이블링",
+                "법률 자동화",
+                "데이터 시각화"
+            ],
             "x": 0.21981608903800884,
             "y": 0.5769077302917754
         },
         {
             "id": 48,
             "label": "인프라 코드로 관리",
+            "label_full": "Infrastructure as Code (IaC)(인프라 코드로 관리)",
+            "label_en": "Infrastructure as Code (IaC)",
+            "label_ko": "인프라 코드로 관리",
+            "connected_labels": [
+                "서버리스 컴퓨팅",
+                "서비스형 인프라",
+                "컨테이너화",
+                "서비스형 소프트웨어",
+                "컨테이너 보안"
+            ],
             "x": -0.7077181840468159,
             "y": 0.5864848665830841
         },
         {
             "id": 49,
             "label": "서비스형 소프트웨어",
+            "label_full": "Software as a Service (SaaS)(서비스형 소프트웨어)",
+            "label_en": "Software as a Service (SaaS)",
+            "label_ko": "서비스형 소프트웨어",
+            "connected_labels": [
+                "인프라 코드로 관리",
+                "서비스형 인프라",
+                "컨테이너화",
+                "도커",
+                "서비스형 플랫폼",
+                "클라우드 게임",
+                "생산성 소프트웨어"
+            ],
             "x": -0.5350257522997527,
             "y": 0.6532721575432936
         },
         {
             "id": 50,
             "label": "서비스형 인프라",
+            "label_full": "Infrastructure as a Service (IaaS)(서비스형 인프라)",
+            "label_en": "Infrastructure as a Service (IaaS)",
+            "label_ko": "서비스형 인프라",
+            "connected_labels": [
+                "서버리스 컴퓨팅",
+                "인프라 코드로 관리",
+                "서비스형 소프트웨어",
+                "서비스형 플랫폼"
+            ],
             "x": -0.7407381573659295,
             "y": 0.8094329962649628
         },
         {
             "id": 51,
             "label": "서비스형 플랫폼",
+            "label_full": "Platform as a Service (PaaS)(서비스형 플랫폼)",
+            "label_en": "Platform as a Service (PaaS)",
+            "label_ko": "서비스형 플랫폼",
+            "connected_labels": [
+                "서버리스 컴퓨팅",
+                "서비스형 인프라",
+                "서비스형 소프트웨어",
+                "하이브리드 클라우드"
+            ],
             "x": -0.4487694130481478,
             "y": 0.7006014544374639
         },
         {
             "id": 52,
             "label": "데이터 중복 제거",
+            "label_full": "Data Deduplication(데이터 중복 제거)",
+            "label_en": "Data Deduplication",
+            "label_ko": "데이터 중복 제거",
+            "connected_labels": [
+                "제로 트러스트 보안",
+                "클라우드 백업",
+                "프라이버시 강화 기술",
+                "암호화",
+                "하이브리드 클라우드",
+                "실시간 분석",
+                "데이터 레이크",
+                "컨테이너 보안"
+            ],
             "x": -0.5597269342054819,
             "y": 0.07624292431121327
         },
         {
             "id": 53,
             "label": "분산 원장 기술",
+            "label_full": "Distributed Ledger Technology(분산 원장 기술)",
+            "label_en": "Distributed Ledger Technology",
+            "label_ko": "분산 원장 기술",
+            "connected_labels": [
+                "스마트 계약",
+                "보안 운영 센터",
+                "하이브리드 클라우드",
+                "클라우드 네이티브",
+                "추천 시스템",
+                "메타버스",
+                "하이브리드 업무 환경",
+                "네트워크 보안",
+                "블록체인 기반 인증"
+            ],
             "x": -0.11872018140928427,
             "y": 0.018419627600664023
         },
         {
             "id": 54,
             "label": "멀티 클라우드",
+            "label_full": "Multi-Cloud(멀티 클라우드)",
+            "label_en": "Multi-Cloud",
+            "label_ko": "멀티 클라우드",
+            "connected_labels": [
+                "API 게이트웨이",
+                "하이브리드 클라우드",
+                "클라우드 네이티브",
+                "컨테이너화",
+                "보안 오케스트레이션 자동화 및 대응",
+                "퍼플팀"
+            ],
             "x": -0.4837781259038127,
             "y": 0.3075657016178428
         },
         {
             "id": 55,
             "label": "하이브리드 클라우드",
+            "label_full": "Hybrid Cloud(하이브리드 클라우드)",
+            "label_en": "Hybrid Cloud",
+            "label_ko": "하이브리드 클라우드",
+            "connected_labels": [
+                "서비스형 플랫폼",
+                "데이터 중복 제거",
+                "분산 원장 기술",
+                "멀티 클라우드",
+                "클라우드 백업",
+                "침입 방지 시스템",
+                "클라우드 네이티브",
+                "하이브리드 업무 환경",
+                "클라우드 보안",
+                "네트워크 보안",
+                "스마트 이력서"
+            ],
             "x": -0.3100045648724015,
             "y": 0.22155036433810232
         },
         {
             "id": 56,
             "label": "포그 컴퓨팅",
+            "label_full": "Fog Computing(포그 컴퓨팅)",
+            "label_en": "Fog Computing",
+            "label_ko": "포그 컴퓨팅",
+            "connected_labels": [
+                "엣지 컴퓨팅",
+                "쿠버네티스",
+                "데이터 레이크",
+                "클라우드 네이티브",
+                "클라우드 백업",
+                "AI 가속기",
+                "클라우드 게임",
+                "이더리움",
+                "실시간 번역"
+            ],
             "x": -0.2406342591748825,
             "y": 0.39285641225520074
         },
         {
             "id": 57,
             "label": "그린 IT",
+            "label_full": "Green IT(그린 IT)",
+            "label_en": "Green IT",
+            "label_ko": "그린 IT",
+            "connected_labels": [
+                "재생 가능한 에너지 기술",
+                "모빌리티 서비스",
+                "디지털 트랜스포메이션",
+                "디지털 주권",
+                "지속 가능한 기술"
+            ],
             "x": 0.40839382401521446,
             "y": -0.41975194418520395
         },
         {
             "id": 58,
             "label": "재생 가능한 에너지 기술",
+            "label_full": "Renewable Energy Technology(재생 가능한 에너지 기술)",
+            "label_en": "Renewable Energy Technology",
+            "label_ko": "재생 가능한 에너지 기술",
+            "connected_labels": [
+                "그린 IT",
+                "모빌리티 서비스",
+                "자율 에너지 관리 시스템",
+                "산업용 사물인터넷",
+                "수소 에너지",
+                "에너지 저장 시스템",
+                "지속 가능한 기술"
+            ],
             "x": 0.3143142004981447,
             "y": -0.49425905131924336
         },
         {
             "id": 59,
             "label": "스마트 그리드",
+            "label_full": "Smart Grid(스마트 그리드)",
+            "label_en": "Smart Grid",
+            "label_ko": "스마트 그리드",
+            "connected_labels": [
+                "자율 에너지 관리 시스템",
+                "스마트 에너지",
+                "예측 유지보수",
+                "스마트 플랜트"
+            ],
             "x": 0.30679194421342737,
             "y": -0.8451860755956949
         },
         {
             "id": 60,
             "label": "전자 정부",
+            "label_full": "E-Government(전자 정부)",
+            "label_en": "E-Government",
+            "label_ko": "전자 정부",
+            "connected_labels": [
+                "디지털 금융",
+                "스마트 연구",
+                "스마트 미디어",
+                "디지털 농업"
+            ],
             "x": 0.849132178983426,
             "y": -0.12293054177377871
         },
         {
             "id": 61,
             "label": "스마트 헬스케어",
+            "label_full": "Smart Healthcare(스마트 헬스케어)",
+            "label_en": "Smart Healthcare",
+            "label_ko": "스마트 헬스케어",
+            "connected_labels": [
+                "스마트 시티",
+                "스마트 보건",
+                "스마트 물류",
+                "스마트 은행",
+                "AI 교통 관리"
+            ],
             "x": 0.8136107472660568,
             "y": -0.30280990283931064
         },
         {
             "id": 62,
             "label": "개인 정보 보호 강화 기술",
+            "label_full": "Privacy Enhancing Technologies (PET)(개인 정보 보호 강화 기술)",
+            "label_en": "Privacy Enhancing Technologies (PET)",
+            "label_ko": "개인 정보 보호 강화 기술",
+            "connected_labels": [
+                "프라이버시 강화 기술",
+                "암호화",
+                "데이터 무결성",
+                "데이터 레이크"
+            ],
             "x": -0.7949658670904012,
             "y": -0.020479872521065486
         },
         {
             "id": 63,
             "label": "동형 암호화",
+            "label_full": "Homomorphic Encryption(동형 암호화)",
+            "label_en": "Homomorphic Encryption",
+            "label_ko": "동형 암호화",
+            "connected_labels": [
+                "디지털 트윈",
+                "암호화",
+                "자율 ID 관리",
+                "컨테이너화",
+                "지식 그래프",
+                "양자 암호화",
+                "신원 인증 기술",
+                "안전한 다자 연산",
+                "딥페이크 탐지",
+                "데이터 암호화",
+                "양자 저항 암호화"
+            ],
             "x": -0.37751372225433943,
             "y": 0.203423184677885
         },
         {
             "id": 64,
             "label": "양자 암호화",
+            "label_full": "Quantum Encryption(양자 암호화)",
+            "label_en": "Quantum Encryption",
+            "label_ko": "양자 암호화",
+            "connected_labels": [
+                "블록체인",
+                "제로 트러스트 보안",
+                "다중 인증",
+                "유전자 편집",
+                "데이터 암호화",
+                "암호화",
+                "동형 암호화",
+                "퀀텀 키 분배",
+                "양자 저항 암호화"
+            ],
             "x": -0.4177852330328325,
             "y": -0.20678354573637575
         },
         {
             "id": 65,
             "label": "데이터 분석",
+            "label_full": "Data Analytics(데이터 분석)",
+            "label_en": "Data Analytics",
+            "label_ko": "데이터 분석",
+            "connected_labels": [
+                "빅데이터",
+                "데이터 시각화",
+                "자동화 투자",
+                "데이터 경제",
+                "데이터 브로커",
+                "오픈 데이터",
+                "데이터 거버넌스",
+                "데이터 보안",
+                "디지털 트랜스포메이션",
+                "정보기술",
+                "공유 경제",
+                "고객 경험 관리"
+            ],
             "x": 0.22211657742068203,
             "y": 0.2709892089466966
         },
         {
             "id": 66,
             "label": "예측 분석",
+            "label_full": "Predictive Analytics(예측 분석)",
+            "label_en": "Predictive Analytics",
+            "label_ko": "예측 분석",
+            "connected_labels": [
+                "감정 분석",
+                "소셜 미디어 분석",
+                "코딩 AI",
+                "비디오 분석"
+            ],
             "x": 0.534227977197369,
             "y": 0.31335926558441307
         },
         {
             "id": 67,
             "label": "실시간 분석",
+            "label_full": "Real-Time Analytics(실시간 분석)",
+            "label_en": "Real-Time Analytics",
+            "label_ko": "실시간 분석",
+            "connected_labels": [
+                "데이터 중복 제거",
+                "AI 가속기",
+                "프라이버시 강화 기술",
+                "딥러닝",
+                "텍스트 마이닝",
+                "화상회의 기술",
+                "AI 콘텐츠 추천",
+                "에너지 저장 시스템"
+            ],
             "x": -0.22883089772889612,
             "y": -0.09295889084056293
         },
         {
             "id": 68,
             "label": "소셜 미디어 분석",
+            "label_full": "Social Media Analytics(소셜 미디어 분석)",
+            "label_en": "Social Media Analytics",
+            "label_ko": "소셜 미디어 분석",
+            "connected_labels": [
+                "예측 분석",
+                "감정 분석",
+                "텍스트 마이닝",
+                "데이터 시각화",
+                "피지털 마케팅"
+            ],
             "x": 0.33825163307794204,
             "y": 0.46670715085983017
         },
         {
             "id": 69,
             "label": "감정 분석",
+            "label_full": "Sentiment Analysis(감정 분석)",
+            "label_en": "Sentiment Analysis",
+            "label_ko": "감정 분석",
+            "connected_labels": [
+                "예측 분석",
+                "소셜 미디어 분석",
+                "감정 인식 AI",
+                "텍스트 마이닝"
+            ],
             "x": 0.4310849206628734,
             "y": 0.5869431745376865
         },
         {
             "id": 70,
             "label": "텍스트 마이닝",
+            "label_full": "Text Mining(텍스트 마이닝)",
+            "label_en": "Text Mining",
+            "label_ko": "텍스트 마이닝",
+            "connected_labels": [
+                "디지털 포렌식",
+                "소셜 미디어 분석",
+                "감정 분석",
+                "지능형 필터링",
+                "실시간 분석",
+                "비디오 분석"
+            ],
             "x": 0.10308628898694144,
             "y": 0.03194250212432889
         },
         {
             "id": 71,
             "label": "추천 시스템",
+            "label_full": "Recommendation System(추천 시스템)",
+            "label_en": "Recommendation System",
+            "label_ko": "추천 시스템",
+            "connected_labels": [
+                "분산 원장 기술",
+                "피지털 마케팅",
+                "코딩 AI",
+                "소셜 AI"
+            ],
             "x": 0.22951361884582547,
             "y": 0.32093608765437426
         },
         {
             "id": 72,
             "label": "데이터 시각화",
+            "label_full": "Data Visualization(데이터 시각화)",
+            "label_en": "Data Visualization",
+            "label_ko": "데이터 시각화",
+            "connected_labels": [
+                "클라우드 컴퓨팅",
+                "데이터 레이블링",
+                "인프라 자동화",
+                "데이터 분석",
+                "소셜 미디어 분석",
+                "코딩 AI",
+                "디지털 콘텐츠 생성",
+                "지식 그래프",
+                "마케팅 자동화",
+                "데이터 개인화"
+            ],
             "x": 0.2537532289212346,
             "y": 0.2160792092996507
         },
         {
             "id": 73,
             "label": "데이터 레이크",
+            "label_full": "Data Lake(데이터 레이크)",
+            "label_en": "Data Lake",
+            "label_ko": "데이터 레이크",
+            "connected_labels": [
+                "포그 컴퓨팅",
+                "개인 정보 보호 강화 기술",
+                "데이터 무결성",
+                "도커",
+                "데이터 중복 제거",
+                "디지털 지갑",
+                "AI 콘텐츠 추천",
+                "에너지 저장 시스템"
+            ],
             "x": -0.43985951587122907,
             "y": 0.14725929029787066
         },
         {
             "id": 74,
             "label": "데이터 웨어하우스",
+            "label_full": "Data Warehouse(데이터 웨어하우스)",
+            "label_en": "Data Warehouse",
+            "label_ko": "데이터 웨어하우스",
+            "connected_labels": [
+                "네트워크 슬라이싱",
+                "데이터 백업 및 복구",
+                "데이터 브로커",
+                "생산성 소프트웨어",
+                "도커",
+                "협동 로봇",
+                "운영기술",
+                "디지털 협업 도구",
+                "리쇼어링"
+            ],
             "x": -0.3128280856684655,
             "y": 0.5020981372024054
         },
         {
             "id": 75,
             "label": "데이터 브로커",
+            "label_full": "Data Broker(데이터 브로커)",
+            "label_en": "Data Broker",
+            "label_ko": "데이터 브로커",
+            "connected_labels": [
+                "데이터 웨어하우스",
+                "데이터 백업 및 복구",
+                "지식 그래프",
+                "데이터 분석",
+                "고객 경험 관리"
+            ],
             "x": -0.04782268746293421,
             "y": 0.46536999612292484
         },
         {
             "id": 76,
             "label": "오픈 데이터",
+            "label_full": "Open Data(오픈 데이터)",
+            "label_en": "Open Data",
+            "label_ko": "오픈 데이터",
+            "connected_labels": [
+                "데이터 거버넌스",
+                "데이터 신원",
+                "오픈 소스 보안",
+                "데이터 분석",
+                "지속 가능한 기술"
+            ],
             "x": -0.06908332048579338,
             "y": -0.05662626498010021
         },
         {
             "id": 77,
             "label": "데이터 거버넌스",
+            "label_full": "Data Governance(데이터 거버넌스)",
+            "label_en": "Data Governance",
+            "label_ko": "데이터 거버넌스",
+            "connected_labels": [
+                "오픈 데이터",
+                "사이버 위협 인텔리전스",
+                "AI 트러스트",
+                "데이터 분석",
+                "데이터 보안"
+            ],
             "x": -0.050436946499527346,
             "y": 0.2791947529892452
         },
         {
             "id": 78,
             "label": "데이터 보안",
+            "label_full": "Data Security(데이터 보안)",
+            "label_en": "Data Security",
+            "label_ko": "데이터 보안",
+            "connected_labels": [
+                "데이터 거버넌스",
+                "사이버 위협 인텔리전스",
+                "보안 운영 센터",
+                "데이터 분석"
+            ],
             "x": -0.17293643661306796,
             "y": 0.18262805745718375
         },
         {
             "id": 79,
             "label": "데이터 백업 및 복구",
+            "label_full": "Data Backup and Recovery(데이터 백업 및 복구)",
+            "label_en": "Data Backup and Recovery",
+            "label_ko": "데이터 백업 및 복구",
+            "connected_labels": [
+                "데이터 웨어하우스",
+                "데이터 브로커",
+                "데이터 무결성",
+                "데이터 신원",
+                "사이버 위협 인텔리전스"
+            ],
             "x": -0.5239627142095684,
             "y": 0.3731099117646979
         },
         {
             "id": 80,
             "label": "사이버 위협 인텔리전스",
+            "label_full": "Cyber Threat Intelligence(사이버 위협 인텔리전스)",
+            "label_en": "Cyber Threat Intelligence",
+            "label_ko": "사이버 위협 인텔리전스",
+            "connected_labels": [
+                "데이터 거버넌스",
+                "데이터 보안",
+                "데이터 백업 및 복구",
+                "위협 벡터",
+                "암호화",
+                "오픈 소스 보안",
+                "위협 헌팅",
+                "보안 운영 센터",
+                "취약점 관리",
+                "내부자 위협",
+                "사이버 보안 훈련",
+                "금융 사이버 보안",
+                "애플리케이션 보안",
+                "데이터 신원"
+            ],
             "x": -0.4181122524607493,
             "y": -0.0023531924294425558
         },
         {
             "id": 81,
             "label": "멀웨어 탐지",
+            "label_full": "Malware Detection(멀웨어 탐지)",
+            "label_en": "Malware Detection",
+            "label_ko": "멀웨어 탐지",
+            "connected_labels": [
+                "랜섬웨어",
+                "버그 바운티",
+                "제로 데이 공격",
+                "보안 패치"
+            ],
             "x": -0.9999999999999999,
             "y": -0.35728635723051516
         },
         {
             "id": 82,
             "label": "위협 헌팅",
+            "label_full": "Threat Hunting(위협 헌팅)",
+            "label_en": "Threat Hunting",
+            "label_ko": "위협 헌팅",
+            "connected_labels": [
+                "위협 벡터",
+                "보안 자동화",
+                "자동화 투자",
+                "사이버 위협 인텔리전스",
+                "침입 방지 시스템",
+                "내부자 위협",
+                "레드팀",
+                "정보 보안 감사",
+                "소프트웨어 보안",
+                "리스크 관리",
+                "윤리적 해킹",
+                "오픈 소스 보안"
+            ],
             "x": -0.289879589988592,
             "y": -0.16594875067834708
         },
         {
             "id": 83,
             "label": "침입 탐지 시스템",
+            "label_full": "Intrusion Detection System (IDS)(침입 탐지 시스템)",
+            "label_en": "Intrusion Detection System (IDS)",
+            "label_ko": "침입 탐지 시스템",
+            "connected_labels": [
+                "엔드포인트 탐지 및 대응",
+                "보안 정보 및 이벤트 관리",
+                "데이터 암호화",
+                "지능형 필터링"
+            ],
             "x": -0.326703537644809,
             "y": -0.4650648671374245
         },
         {
             "id": 84,
             "label": "침입 방지 시스템",
+            "label_full": "Intrusion Prevention System (IPS)(침입 방지 시스템)",
+            "label_en": "Intrusion Prevention System (IPS)",
+            "label_ko": "침입 방지 시스템",
+            "connected_labels": [
+                "디지털 트윈",
+                "패스워드 없는 인증",
+                "하이브리드 클라우드",
+                "위협 벡터",
+                "보안 오케스트레이션 자동화 및 대응",
+                "위협 헌팅",
+                "블루팀"
+            ],
             "x": -0.43406676745665324,
             "y": 0.06149517170667864
         },
         {
             "id": 85,
             "label": "엔드포인트 탐지 및 대응",
+            "label_full": "Endpoint Detection and Response (EDR)(엔드포인트 탐지 및 대응)",
+            "label_en": "Endpoint Detection and Response (EDR)",
+            "label_ko": "엔드포인트 탐지 및 대응",
+            "connected_labels": [
+                "침입 탐지 시스템",
+                "보안 정보 및 이벤트 관리",
+                "보안 운영 센터",
+                "지능형 필터링"
+            ],
             "x": -0.18058733415178319,
             "y": -0.5438860781321331
         },
         {
             "id": 86,
             "label": "보안 정보 및 이벤트 관리",
+            "label_full": "Security Information and Event Management (SIEM)(보안 정보 및 이벤트 관리)",
+            "label_en": "Security Information and Event Management (SIEM)",
+            "label_ko": "보안 정보 및 이벤트 관리",
+            "connected_labels": [
+                "제로 트러스트 보안",
+                "침입 탐지 시스템",
+                "엔드포인트 탐지 및 대응",
+                "보안 오케스트레이션 자동화 및 대응",
+                "AI 사이버 보안"
+            ],
             "x": -0.23696721929758455,
             "y": -0.5802984303570183
         },
         {
             "id": 87,
             "label": "보안 오케스트레이션 자동화 및 대응",
+            "label_full": "Security Orchestration Automation and Response (SOAR)(보안 오케스트레이션 자동화 및 대응)",
+            "label_en": "Security Orchestration Automation and Response (SOAR)",
+            "label_ko": "보안 오케스트레이션 자동화 및 대응",
+            "connected_labels": [
+                "침입 방지 시스템",
+                "보안 정보 및 이벤트 관리",
+                "보안 자동화",
+                "멀티 클라우드"
+            ],
             "x": -0.5897581116178672,
             "y": -0.26385346979675717
         },
         {
             "id": 88,
             "label": "보안 운영 센터",
+            "label_full": "Security Operations Center (SOC)(보안 운영 센터)",
+            "label_en": "Security Operations Center (SOC)",
+            "label_ko": "보안 운영 센터",
+            "connected_labels": [
+                "분산 원장 기술",
+                "데이터 보안",
+                "엔드포인트 탐지 및 대응",
+                "사이버 위협 인텔리전스",
+                "스마트 계약"
+            ],
             "x": -0.2739160601269631,
             "y": -0.21505901365511068
         },
         {
             "id": 89,
             "label": "취약점 관리",
+            "label_full": "Vulnerability Management(취약점 관리)",
+            "label_en": "Vulnerability Management",
+            "label_ko": "취약점 관리",
+            "connected_labels": [
+                "내부자 위협",
+                "사이버 위협 인텔리전스",
+                "암호화",
+                "버그 바운티",
+                "정보 보안 감사",
+                "리스크 관리"
+            ],
             "x": -0.7253763648606525,
             "y": -0.28695225398506086
         },
         {
             "id": 90,
             "label": "위협 벡터",
+            "label_full": "Threat Vector(위협 벡터)",
+            "label_en": "Threat Vector",
+            "label_ko": "위협 벡터",
+            "connected_labels": [
+                "클라우드 네이티브",
+                "사이버 위협 인텔리전스",
+                "위협 헌팅",
+                "침입 방지 시스템",
+                "오픈 소스 보안",
+                "내부자 위협",
+                "블루팀",
+                "윤리적 해킹"
+            ],
             "x": -0.47985740841909486,
             "y": 0.12205582356883858
         },
         {
             "id": 91,
             "label": "내부자 위협",
+            "label_full": "Insider Threat(내부자 위협)",
+            "label_en": "Insider Threat",
+            "label_ko": "내부자 위협",
+            "connected_labels": [
+                "취약점 관리",
+                "사이버 위협 인텔리전스",
+                "위협 헌팅",
+                "위협 벡터"
+            ],
             "x": -0.6591288220234823,
             "y": -0.04326007780431235
         },
         {
             "id": 92,
             "label": "사이버 보안 훈련",
+            "label_full": "Cybersecurity Training(사이버 보안 훈련)",
+            "label_en": "Cybersecurity Training",
+            "label_ko": "사이버 보안 훈련",
+            "connected_labels": [
+                "해킹 대회",
+                "버그 바운티",
+                "사이버 위협 인텔리전스",
+                "프라이버시 강화 기술",
+                "해커톤"
+            ],
             "x": -0.748503138421561,
             "y": -0.17273914552572975
         },
         {
             "id": 93,
             "label": "해커톤",
+            "label_full": "Hackathon(해커톤)",
+            "label_en": "Hackathon",
+            "label_ko": "해커톤",
+            "connected_labels": [
+                "해킹 대회",
+                "버그 바운티",
+                "화이트 해킹",
+                "사이버 보안 훈련"
+            ],
             "x": -0.7462183127271916,
             "y": -0.4725780144816108
         },
         {
             "id": 94,
             "label": "블랙 해킹",
+            "label_full": "Black Hat Hacking(블랙 해킹)",
+            "label_en": "Black Hat Hacking",
+            "label_ko": "블랙 해킹",
+            "connected_labels": [
+                "화이트 해킹",
+                "버그 바운티",
+                "해킹 대회",
+                "랜섬웨어"
+            ],
             "x": -0.7424006230728719,
             "y": -0.5419732205237207
         },
         {
             "id": 95,
             "label": "화이트 해킹",
+            "label_full": "White Hat Hacking(화이트 해킹)",
+            "label_en": "White Hat Hacking",
+            "label_ko": "화이트 해킹",
+            "connected_labels": [
+                "해커톤",
+                "블랙 해킹",
+                "버그 바운티",
+                "디지털 아이덴티티",
+                "프라이버시 강화 기술",
+                "레드팀",
+                "해킹 대회"
+            ],
             "x": -0.5338102159108102,
             "y": -0.26263233020997556
         },
         {
             "id": 96,
             "label": "레드팀",
+            "label_full": "Red Team(레드팀)",
+            "label_en": "Red Team",
+            "label_ko": "레드팀",
+            "connected_labels": [
+                "블루팀",
+                "퍼플팀",
+                "위협 헌팅",
+                "화이트 해킹"
+            ],
             "x": -0.7350036842015977,
             "y": -0.10733330611966728
         },
         {
             "id": 97,
             "label": "블루팀",
+            "label_full": "Blue Team(블루팀)",
+            "label_en": "Blue Team",
+            "label_ko": "블루팀",
+            "connected_labels": [
+                "레드팀",
+                "퍼플팀",
+                "침입 방지 시스템",
+                "위협 벡터"
+            ],
             "x": -0.8432447497263438,
             "y": 0.15636683861545592
         },
         {
             "id": 98,
             "label": "퍼플팀",
+            "label_full": "Purple Team(퍼플팀)",
+            "label_en": "Purple Team",
+            "label_ko": "퍼플팀",
+            "connected_labels": [
+                "레드팀",
+                "블루팀",
+                "멀티 클라우드",
+                "API 게이트웨이"
+            ],
             "x": -0.8538600447016943,
             "y": 0.31942090147962515
         },
         {
             "id": 99,
             "label": "버그 바운티",
+            "label_full": "Bug Bounty(버그 바운티)",
+            "label_en": "Bug Bounty",
+            "label_ko": "버그 바운티",
+            "connected_labels": [
+                "랜섬웨어",
+                "디도스",
+                "멀웨어 탐지",
+                "취약점 관리",
+                "사이버 보안 훈련",
+                "해커톤",
+                "블랙 해킹",
+                "화이트 해킹",
+                "윤리적 해킹",
+                "오픈 소스 보안",
+                "보안 패치",
+                "제로 데이 공격",
+                "해킹 대회",
+                "리쇼어링"
+            ],
             "x": -0.6495455794947231,
             "y": -0.3403142615141059
         },
         {
             "id": 100,
             "label": "전자상거래 보안",
+            "label_full": "E-commerce Security(전자상거래 보안)",
+            "label_en": "E-commerce Security",
+            "label_ko": "전자상거래 보안",
+            "connected_labels": [
+                "프라이버시 강화 기술",
+                "애플리케이션 보안",
+                "결제 게이트웨이",
+                "금융 규제 기술"
+            ],
             "x": -0.6221090915921923,
             "y": 0.36251466020920836
         },
         {
             "id": 101,
             "label": "모빌리티 서비스",
+            "label_full": "Mobility Services(모빌리티 서비스)",
+            "label_en": "Mobility Services",
+            "label_ko": "모빌리티 서비스",
+            "connected_labels": [
+                "나노기술",
+                "그린 IT",
+                "재생 가능한 에너지 기술",
+                "디지털 금융",
+                "e스포츠",
+                "AI 비즈니스",
+                "게임 테크",
+                "스마트 워크",
+                "기계 지능",
+                "오토메이션",
+                "지속 가능한 기술"
+            ],
             "x": 0.4134209499749632,
             "y": -0.3316268245077289
         },
         {
             "id": 102,
             "label": "스마트 팩토리",
+            "label_full": "Smart Factory(스마트 팩토리)",
+            "label_en": "Smart Factory",
+            "label_ko": "스마트 팩토리",
+            "connected_labels": [
+                "스마트 시티",
+                "스마트 플랜트",
+                "4D 프린팅",
+                "디지털 콘텐츠 생성",
+                "지능형 필터링",
+                "스마트 홈",
+                "스마트 로봇",
+                "자율 농업"
+            ],
             "x": 0.20254866830604606,
             "y": -0.42802524037408096
         },
         {
             "id": 103,
             "label": "스마트 홈",
+            "label_full": "Smart Home(스마트 홈)",
+            "label_en": "Smart Home",
+            "label_ko": "스마트 홈",
+            "connected_labels": [
+                "자율 드론",
+                "스마트 가정",
+                "스마트 팩토리",
+                "스마트 전력",
+                "스마트 로봇"
+            ],
             "x": 0.28791420376769783,
             "y": -0.7691314889179723
         },
         {
             "id": 104,
             "label": "스마트 농업",
+            "label_full": "Smart Agriculture(스마트 농업)",
+            "label_en": "Smart Agriculture",
+            "label_ko": "스마트 농업",
+            "connected_labels": [
+                "자율 주행",
+                "3D 프린팅",
+                "디지털 농업",
+                "산업용 사물인터넷",
+                "스마트 보건",
+                "자율주행차",
+                "핀테크",
+                "스마트 플랜트",
+                "자율 농업"
+            ],
             "x": 0.6886381937410284,
             "y": -0.4732437495157897
         },
         {
             "id": 105,
             "label": "지능형 교통 시스템",
+            "label_full": "Intelligent Transportation Systems(지능형 교통 시스템)",
+            "label_en": "Intelligent Transportation Systems",
+            "label_ko": "지능형 교통 시스템",
+            "connected_labels": [
+                "자율 에너지 관리 시스템",
+                "산업용 사물인터넷",
+                "자율주행차",
+                "스마트 물류"
+            ],
             "x": 0.7548337469932099,
             "y": -0.48602936391324986
         },
         {
             "id": 106,
             "label": "자율 에너지 관리 시스템",
+            "label_full": "Autonomous Energy Management System(자율 에너지 관리 시스템)",
+            "label_en": "Autonomous Energy Management System",
+            "label_ko": "자율 에너지 관리 시스템",
+            "connected_labels": [
+                "재생 가능한 에너지 기술",
+                "스마트 그리드",
+                "지능형 교통 시스템",
+                "스마트 에너지",
+                "스마트 물류",
+                "스마트 빌딩",
+                "스마트 전력",
+                "스마트 폐기물 관리",
+                "에너지 블록체인"
+            ],
             "x": 0.40748399730858287,
             "y": -0.6136048365752089
         },
         {
             "id": 107,
             "label": "예측 유지보수",
+            "label_full": "Predictive Maintenance(예측 유지보수)",
+            "label_en": "Predictive Maintenance",
+            "label_ko": "예측 유지보수",
+            "connected_labels": [
+                "스마트 그리드",
+                "보안 자동화",
+                "블록체인 기반 인증",
+                "스마트 폐기물 관리"
+            ],
             "x": -0.13549621812690993,
             "y": -0.7694668106012008
         },
         {
             "id": 108,
             "label": "디지털 트랜스포메이션",
+            "label_full": "Digital Transformation(디지털 트랜스포메이션)",
+            "label_en": "Digital Transformation",
+            "label_ko": "디지털 트랜스포메이션",
+            "connected_labels": [
+                "그린 IT",
+                "IT/OT 융합",
+                "디지털 금융",
+                "AI 비즈니스",
+                "데이터 분석",
+                "정보기술",
+                "API 경제"
+            ],
             "x": 0.638267235611397,
             "y": 0.15315926718798548
         },
         {
             "id": 109,
             "label": "로봇 공학",
+            "label_full": "Robotics(로봇 공학)",
+            "label_en": "Robotics",
+            "label_ko": "로봇 공학",
+            "connected_labels": [
+                "기계 지능",
+                "스마트 로봇",
+                "디지털 콘텐츠 생성",
+                "뇌-컴퓨터 인터페이스",
+                "무인 항공기"
+            ],
             "x": 0.2354970562769971,
             "y": -0.1419282588004489
         },
         {
             "id": 110,
             "label": "협동 로봇",
+            "label_full": "Collaborative Robots (Cobots)(협동 로봇)",
+            "label_en": "Collaborative Robots (Cobots)",
+            "label_ko": "협동 로봇",
+            "connected_labels": [
+                "운영기술",
+                "데이터 웨어하우스",
+                "디지털 협업 도구",
+                "분산형 애플리케이션"
+            ],
             "x": -0.1436809249751128,
             "y": 0.8138027576748005
         },
         {
             "id": 111,
             "label": "산업용 사물인터넷",
+            "label_full": "Industrial Internet of Things (IIoT)(산업용 사물인터넷)",
+            "label_en": "Industrial Internet of Things (IIoT)",
+            "label_ko": "산업용 사물인터넷",
+            "connected_labels": [
+                "사물인터넷",
+                "자율 주행",
+                "3D 프린팅",
+                "재생 가능한 에너지 기술",
+                "스마트 농업",
+                "지능형 교통 시스템",
+                "블록체인 금융",
+                "AI 창작",
+                "4D 프린팅",
+                "정보기술",
+                "IT/OT 융합",
+                "API 경제",
+                "AI 비즈니스",
+                "핀테크",
+                "자율주행차",
+                "디지털 농업"
+            ],
             "x": 0.5954890773189042,
             "y": -0.1999226040690664
         },
         {
             "id": 112,
             "label": "운영기술",
+            "label_full": "Operational Technology (OT)(운영기술)",
+            "label_en": "Operational Technology (OT)",
+            "label_ko": "운영기술",
+            "connected_labels": [
+                "협동 로봇",
+                "데이터 웨어하우스",
+                "생산성 소프트웨어",
+                "분산형 애플리케이션",
+                "공급망 디지털화"
+            ],
             "x": -0.02102056849723809,
             "y": 0.576003925013009
         },
         {
             "id": 113,
             "label": "정보기술",
+            "label_full": "Information Technology (IT)(정보기술)",
+            "label_en": "Information Technology (IT)",
+            "label_ko": "정보기술",
+            "connected_labels": [
+                "데이터 분석",
+                "디지털 트랜스포메이션",
+                "산업용 사물인터넷",
+                "디지털 금융"
+            ],
             "x": 0.6613143844094077,
             "y": 0.08348617493761712
         },
         {
             "id": 114,
             "label": "IT/OT 융합",
+            "label_full": "IT/OT Convergence(IT/OT 융합)",
+            "label_en": "IT/OT Convergence",
+            "label_ko": "IT/OT 융합",
+            "connected_labels": [
+                "디지털 트랜스포메이션",
+                "산업용 사물인터넷",
+                "AI 비즈니스",
+                "증강 분석"
+            ],
             "x": 0.8616069823544855,
             "y": 0.03348953415261365
         },
         {
             "id": 115,
             "label": "API 경제",
+            "label_full": "API Economy(API 경제)",
+            "label_en": "API Economy",
+            "label_ko": "API 경제",
+            "connected_labels": [
+                "데이터 경제",
+                "산업용 사물인터넷",
+                "디지털 트랜스포메이션",
+                "AI 비즈니스",
+                "공유 경제"
+            ],
             "x": 0.7980449383998585,
             "y": 0.0678702425210668
         },
         {
             "id": 116,
             "label": "AI 비즈니스",
+            "label_full": "AI Business(AI 비즈니스)",
+            "label_en": "AI Business",
+            "label_ko": "AI 비즈니스",
+            "connected_labels": [
+                "모빌리티 서비스",
+                "디지털 트랜스포메이션",
+                "IT/OT 융합",
+                "API 경제",
+                "데이터 중심 비즈니스",
+                "증강 분석",
+                "산업용 사물인터넷",
+                "데이터 경제"
+            ],
             "x": 0.7389541128479239,
             "y": -0.030662878902367328
         },
         {
             "id": 117,
             "label": "데이터 경제",
+            "label_full": "Data Economy(데이터 경제)",
+            "label_en": "Data Economy",
+            "label_ko": "데이터 경제",
+            "connected_labels": [
+                "데이터 분석",
+                "API 경제",
+                "데이터 중심 비즈니스",
+                "AI 비즈니스"
+            ],
             "x": 0.6858698118484727,
             "y": 0.39794804624216606
         },
         {
             "id": 118,
             "label": "공유 경제",
+            "label_full": "Sharing Economy(공유 경제)",
+            "label_en": "Sharing Economy",
+            "label_ko": "공유 경제",
+            "connected_labels": [
+                "디지털 금융",
+                "API 경제",
+                "데이터 분석",
+                "스마트 계약",
+                "피지털 마케팅"
+            ],
             "x": 0.3380040394523665,
             "y": 0.0904004060845044
         },
         {
             "id": 119,
             "label": "지식 그래프",
+            "label_full": "Knowledge Graph(지식 그래프)",
+            "label_en": "Knowledge Graph",
+            "label_ko": "지식 그래프",
+            "connected_labels": [
+                "엑소스켈레톤",
+                "AI 가속기",
+                "AI 모델 해석성",
+                "동형 암호화",
+                "데이터 시각화",
+                "데이터 브로커",
+                "지능형 필터링",
+                "AI 트러스트",
+                "실시간 번역"
+            ],
             "x": -0.031292769357219384,
             "y": 0.20865913233368896
         },
         {
             "id": 120,
             "label": "고객 경험 관리",
+            "label_full": "Customer Experience Management(고객 경험 관리)",
+            "label_en": "Customer Experience Management",
+            "label_ko": "고객 경험 관리",
+            "connected_labels": [
+                "금융 규제 기술",
+                "데이터 분석",
+                "데이터 신원",
+                "데이터 브로커"
+            ],
             "x": 0.0689027289597923,
             "y": 0.5954525123052912
         },
         {
             "id": 121,
             "label": "마케팅 자동화",
+            "label_full": "Marketing Automation(마케팅 자동화)",
+            "label_en": "Marketing Automation",
+            "label_ko": "마케팅 자동화",
+            "connected_labels": [
+                "자동화 투자",
+                "데이터 시각화",
+                "공급망 디지털화",
+                "디지털 콘텐츠 생성",
+                "피지털 마케팅",
+                "스마트 은행"
+            ],
             "x": 0.2695120856460314,
             "y": 0.03317762715198938
         },
         {
             "id": 122,
             "label": "애드테크",
+            "label_full": "AdTech(애드테크)",
+            "label_en": "AdTech",
+            "label_ko": "애드테크",
+            "connected_labels": [
+                "컨테이너화",
+                "클라우드 네이티브",
+                "금융 규제 기술",
+                "피지털 마케팅",
+                "인플루언서 경제"
+            ],
             "x": -0.07398338197406394,
             "y": 0.6325352228016953
         },
         {
             "id": 123,
             "label": "피지털 마케팅",
+            "label_full": "Phygital Marketing(피지털 마케팅)",
+            "label_en": "Phygital Marketing",
+            "label_ko": "피지털 마케팅",
+            "connected_labels": [
+                "추천 시스템",
+                "애드테크",
+                "공유 경제",
+                "마케팅 자동화",
+                "데이터 개인화",
+                "소셜 미디어 분석"
+            ],
             "x": 0.2327327926323675,
             "y": 0.4588347108303821
         },
         {
             "id": 124,
             "label": "데이터 개인화",
+            "label_full": "Data Personalization(데이터 개인화)",
+            "label_en": "Data Personalization",
+            "label_ko": "데이터 개인화",
+            "connected_labels": [
+                "피지털 마케팅",
+                "데이터 시각화",
+                "감정 인식 AI",
+                "자동화 투자",
+                "AI 금융"
+            ],
             "x": 0.39934631827348677,
             "y": 0.4341783729096646
         },
         {
             "id": 125,
             "label": "증강 분석",
+            "label_full": "Augmented Analytics(증강 분석)",
+            "label_en": "Augmented Analytics",
+            "label_ko": "증강 분석",
+            "connected_labels": [
+                "IT/OT 융합",
+                "AI 비즈니스",
+                "코딩 AI",
+                "데이터 중심 비즈니스",
+                "AI 의사",
+                "자동화 투자",
+                "AI 금융"
+            ],
             "x": 0.5777509534088012,
             "y": 0.21770557812778327
         },
         {
             "id": 126,
             "label": "디지털 금융",
+            "label_full": "Digital Finance(디지털 금융)",
+            "label_en": "Digital Finance",
+            "label_ko": "디지털 금융",
+            "connected_labels": [
+                "전자 정부",
+                "모빌리티 서비스",
+                "디지털 트랜스포메이션",
+                "정보기술",
+                "공유 경제",
+                "AI 금융",
+                "핀테크",
+                "기계 지능"
+            ],
             "x": 0.6438827885992243,
             "y": -0.0652183662384474
         },
         {
             "id": 127,
             "label": "핀테크",
+            "label_full": "FinTech(핀테크)",
+            "label_en": "FinTech",
+            "label_ko": "핀테크",
+            "connected_labels": [
+                "산업용 사물인터넷",
+                "인슈어테크",
+                "디지털 금융",
+                "스마트 농업"
+            ],
             "x": 0.8537301585994289,
             "y": -0.20869301506477714
         },
         {
             "id": 128,
             "label": "인슈어테크",
+            "label_full": "InsurTech(인슈어테크)",
+            "label_en": "InsurTech",
+            "label_ko": "인슈어테크",
+            "connected_labels": [
+                "핀테크",
+                "스마트 은행",
+                "AI 금융",
+                "자동화 투자"
+            ],
             "x": 0.7049870829197711,
             "y": 0.1313876121676294
         },
         {
             "id": 129,
             "label": "AI 금융",
+            "label_full": "AI Finance(AI 금융)",
+            "label_en": "AI Finance",
+            "label_ko": "AI 금융",
+            "connected_labels": [
+                "인공지능",
+                "엣지 AI",
+                "데이터 개인화",
+                "디지털 금융",
+                "인슈어테크",
+                "코딩 AI",
+                "증강 분석",
+                "AI 의사"
+            ],
             "x": 0.6183716942225496,
             "y": 0.30441913977608853
         },
         {
             "id": 130,
             "label": "자동화 투자",
+            "label_full": "Automated Investing(자동화 투자)",
+            "label_en": "Automated Investing",
+            "label_ko": "자동화 투자",
+            "connected_labels": [
+                "빅데이터",
+                "AI 모델 해석성",
+                "데이터 분석",
+                "위협 헌팅",
+                "마케팅 자동화",
+                "데이터 개인화",
+                "증강 분석",
+                "인슈어테크",
+                "코딩 AI",
+                "스마트 은행",
+                "스마트 물류",
+                "공급망 디지털화",
+                "글로벌 교육 네트워크"
+            ],
             "x": 0.24178240853126728,
             "y": 0.09953298201092864
         },
         {
             "id": 131,
             "label": "로보어드바이저",
+            "label_full": "Robo-Advisor(로보어드바이저)",
+            "label_en": "Robo-Advisor",
+            "label_ko": "로보어드바이저",
+            "connected_labels": [
+                "AI옵스",
+                "AI 사이버 보안",
+                "스마트 면접",
+                "스마트 에너지"
+            ],
             "x": 0.4687243411277827,
             "y": -0.5125867571035401
         },
         {
             "id": 132,
             "label": "블록체인 금융",
+            "label_full": "Blockchain Finance(블록체인 금융)",
+            "label_en": "Blockchain Finance",
+            "label_ko": "블록체인 금융",
+            "connected_labels": [
+                "블록체인",
+                "산업용 사물인터넷",
+                "스마트 계약",
+                "4D 프린팅"
+            ],
             "x": 0.21650676606805266,
             "y": -0.4865359414959963
         },
         {
             "id": 133,
             "label": "탈중앙화 금융",
+            "label_full": "Decentralized Finance (DeFi)(탈중앙화 금융)",
+            "label_en": "Decentralized Finance (DeFi)",
+            "label_ko": "탈중앙화 금융",
+            "connected_labels": [
+                "금융 규제 기술",
+                "NFT",
+                "디지털 자산",
+                "암호화폐",
+                "결제 게이트웨이",
+                "웹 3.0",
+                "탈중앙화 조직"
+            ],
             "x": -0.2633682450982639,
             "y": 0.5016617067301659
         },
         {
             "id": 134,
             "label": "중앙 은행 디지털 통화",
+            "label_full": "Central Bank Digital Currency (CBDC)(중앙 은행 디지털 통화)",
+            "label_en": "Central Bank Digital Currency (CBDC)",
+            "label_ko": "중앙 은행 디지털 통화",
+            "connected_labels": [
+                "금융 규제 기술",
+                "암호화폐",
+                "디지털 자산",
+                "NFT"
+            ],
             "x": 0.0326716555328106,
             "y": 0.675471198781317
         },
         {
             "id": 135,
             "label": "암호화폐",
+            "label_full": "Cryptocurrency(암호화폐)",
+            "label_en": "Cryptocurrency",
+            "label_ko": "암호화폐",
+            "connected_labels": [
+                "탈중앙화 금융",
+                "중앙 은행 디지털 통화",
+                "NFT",
+                "금융 규제 기술",
+                "인플루언서 경제"
+            ],
             "x": -0.15784503703184213,
             "y": 0.8549934943426117
         },
         {
             "id": 136,
             "label": "스마트 은행",
+            "label_full": "Smart Banking(스마트 은행)",
+            "label_en": "Smart Banking",
+            "label_ko": "스마트 은행",
+            "connected_labels": [
+                "스마트 헬스케어",
+                "인슈어테크",
+                "자동화 투자",
+                "스마트 물류",
+                "마케팅 자동화",
+                "스마트 빌딩"
+            ],
             "x": 0.5392670209001044,
             "y": -0.14314928593442774
         },
         {
             "id": 137,
             "label": "디지털 자산",
+            "label_full": "Digital Assets(디지털 자산)",
+            "label_en": "Digital Assets",
+            "label_ko": "디지털 자산",
+            "connected_labels": [
+                "탈중앙화 금융",
+                "중앙 은행 디지털 통화",
+                "NFT",
+                "디지털 아이덴티티",
+                "금융 사이버 보안",
+                "디지털 콘텐츠 생성",
+                "디지털 저작권"
+            ],
             "x": -0.04345492554673614,
             "y": 0.1615619083615867
         },
         {
             "id": 138,
             "label": "금융 사이버 보안",
+            "label_full": "Financial Cybersecurity(금융 사이버 보안)",
+            "label_en": "Financial Cybersecurity",
+            "label_ko": "금융 사이버 보안",
+            "connected_labels": [
+                "디지털 자산",
+                "사이버 위협 인텔리전스",
+                "금융 규제 기술",
+                "디지털 콘텐츠 생성",
+                "디지털 저작권",
+                "사이버 보험"
+            ],
             "x": -0.15542762461878984,
             "y": 0.008330796858118541
         },
         {
             "id": 139,
             "label": "결제 게이트웨이",
+            "label_full": "Payment Gateway(결제 게이트웨이)",
+            "label_en": "Payment Gateway",
+            "label_ko": "결제 게이트웨이",
+            "connected_labels": [
+                "전자상거래 보안",
+                "금융 규제 기술",
+                "탈중앙화 금융",
+                "컨테이너화"
+            ],
             "x": -0.41370194683657485,
             "y": 0.6581769886886469
         },
         {
             "id": 140,
             "label": "금융 규제 기술",
+            "label_full": "Regulatory Technology (RegTech)(금융 규제 기술)",
+            "label_en": "Regulatory Technology (RegTech)",
+            "label_ko": "금융 규제 기술",
+            "connected_labels": [
+                "AI 모델 해석성",
+                "전자상거래 보안",
+                "고객 경험 관리",
+                "애드테크",
+                "탈중앙화 금융",
+                "중앙 은행 디지털 통화",
+                "암호화폐",
+                "금융 사이버 보안",
+                "결제 게이트웨이",
+                "인플루언서 경제"
+            ],
             "x": -0.15517970172259302,
             "y": 0.5166979679160775
         },
         {
             "id": 141,
             "label": "인플루언서 경제",
+            "label_full": "Influencer Economy(인플루언서 경제)",
+            "label_en": "Influencer Economy",
+            "label_ko": "인플루언서 경제",
+            "connected_labels": [
+                "NFT",
+                "암호화폐",
+                "애드테크",
+                "금융 규제 기술"
+            ],
             "x": -0.03312555438626453,
             "y": 0.825817846200568
         },
         {
             "id": 142,
             "label": "NFT",
+            "label_full": "Non-Fungible Token(NFT)",
+            "label_en": "Non-Fungible Token(NFT)",
+            "label_ko": "NFT",
+            "connected_labels": [
+                "탈중앙화 금융",
+                "중앙 은행 디지털 통화",
+                "암호화폐",
+                "디지털 자산",
+                "인플루언서 경제",
+                "디지털 아바타",
+                "탈중앙화 조직"
+            ],
             "x": -0.05229397504063205,
             "y": 0.5504568926839998
         },
         {
             "id": 143,
             "label": "디지털 저작권",
+            "label_full": "Digital Copyright(디지털 저작권)",
+            "label_en": "Digital Copyright",
+            "label_ko": "디지털 저작권",
+            "connected_labels": [
+                "디지털 자산",
+                "디지털 아이덴티티",
+                "금융 사이버 보안",
+                "디지털 아바타"
+            ],
             "x": -0.2640499103724883,
             "y": 0.2116460590474244
         },
         {
             "id": 144,
             "label": "메타버스",
+            "label_full": "Metaverse(메타버스)",
+            "label_en": "Metaverse",
+            "label_ko": "메타버스",
+            "connected_labels": [
+                "증강 현실",
+                "5G 네트워크",
+                "가상 세계",
+                "게임 테크",
+                "분산 원장 기술"
+            ],
             "x": 0.22476725181101725,
             "y": -0.0650352615311958
         },
         {
             "id": 145,
             "label": "가상 세계",
+            "label_full": "Virtual World(가상 세계)",
+            "label_en": "Virtual World",
+            "label_ko": "가상 세계",
+            "connected_labels": [
+                "증강 현실",
+                "가상 현실",
+                "메타버스",
+                "디지털 아바타"
+            ],
             "x": 0.3491777312716761,
             "y": 0.2897551846881827
         },
         {
             "id": 146,
             "label": "디지털 아바타",
+            "label_full": "Digital Avatar(디지털 아바타)",
+            "label_en": "Digital Avatar",
+            "label_ko": "디지털 아바타",
+            "connected_labels": [
+                "엑소스켈레톤",
+                "NFT",
+                "디지털 저작권",
+                "가상 세계",
+                "디지털 콘텐츠 생성",
+                "디지털 아이덴티티",
+                "신원 인증 기술",
+                "뇌-컴퓨터 인터페이스",
+                "모션 캡처 기술"
+            ],
             "x": 0.01922463423433607,
             "y": 0.13509158881660924
         },
         {
             "id": 147,
             "label": "게임 테크",
+            "label_full": "Game Tech(게임 테크)",
+            "label_en": "Game Tech",
+            "label_ko": "게임 테크",
+            "connected_labels": [
+                "가상 현실",
+                "나노기술",
+                "메타버스",
+                "오토메이션",
+                "디지털 콘텐츠 생성",
+                "모빌리티 서비스",
+                "e스포츠",
+                "스마트 워크"
+            ],
             "x": 0.21774441945759587,
             "y": -0.2953407316652264
         },
         {
             "id": 148,
             "label": "클라우드 게임",
+            "label_full": "Cloud Gaming(클라우드 게임)",
+            "label_en": "Cloud Gaming",
+            "label_ko": "클라우드 게임",
+            "connected_labels": [
+                "클라우드 백업",
+                "포그 컴퓨팅",
+                "서비스형 소프트웨어",
+                "퀀텀 키 분배",
+                "비트코인",
+                "이더리움"
+            ],
             "x": -0.650374612319291,
             "y": 0.46067588046613445
         },
         {
             "id": 149,
             "label": "e스포츠",
+            "label_full": "eSports(e스포츠)",
+            "label_en": "eSports",
+            "label_ko": "e스포츠",
+            "connected_labels": [
+                "모빌리티 서비스",
+                "게임 테크",
+                "디지털 주권",
+                "오토메이션",
+                "스마트 워크"
+            ],
             "x": 0.13148151256787247,
             "y": -0.6181363115481335
         },
         {
             "id": 150,
             "label": "스마트 워크",
+            "label_full": "Smart Work(스마트 워크)",
+            "label_en": "Smart Work",
+            "label_ko": "스마트 워크",
+            "connected_labels": [
+                "오토메이션",
+                "모빌리티 서비스",
+                "게임 테크",
+                "e스포츠"
+            ],
             "x": 0.29126652716840923,
             "y": -0.6380831864533781
         },
         {
             "id": 151,
             "label": "하이브리드 업무 환경",
+            "label_full": "Hybrid Work Environment(하이브리드 업무 환경)",
+            "label_en": "Hybrid Work Environment",
+            "label_ko": "하이브리드 업무 환경",
+            "connected_labels": [
+                "클라우드 네이티브",
+                "분산 원장 기술",
+                "하이브리드 클라우드",
+                "생산성 소프트웨어"
+            ],
             "x": -0.16671799313222654,
             "y": 0.4289123140768764
         },
         {
             "id": 152,
             "label": "디지털 협업 도구",
+            "label_full": "Digital Collaboration Tools(디지털 협업 도구)",
+            "label_en": "Digital Collaboration Tools",
+            "label_ko": "디지털 협업 도구",
+            "connected_labels": [
+                "네트워크 슬라이싱",
+                "협동 로봇",
+                "데이터 웨어하우스",
+                "생산성 소프트웨어",
+                "분산형 애플리케이션"
+            ],
             "x": -0.29926761596408846,
             "y": 0.833083365611873
         },
         {
             "id": 153,
             "label": "생산성 소프트웨어",
+            "label_full": "Productivity Software(생산성 소프트웨어)",
+            "label_en": "Productivity Software",
+            "label_ko": "생산성 소프트웨어",
+            "connected_labels": [
+                "엑소스켈레톤",
+                "컨테이너화",
+                "데이터 웨어하우스",
+                "운영기술",
+                "하이브리드 업무 환경",
+                "디지털 협업 도구",
+                "클라우드 네이티브",
+                "도커",
+                "서비스형 소프트웨어",
+                "웹 3.0",
+                "윤리적 AI"
+            ],
             "x": -0.23646725146825995,
             "y": 0.5436888273397998
         },
         {
             "id": 154,
             "label": "화상회의 기술",
+            "label_full": "Video Conferencing Technology(화상회의 기술)",
+            "label_en": "Video Conferencing Technology",
+            "label_ko": "화상회의 기술",
+            "connected_labels": [
+                "실시간 분석",
+                "디지털 콘텐츠 생성",
+                "실시간 번역",
+                "컨테이너화"
+            ],
             "x": -0.11117251992855494,
             "y": 0.13123280226153086
         },
         {
             "id": 155,
             "label": "웹 3.0",
+            "label_full": "Web 3.0(웹 3.0)",
+            "label_en": "Web 3.0",
+            "label_ko": "웹 3.0",
+            "connected_labels": [
+                "탈중앙화 금융",
+                "오픈 소스 보안",
+                "생산성 소프트웨어",
+                "자율 ID 관리"
+            ],
             "x": -0.5531518832458153,
             "y": 0.30632030526656806
         },
         {
             "id": 156,
             "label": "분산형 애플리케이션",
+            "label_full": "Decentralized Applications (DApps)(분산형 애플리케이션)",
+            "label_en": "Decentralized Applications (DApps)",
+            "label_ko": "분산형 애플리케이션",
+            "connected_labels": [
+                "네트워크 슬라이싱",
+                "마이크로서비스",
+                "협동 로봇",
+                "운영기술",
+                "디지털 협업 도구",
+                "안전한 다자 연산",
+                "컨테이너화"
+            ],
             "x": -0.2705067431874614,
             "y": 0.7698617958609472
         },
         {
             "id": 157,
             "label": "탈중앙화 조직",
+            "label_full": "Decentralized Autonomous Organization (DAO)(탈중앙화 조직)",
+            "label_en": "Decentralized Autonomous Organization (DAO)",
+            "label_ko": "탈중앙화 조직",
+            "connected_labels": [
+                "자율 ID 관리",
+                "NFT",
+                "탈중앙화 금융",
+                "디지털 콘텐츠 생성"
+            ],
             "x": -0.05107036332095809,
             "y": 0.10657686397681489
         },
         {
             "id": 158,
             "label": "디지털 아이덴티티",
+            "label_full": "Digital Identity(디지털 아이덴티티)",
+            "label_en": "Digital Identity",
+            "label_ko": "디지털 아이덴티티",
+            "connected_labels": [
+                "디지털 포렌식",
+                "패스워드 없는 인증",
+                "스마트 계약",
+                "AI 트러스트",
+                "AI 윤리",
+                "화이트 해킹",
+                "디지털 자산",
+                "디지털 저작권",
+                "디지털 아바타",
+                "프라이버시 강화 기술",
+                "디지털 콘텐츠 생성",
+                "자율 ID 관리",
+                "신원 인증 기술",
+                "디지털 지갑",
+                "암호화폐 지갑 보안",
+                "디지털 주권",
+                "디지털 윤리"
+            ],
             "x": -0.17734034472425228,
             "y": -0.09010040133933477
         },
         {
             "id": 159,
             "label": "자율 ID 관리",
+            "label_full": "Self-Sovereign Identity(자율 ID 관리)",
+            "label_en": "Self-Sovereign Identity",
+            "label_ko": "자율 ID 관리",
+            "connected_labels": [
+                "암호화",
+                "동형 암호화",
+                "웹 3.0",
+                "탈중앙화 조직",
+                "디지털 아이덴티티",
+                "데이터 신원",
+                "프라이버시 강화 기술",
+                "윤리적 AI",
+                "블록체인 기반 인증"
+            ],
             "x": -0.3691831863079212,
             "y": 0.021739316564493717
         },
         {
             "id": 160,
             "label": "신원 인증 기술",
+            "label_full": "Identity Verification Technology(신원 인증 기술)",
+            "label_en": "Identity Verification Technology",
+            "label_ko": "신원 인증 기술",
+            "connected_labels": [
+                "바이오 인증",
+                "디지털 아이덴티티",
+                "동형 암호화",
+                "디지털 아바타"
+            ],
             "x": -0.31907971901475213,
             "y": -0.052729745660722006
         },
         {
             "id": 161,
             "label": "디지털 지갑",
+            "label_full": "Digital Wallet(디지털 지갑)",
+            "label_en": "Digital Wallet",
+            "label_ko": "디지털 지갑",
+            "connected_labels": [
+                "디지털 아이덴티티",
+                "데이터 레이크",
+                "AI 가속기",
+                "프라이버시 강화 기술",
+                "암호화폐 지갑 보안",
+                "비트코인"
+            ],
             "x": -0.43115548839397055,
             "y": -0.08685009136165757
         },
         {
             "id": 162,
             "label": "안전한 다자 연산",
+            "label_full": "Secure Multi-Party Computation (SMPC)(안전한 다자 연산)",
+            "label_en": "Secure Multi-Party Computation (SMPC)",
+            "label_ko": "안전한 다자 연산",
+            "connected_labels": [
+                "마이크로서비스",
+                "분산형 애플리케이션",
+                "컨테이너화",
+                "동형 암호화"
+            ],
             "x": -0.5091119587648211,
             "y": 0.5586082920144048
         },
         {
             "id": 163,
             "label": "생체 인식",
+            "label_full": "Biometric Recognition(생체 인식)",
+            "label_en": "Biometric Recognition",
+            "label_ko": "생체 인식",
+            "connected_labels": [
+                "바이오 인증",
+                "얼굴 인식",
+                "유전자 편집",
+                "블록체인 기반 인증",
+                "무인 항공기"
+            ],
             "x": -0.18414640647332806,
             "y": -0.6357975596203116
         },
         {
             "id": 164,
             "label": "얼굴 인식",
+            "label_full": "Facial Recognition(얼굴 인식)",
+            "label_en": "Facial Recognition",
+            "label_ko": "얼굴 인식",
+            "connected_labels": [
+                "생체 인식",
+                "지능형 필터링",
+                "디지털 콘텐츠 생성",
+                "AI 콘텐츠 추천"
+            ],
             "x": -0.08193172988604795,
             "y": -0.297087826252248
         },
         {
             "id": 165,
             "label": "딥페이크 탐지",
+            "label_full": "Deepfake Detection(딥페이크 탐지)",
+            "label_en": "Deepfake Detection",
+            "label_ko": "딥페이크 탐지",
+            "connected_labels": [
+                "감정 인식 AI",
+                "AI 모델 해석성",
+                "동형 암호화",
+                "자연어 처리"
+            ],
             "x": -0.1255497434212611,
             "y": 0.6186796450742501
         },
         {
             "id": 166,
             "label": "비디오 분석",
+            "label_full": "Video Analytics(비디오 분석)",
+            "label_en": "Video Analytics",
+            "label_ko": "비디오 분석",
+            "connected_labels": [
+                "딥러닝",
+                "AI옵스",
+                "예측 분석",
+                "텍스트 마이닝",
+                "AI 사이버 보안",
+                "지능형 필터링",
+                "스마트 연구",
+                "AI 기반 회계"
+            ],
             "x": 0.34534692566665826,
             "y": -0.22472987566678587
         },
         {
             "id": 167,
             "label": "클라우드 보안",
+            "label_full": "Cloud Security(클라우드 보안)",
+            "label_en": "Cloud Security",
+            "label_ko": "클라우드 보안",
+            "connected_labels": [
+                "하이브리드 클라우드",
+                "클라우드 접근 보안 브로커",
+                "네트워크 보안",
+                "클라우드 백업"
+            ],
             "x": -0.7328331900479147,
             "y": 0.271027298496525
         },
         {
             "id": 168,
             "label": "컨테이너 보안",
+            "label_full": "Container Security(컨테이너 보안)",
+            "label_en": "Container Security",
+            "label_ko": "컨테이너 보안",
+            "connected_labels": [
+                "프라이버시 강화 기술",
+                "인프라 코드로 관리",
+                "데이터 무결성",
+                "데이터 중복 제거"
+            ],
             "x": -0.8204362921095281,
             "y": 0.2541525445798186
         },
         {
             "id": 169,
             "label": "애플리케이션 보안",
+            "label_full": "Application Security(애플리케이션 보안)",
+            "label_en": "Application Security",
+            "label_ko": "애플리케이션 보안",
+            "connected_labels": [
+                "전자상거래 보안",
+                "암호화",
+                "사이버 위협 인텔리전스",
+                "프라이버시 강화 기술",
+                "보안 패치"
+            ],
             "x": -0.7653694507489585,
             "y": 0.05509507414496875
         },
         {
             "id": 170,
             "label": "제로 데이 공격",
+            "label_full": "Zero-Day Attack(제로 데이 공격)",
+            "label_en": "Zero-Day Attack",
+            "label_ko": "제로 데이 공격",
+            "connected_labels": [
+                "랜섬웨어",
+                "디도스",
+                "멀웨어 탐지",
+                "버그 바운티",
+                "보안 패치"
+            ],
             "x": -0.8426461991334061,
             "y": -0.504303629190079
         },
         {
             "id": 171,
             "label": "AI 사이버 보안",
+            "label_full": "AI Cybersecurity(AI 사이버 보안)",
+            "label_en": "AI Cybersecurity",
+            "label_ko": "AI 사이버 보안",
+            "connected_labels": [
+                "AI옵스",
+                "보안 정보 및 이벤트 관리",
+                "로보어드바이저",
+                "비디오 분석",
+                "AI 창작",
+                "AI 기반 회계",
+                "AI 기반 학습"
+            ],
             "x": 0.3419325543534428,
             "y": -0.38421685992881205
         },
         {
             "id": 172,
             "label": "사이버 보험",
+            "label_full": "Cyber Insurance(사이버 보험)",
+            "label_en": "Cyber Insurance",
+            "label_ko": "사이버 보험",
+            "connected_labels": [
+                "디도스",
+                "금융 사이버 보안",
+                "스마트 계약",
+                "디지털 콘텐츠 생성"
+            ],
             "x": -0.1591186741241289,
             "y": -0.25725246090364356
         },
         {
             "id": 173,
             "label": "해킹 대회",
+            "label_full": "Hacking Competitions(해킹 대회)",
+            "label_en": "Hacking Competitions",
+            "label_ko": "해킹 대회",
+            "connected_labels": [
+                "사이버 보안 훈련",
+                "해커톤",
+                "블랙 해킹",
+                "화이트 해킹",
+                "버그 바운티"
+            ],
             "x": -0.8328361978233172,
             "y": -0.3896819277122559
         },
         {
             "id": 174,
             "label": "정보 보안 감사",
+            "label_full": "Information Security Audit(정보 보안 감사)",
+            "label_en": "Information Security Audit",
+            "label_ko": "정보 보안 감사",
+            "connected_labels": [
+                "보안 자동화",
+                "리스크 관리",
+                "위협 헌팅",
+                "취약점 관리"
+            ],
             "x": -0.5508205618076543,
             "y": -0.554530471527644
         },
         {
             "id": 175,
             "label": "소프트웨어 보안",
+            "label_full": "Software Security(소프트웨어 보안)",
+            "label_en": "Software Security",
+            "label_ko": "소프트웨어 보안",
+            "connected_labels": [
+                "위협 헌팅",
+                "네트워크 보안",
+                "보안 자동화",
+                "리스크 관리"
+            ],
             "x": -0.5291798451562983,
             "y": -0.4753856885964255
         },
         {
             "id": 176,
             "label": "네트워크 보안",
+            "label_full": "Network Security(네트워크 보안)",
+            "label_en": "Network Security",
+            "label_ko": "네트워크 보안",
+            "connected_labels": [
+                "클라우드 보안",
+                "소프트웨어 보안",
+                "보안 자동화",
+                "하이브리드 클라우드",
+                "분산 원장 기술"
+            ],
             "x": -0.5161282547595435,
             "y": -0.16520233244457752
         },
         {
             "id": 177,
             "label": "클라우드 백업",
+            "label_full": "Cloud Backup(클라우드 백업)",
+            "label_en": "Cloud Backup",
+            "label_ko": "클라우드 백업",
+            "connected_labels": [
+                "데이터 중복 제거",
+                "하이브리드 클라우드",
+                "포그 컴퓨팅",
+                "클라우드 게임",
+                "클라우드 보안"
+            ],
             "x": -0.5223048494989055,
             "y": 0.43527076020464955
         },
         {
             "id": 178,
             "label": "데이터 무결성",
+            "label_full": "Data Integrity(데이터 무결성)",
+            "label_en": "Data Integrity",
+            "label_ko": "데이터 무결성",
+            "connected_labels": [
+                "개인 정보 보호 강화 기술",
+                "데이터 레이크",
+                "데이터 백업 및 복구",
+                "컨테이너 보안",
+                "프라이버시 강화 기술",
+                "암호화"
+            ],
             "x": -0.715215973043375,
             "y": 0.16014412493615465
         },
         {
             "id": 179,
             "label": "데이터 암호화",
+            "label_full": "Data Encryption(데이터 암호화)",
+            "label_en": "Data Encryption",
+            "label_ko": "데이터 암호화",
+            "connected_labels": [
+                "암호화",
+                "양자 암호화",
+                "침입 탐지 시스템",
+                "프라이버시 강화 기술",
+                "퀀텀 키 분배",
+                "동형 암호화"
+            ],
             "x": -0.6053920926226865,
             "y": -0.14074368351447522
         },
         {
             "id": 180,
             "label": "보안 패치",
+            "label_full": "Security Patch(보안 패치)",
+            "label_en": "Security Patch",
+            "label_ko": "보안 패치",
+            "connected_labels": [
+                "멀웨어 탐지",
+                "버그 바운티",
+                "제로 데이 공격",
+                "애플리케이션 보안",
+                "암호화"
+            ],
             "x": -0.9295787993910833,
             "y": -0.15865914923289332
         },
         {
             "id": 181,
             "label": "보안 자동화",
+            "label_full": "Security Automation(보안 자동화)",
+            "label_en": "Security Automation",
+            "label_ko": "보안 자동화",
+            "connected_labels": [
+                "패스워드 없는 인증",
+                "위협 헌팅",
+                "보안 오케스트레이션 자동화 및 대응",
+                "예측 유지보수",
+                "정보 보안 감사",
+                "소프트웨어 보안",
+                "네트워크 보안",
+                "리스크 관리",
+                "블록체인 기반 인증"
+            ],
             "x": -0.3788679393005203,
             "y": -0.48323347658543153
         },
         {
             "id": 182,
             "label": "리스크 관리",
+            "label_full": "Risk Management(리스크 관리)",
+            "label_en": "Risk Management",
+            "label_ko": "리스크 관리",
+            "connected_labels": [
+                "정보 보안 감사",
+                "소프트웨어 보안",
+                "보안 자동화",
+                "위협 헌팅",
+                "취약점 관리"
+            ],
             "x": -0.4770169157006445,
             "y": -0.5984339951292642
         },
         {
             "id": 183,
             "label": "암호화폐 지갑 보안",
+            "label_full": "Cryptocurrency Wallet Security(암호화폐 지갑 보안)",
+            "label_en": "Cryptocurrency Wallet Security",
+            "label_ko": "암호화폐 지갑 보안",
+            "connected_labels": [
+                "디지털 지갑",
+                "블록체인",
+                "지능형 필터링",
+                "디지털 아이덴티티"
+            ],
             "x": -0.27376921615990074,
             "y": -0.33450522992853643
         },
         {
             "id": 184,
             "label": "클라우드 접근 보안 브로커",
+            "label_full": "Cloud Access Security Broker (CASB)(클라우드 접근 보안 브로커)",
+            "label_en": "Cloud Access Security Broker (CASB)",
+            "label_ko": "클라우드 접근 보안 브로커",
+            "connected_labels": [
+                "클라우드 보안",
+                "프라이버시 강화 기술",
+                "API 게이트웨이",
+                "퀀텀 키 분배"
+            ],
             "x": -0.8599876480116797,
             "y": 0.11194580903652893
         },
         {
             "id": 185,
             "label": "비트코인",
+            "label_full": "Bitcoin(비트코인)",
+            "label_en": "Bitcoin",
+            "label_ko": "비트코인",
+            "connected_labels": [
+                "이더리움",
+                "클라우드 게임",
+                "로보틱 프로세스 자동화",
+                "디지털 지갑"
+            ],
             "x": -0.7958137626980627,
             "y": 0.19323223818264862
         },
         {
             "id": 186,
             "label": "이더리움",
+            "label_full": "Ethereum(이더리움)",
+            "label_en": "Ethereum",
+            "label_ko": "이더리움",
+            "connected_labels": [
+                "비트코인",
+                "클라우드 게임",
+                "퀀텀 키 분배",
+                "포그 컴퓨팅"
+            ],
             "x": -0.6919367005743616,
             "y": 0.38625452716421177
         },
         {
             "id": 187,
             "label": "윤리적 AI",
+            "label_full": "Ethical AI(윤리적 AI)",
+            "label_en": "Ethical AI",
+            "label_ko": "윤리적 AI",
+            "connected_labels": [
+                "AI 트러스트",
+                "프라이버시 강화 기술",
+                "생산성 소프트웨어",
+                "자율 ID 관리"
+            ],
             "x": -0.31928569274909685,
             "y": 0.27743352859720755
         },
         {
             "id": 188,
             "label": "윤리적 해킹",
+            "label_full": "Ethical Hacking(윤리적 해킹)",
+            "label_en": "Ethical Hacking",
+            "label_ko": "윤리적 해킹",
+            "connected_labels": [
+                "버그 바운티",
+                "오픈 소스 보안",
+                "위협 헌팅",
+                "위협 벡터"
+            ],
             "x": -0.6526940359835244,
             "y": -0.21306460383209538
         },
         {
             "id": 189,
             "label": "퀀텀 키 분배",
+            "label_full": "Quantum Key Distribution(퀀텀 키 분배)",
+            "label_en": "Quantum Key Distribution",
+            "label_ko": "퀀텀 키 분배",
+            "connected_labels": [
+                "클라우드 게임",
+                "데이터 암호화",
+                "클라우드 접근 보안 브로커",
+                "이더리움",
+                "로보틱 프로세스 자동화",
+                "양자 암호화",
+                "프라이버시 강화 기술",
+                "양자 저항 암호화"
+            ],
             "x": -0.7112454163898145,
             "y": 0.0797764327253916
         },
         {
             "id": 190,
             "label": "스마트 러닝",
+            "label_full": "Smart Learning(스마트 러닝)",
+            "label_en": "Smart Learning",
+            "label_ko": "스마트 러닝",
+            "connected_labels": [
+                "디지털 교실",
+                "글로벌 교육 네트워크",
+                "스마트 연구",
+                "딥러닝",
+                "협동 학습"
+            ],
             "x": 0.5275140581556688,
             "y": 0.07685924500021817
         },
         {
             "id": 191,
             "label": "유전자 분석",
+            "label_full": "Gene Analysis(유전자 분석)",
+            "label_en": "Gene Analysis",
+            "label_ko": "유전자 분석",
+            "connected_labels": [
+                "유전자 편집",
+                "유전체학",
+                "디지털 콘텐츠 생성",
+                "지능형 필터링",
+                "원격 진료"
+            ],
             "x": 0.03481723961421936,
             "y": -0.42587730011974
         },
         {
             "id": 192,
             "label": "뇌-컴퓨터 인터페이스",
+            "label_full": "Brain-Computer Interface(뇌-컴퓨터 인터페이스)",
+            "label_en": "Brain-Computer Interface",
+            "label_ko": "뇌-컴퓨터 인터페이스",
+            "connected_labels": [
+                "양자 컴퓨팅",
+                "자연어 처리",
+                "엑소스켈레톤",
+                "로봇 공학",
+                "감정 인식 AI",
+                "소셜 AI",
+                "디지털 아바타"
+            ],
             "x": 0.2093072064454316,
             "y": 0.41886830510604905
         },
         {
             "id": 193,
             "label": "스마트 보건",
+            "label_full": "Smart Health(스마트 보건)",
+            "label_en": "Smart Health",
+            "label_ko": "스마트 보건",
+            "connected_labels": [
+                "스마트 헬스케어",
+                "스마트 농업",
+                "스마트 에너지",
+                "디지털 농업",
+                "AI 교통 관리"
+            ],
             "x": 0.8647867100751819,
             "y": -0.4810048445439123
         },
         {
             "id": 194,
             "label": "AI 의사",
+            "label_full": "AI Doctor(AI 의사)",
+            "label_en": "AI Doctor",
+            "label_ko": "AI 의사",
+            "connected_labels": [
+                "엣지 AI",
+                "증강 분석",
+                "AI 금융",
+                "AI 교통 관리",
+                "코딩 AI",
+                "AI 창작",
+                "인공지능 법률 분석",
+                "스마트 면접",
+                "스마트 연구"
+            ],
             "x": 0.5571987297846372,
             "y": 0.04764045090500745
         },
         {
             "id": 195,
             "label": "원격 진료",
+            "label_full": "Telemedicine(원격 진료)",
+            "label_en": "Telemedicine",
+            "label_ko": "원격 진료",
+            "connected_labels": [
+                "디지털 포렌식",
+                "유전자 분석",
+                "스마트 계약",
+                "블록체인"
+            ],
             "x": -0.12369214980552998,
             "y": -0.6112393585337504
         },
         {
             "id": 196,
             "label": "유전체학",
+            "label_full": "Genomics(유전체학)",
+            "label_en": "Genomics",
+            "label_ko": "유전체학",
+            "connected_labels": [
+                "유전자 분석",
+                "유전자 편집",
+                "디지털 콘텐츠 생성",
+                "스마트 연구"
+            ],
             "x": 0.18341089660897075,
             "y": -0.2586224510599842
         },
         {
             "id": 197,
             "label": "기계 지능",
+            "label_full": "Machine Intelligence(기계 지능)",
+            "label_en": "Machine Intelligence",
+            "label_ko": "기계 지능",
+            "connected_labels": [
+                "로봇 공학",
+                "인공지능",
+                "디지털 콘텐츠 생성",
+                "디지털 금융",
+                "모빌리티 서비스"
+            ],
             "x": 0.37087520490527337,
             "y": -0.049703835676321736
         },
         {
             "id": 198,
             "label": "4D 프린팅",
+            "label_full": "4D Printing(4D 프린팅)",
+            "label_en": "4D Printing",
+            "label_ko": "4D 프린팅",
+            "connected_labels": [
+                "3D 프린팅",
+                "스마트 팩토리",
+                "산업용 사물인터넷",
+                "블록체인 금융",
+                "디지털 콘텐츠 생성",
+                "스마트 미디어",
+                "에너지 블록체인"
+            ],
             "x": 0.34003576814663367,
             "y": -0.31676415969047267
         },
         {
             "id": 199,
             "label": "오토메이션",
+            "label_full": "Automation(오토메이션)",
+            "label_en": "Automation",
+            "label_ko": "오토메이션",
+            "connected_labels": [
+                "나노기술",
+                "게임 테크",
+                "e스포츠",
+                "스마트 워크",
+                "모빌리티 서비스",
+                "AI 창작",
+                "무인 항공기",
+                "리쇼어링"
+            ],
             "x": 0.09891654754726731,
             "y": -0.3569454080368378
         },
         {
             "id": 200,
             "label": "로보틱 프로세스 자동화",
+            "label_full": "Robotic Process Automation (RPA)(로보틱 프로세스 자동화)",
+            "label_en": "Robotic Process Automation (RPA)",
+            "label_ko": "로보틱 프로세스 자동화",
+            "connected_labels": [
+                "쿠버네티스",
+                "비트코인",
+                "퀀텀 키 분배",
+                "AI 콘텐츠 추천",
+                "프라이버시 강화 기술",
+                "리쇼어링"
+            ],
             "x": -0.5978540117508762,
             "y": 0.14715230507057767
         },
         {
             "id": 201,
             "label": "스마트 로봇",
+            "label_full": "Smart Robot(스마트 로봇)",
+            "label_en": "Smart Robot",
+            "label_ko": "스마트 로봇",
+            "connected_labels": [
+                "자율 드론",
+                "스마트 홈",
+                "로봇 공학",
+                "스마트 팩토리",
+                "AI 창작",
+                "스마트 플랜트",
+                "무인 항공기"
+            ],
             "x": 0.38837809976095417,
             "y": -0.5069883115018361
         },
         {
             "id": 202,
             "label": "모션 캡처 기술",
+            "label_full": "Motion Capture Technology(모션 캡처 기술)",
+            "label_en": "Motion Capture Technology",
+            "label_ko": "모션 캡처 기술",
+            "connected_labels": [
+                "디지털 포렌식",
+                "지능형 필터링",
+                "디지털 콘텐츠 생성",
+                "디지털 아바타"
+            ],
             "x": 0.04541262217430502,
             "y": -0.10229541363577634
         },
         {
             "id": 203,
             "label": "디지털 콘텐츠 생성",
+            "label_full": "Digital Content Creation(디지털 콘텐츠 생성)",
+            "label_en": "Digital Content Creation",
+            "label_ko": "디지털 콘텐츠 생성",
+            "connected_labels": [
+                "유전자 편집",
+                "스마트 계약",
+                "데이터 시각화",
+                "스마트 팩토리",
+                "로봇 공학",
+                "마케팅 자동화",
+                "디지털 자산",
+                "금융 사이버 보안",
+                "디지털 아바타",
+                "게임 테크",
+                "화상회의 기술",
+                "탈중앙화 조직",
+                "디지털 아이덴티티",
+                "얼굴 인식",
+                "사이버 보험",
+                "유전자 분석",
+                "유전체학",
+                "기계 지능",
+                "4D 프린팅",
+                "모션 캡처 기술",
+                "지능형 필터링",
+                "무선 전력 전송",
+                "공급망 디지털화",
+                "디지털 주권",
+                "스마트 면접",
+                "디지털 교실",
+                "자율 농업",
+                "디지털 윤리",
+                "에너지 블록체인"
+            ],
             "x": 0.09830760096893769,
             "y": -0.12043828441861397
         },
         {
             "id": 204,
             "label": "AI 콘텐츠 추천",
+            "label_full": "AI Content Recommendation(AI 콘텐츠 추천)",
+            "label_en": "AI Content Recommendation",
+            "label_ko": "AI 콘텐츠 추천",
+            "connected_labels": [
+                "머신러닝",
+                "얼굴 인식",
+                "로보틱 프로세스 자동화",
+                "실시간 분석",
+                "데이터 레이크",
+                "AI 가속기"
+            ],
             "x": -0.3231262446255951,
             "y": 0.0561755572313843
         },
         {
             "id": 205,
             "label": "AI 창작",
+            "label_full": "AI Content Creation(AI 창작)",
+            "label_en": "AI Content Creation",
+            "label_ko": "AI 창작",
+            "connected_labels": [
+                "가상 현실",
+                "딥러닝",
+                "자율 주행",
+                "3D 프린팅",
+                "산업용 사물인터넷",
+                "AI 사이버 보안",
+                "AI 의사",
+                "오토메이션",
+                "스마트 로봇",
+                "코딩 AI",
+                "AI 민주주의",
+                "스마트 연구",
+                "AI 지원 법률",
+                "인공지능 법률 분석",
+                "AI 채용",
+                "스마트 전력"
+            ],
             "x": 0.42037757051110325,
             "y": -0.18110938793691664
         },
         {
             "id": 206,
             "label": "감정 인식 AI",
+            "label_full": "Emotion Recognition AI(감정 인식 AI)",
+            "label_en": "Emotion Recognition AI",
+            "label_ko": "감정 인식 AI",
+            "connected_labels": [
+                "자연어 처리",
+                "감정 분석",
+                "데이터 개인화",
+                "딥페이크 탐지",
+                "뇌-컴퓨터 인터페이스",
+                "소셜 AI"
+            ],
             "x": 0.2540518565571343,
             "y": 0.6751269523232137
         },
         {
             "id": 207,
             "label": "무인 항공기",
+            "label_full": "Unmanned Aerial Vehicles(무인 항공기)",
+            "label_en": "Unmanned Aerial Vehicles",
+            "label_ko": "무인 항공기",
+            "connected_labels": [
+                "스마트 로봇",
+                "로봇 공학",
+                "생체 인식",
+                "오토메이션"
+            ],
             "x": 0.05121222704084175,
             "y": -0.6175717897182992
         },
         {
             "id": 208,
             "label": "자율주행차",
+            "label_full": "Autonomous Vehicles(자율주행차)",
+            "label_en": "Autonomous Vehicles",
+            "label_ko": "자율주행차",
+            "connected_labels": [
+                "자율 주행",
+                "스마트 농업",
+                "지능형 교통 시스템",
+                "산업용 사물인터넷"
+            ],
             "x": 0.9304347734982749,
             "y": -0.3633289222263337
         },
         {
             "id": 209,
             "label": "AI 지원 물류",
+            "label_full": "AI-Powered Logistics(AI 지원 물류)",
+            "label_en": "AI-Powered Logistics",
+            "label_ko": "AI 지원 물류",
+            "connected_labels": [
+                "스마트 물류",
+                "AI 민주주의",
+                "코딩 AI",
+                "AI 트러스트",
+                "AI 채용"
+            ],
             "x": 0.45267156482948023,
             "y": 0.16360519419046804
         },
         {
             "id": 210,
             "label": "무선 전력 전송",
+            "label_full": "Wireless Power Transmission(무선 전력 전송)",
+            "label_en": "Wireless Power Transmission",
+            "label_ko": "무선 전력 전송",
+            "connected_labels": [
+                "6G 네트워크",
+                "블록체인",
+                "스마트 계약",
+                "지능형 필터링",
+                "디지털 콘텐츠 생성",
+                "수소 에너지",
+                "에너지 저장 시스템"
+            ],
             "x": -0.014516660198092366,
             "y": -0.38605254502672776
         },
         {
             "id": 211,
             "label": "수소 에너지",
+            "label_full": "Hydrogen Energy(수소 에너지)",
+            "label_en": "Hydrogen Energy",
+            "label_ko": "수소 에너지",
+            "connected_labels": [
+                "무선 전력 전송",
+                "재생 가능한 에너지 기술",
+                "에너지 블록체인",
+                "에너지 저장 시스템"
+            ],
             "x": 0.009681708252952932,
             "y": -0.674711319971333
         },
         {
             "id": 212,
             "label": "AI 교통 관리",
+            "label_full": "AI Traffic Management(AI 교통 관리)",
+            "label_en": "AI Traffic Management",
+            "label_ko": "AI 교통 관리",
+            "connected_labels": [
+                "스마트 헬스케어",
+                "스마트 보건",
+                "AI 의사",
+                "스마트 에너지",
+                "코딩 AI",
+                "생산 최적화",
+                "스마트 면접",
+                "스마트 주차"
+            ],
             "x": 0.6164841423202504,
             "y": -0.11977912838746069
         },
         {
             "id": 213,
             "label": "스마트 물류",
+            "label_full": "Smart Logistics(스마트 물류)",
+            "label_en": "Smart Logistics",
+            "label_ko": "스마트 물류",
+            "connected_labels": [
+                "스마트 헬스케어",
+                "지능형 교통 시스템",
+                "자율 에너지 관리 시스템",
+                "스마트 은행",
+                "AI 지원 물류",
+                "스마트 미디어",
+                "자동화 투자"
+            ],
             "x": 0.513572791776304,
             "y": -0.24883021631563915
         },
         {
             "id": 214,
             "label": "스마트 플랜트",
+            "label_full": "Smart Plant(스마트 플랜트)",
+            "label_en": "Smart Plant",
+            "label_ko": "스마트 플랜트",
+            "connected_labels": [
+                "스마트 시티",
+                "스마트 그리드",
+                "스마트 팩토리",
+                "스마트 로봇",
+                "스마트 빌딩",
+                "스마트 농업",
+                "스마트 폐기물 관리",
+                "생산 최적화"
+            ],
             "x": 0.44288405047891244,
             "y": -0.6809005575900567
         },
         {
             "id": 215,
             "label": "공급망 디지털화",
+            "label_full": "Supply Chain Digitalization(공급망 디지털화)",
+            "label_en": "Supply Chain Digitalization",
+            "label_ko": "공급망 디지털화",
+            "connected_labels": [
+                "운영기술",
+                "마케팅 자동화",
+                "자동화 투자",
+                "디지털 콘텐츠 생성",
+                "스마트 미디어"
+            ],
             "x": 0.16602889756540612,
             "y": 0.0651879018688662
         },
         {
             "id": 216,
             "label": "생산 최적화",
+            "label_full": "Production Optimization(생산 최적화)",
+            "label_en": "Production Optimization",
+            "label_ko": "생산 최적화",
+            "connected_labels": [
+                "스마트 에너지",
+                "스마트 플랜트",
+                "AI 교통 관리",
+                "스마트 면접"
+            ],
             "x": 0.6223969312940802,
             "y": -0.5141032999664372
         },
         {
             "id": 217,
             "label": "리쇼어링",
+            "label_full": "Reshoring(리쇼어링)",
+            "label_en": "Reshoring",
+            "label_ko": "리쇼어링",
+            "connected_labels": [
+                "버그 바운티",
+                "로보틱 프로세스 자동화",
+                "데이터 웨어하우스",
+                "오토메이션"
+            ],
             "x": -0.3430132967295095,
             "y": -0.10669302201072499
         },
         {
             "id": 218,
             "label": "디지털 주권",
+            "label_full": "Digital Sovereignty(디지털 주권)",
+            "label_en": "Digital Sovereignty",
+            "label_ko": "디지털 주권",
+            "connected_labels": [
+                "그린 IT",
+                "e스포츠",
+                "디지털 아이덴티티",
+                "디지털 콘텐츠 생성",
+                "스마트 계약"
+            ],
             "x": 0.016087308032680627,
             "y": -0.3173726356287761
         },
         {
             "id": 219,
             "label": "프라이버시 강화 기술",
+            "label_full": "Privacy-Enhancing Technologies(프라이버시 강화 기술)",
+            "label_en": "Privacy-Enhancing Technologies",
+            "label_ko": "프라이버시 강화 기술",
+            "connected_labels": [
+                "제로 트러스트 보안",
+                "암호화",
+                "데이터 중복 제거",
+                "개인 정보 보호 강화 기술",
+                "실시간 분석",
+                "사이버 보안 훈련",
+                "화이트 해킹",
+                "전자상거래 보안",
+                "디지털 아이덴티티",
+                "자율 ID 관리",
+                "디지털 지갑",
+                "컨테이너 보안",
+                "애플리케이션 보안",
+                "데이터 무결성",
+                "데이터 암호화",
+                "클라우드 접근 보안 브로커",
+                "윤리적 AI",
+                "퀀텀 키 분배",
+                "로보틱 프로세스 자동화"
+            ],
             "x": -0.5126509128182687,
             "y": -0.0018041286895336868
         },
         {
             "id": 220,
             "label": "양자 저항 암호화",
+            "label_full": "Quantum-Resistant Encryption(양자 저항 암호화)",
+            "label_en": "Quantum-Resistant Encryption",
+            "label_ko": "양자 저항 암호화",
+            "connected_labels": [
+                "양자 암호화",
+                "퀀텀 키 분배",
+                "암호화",
+                "동형 암호화"
+            ],
             "x": -0.7150198865875378,
             "y": -0.003986396207837322
         },
         {
             "id": 221,
             "label": "AI 지원 법률",
+            "label_full": "AI-Enhanced Legal Systems(AI 지원 법률)",
+            "label_en": "AI-Enhanced Legal Systems",
+            "label_ko": "AI 지원 법률",
+            "connected_labels": [
+                "인공지능 법률 분석",
+                "AI 기반 회계",
+                "AI 민주주의",
+                "AI 창작"
+            ],
             "x": 0.7813505206782501,
             "y": -0.12729495697609228
         },
         {
             "id": 222,
             "label": "인공지능 법률 분석",
+            "label_full": "AI Legal Analysis(인공지능 법률 분석)",
+            "label_en": "AI Legal Analysis",
+            "label_ko": "인공지능 법률 분석",
+            "connected_labels": [
+                "AI 지원 법률",
+                "AI 창작",
+                "스마트 면접",
+                "AI 의사"
+            ],
             "x": 0.6802965383382403,
             "y": -0.20283352287600118
         },
         {
             "id": 223,
             "label": "법률 자동화",
+            "label_full": "Legal Automation(법률 자동화)",
+            "label_en": "Legal Automation",
+            "label_ko": "법률 자동화",
+            "connected_labels": [
+                "혼합 현실",
+                "데이터 레이블링",
+                "인프라 자동화",
+                "인공지능",
+                "클라우드 컴퓨팅"
+            ],
             "x": 0.5666771879771378,
             "y": 0.7056549336095603
         },
         {
             "id": 224,
+            "label": "스마트 계약",
+            "label_full": "Smart Contracts(스마트 계약)",
+            "label_en": "Smart Contracts",
+            "label_ko": "스마트 계약",
+            "connected_labels": [
+                "블록체인",
+                "디지털 콘텐츠 생성",
+                "디지털 아이덴티티",
+                "분산 원장 기술",
+                "보안 운영 센터",
+                "공유 경제",
+                "블록체인 금융",
+                "사이버 보험",
+                "원격 진료",
+                "무선 전력 전송",
+                "디지털 주권"
+            ],
+            "x": -0.02587512555286858,
+            "y": -0.20897339595771816
+        },
+        {
+            "id": 225,
             "label": "데이터 중심 비즈니스",
+            "label_full": "Data-Driven Business(데이터 중심 비즈니스)",
+            "label_en": "Data-Driven Business",
+            "label_ko": "데이터 중심 비즈니스",
+            "connected_labels": [
+                "빅데이터",
+                "AI 비즈니스",
+                "데이터 경제",
+                "증강 분석"
+            ],
             "x": 0.8595779767220734,
             "y": 0.32519881532765443
         },
         {
-            "id": 225,
+            "id": 226,
             "label": "AI 민주주의",
+            "label_full": "AI Democracy(AI 민주주의)",
+            "label_en": "AI Democracy",
+            "label_ko": "AI 민주주의",
+            "connected_labels": [
+                "AI 트러스트",
+                "AI 창작",
+                "AI 지원 물류",
+                "AI 지원 법률",
+                "스마트 연구",
+                "AI 채용"
+            ],
             "x": 0.5206666906560364,
             "y": -0.0038850967394193987
         },
         {
-            "id": 226,
+            "id": 227,
             "label": "스마트 미디어",
+            "label_full": "Smart Media(스마트 미디어)",
+            "label_en": "Smart Media",
+            "label_ko": "스마트 미디어",
+            "connected_labels": [
+                "전자 정부",
+                "스마트 물류",
+                "공급망 디지털화",
+                "스마트 가정",
+                "4D 프린팅"
+            ],
             "x": 0.5680382986020421,
             "y": -0.3643419432321494
         },
         {
-            "id": 227,
+            "id": 228,
             "label": "지능형 필터링",
+            "label_full": "Intelligent Filtering(지능형 필터링)",
+            "label_en": "Intelligent Filtering",
+            "label_ko": "지능형 필터링",
+            "connected_labels": [
+                "블록체인",
+                "딥러닝",
+                "디지털 포렌식",
+                "AI 가속기",
+                "AI옵스",
+                "텍스트 마이닝",
+                "침입 탐지 시스템",
+                "엔드포인트 탐지 및 대응",
+                "스마트 팩토리",
+                "지식 그래프",
+                "얼굴 인식",
+                "비디오 분석",
+                "암호화폐 지갑 보안",
+                "유전자 분석",
+                "모션 캡처 기술",
+                "디지털 콘텐츠 생성",
+                "무선 전력 전송",
+                "실시간 번역"
+            ],
             "x": 0.014799052381158171,
             "y": -0.2093963509144244
         },
         {
-            "id": 228,
+            "id": 229,
             "label": "오픈 소스 보안",
+            "label_full": "Open Source Security(오픈 소스 보안)",
+            "label_en": "Open Source Security",
+            "label_ko": "오픈 소스 보안",
+            "connected_labels": [
+                "오픈 데이터",
+                "사이버 위협 인텔리전스",
+                "위협 벡터",
+                "버그 바운티",
+                "웹 3.0",
+                "윤리적 해킹",
+                "위협 헌팅"
+            ],
             "x": -0.49860962780505896,
             "y": -0.09558655263699825
         },
         {
-            "id": 229,
+            "id": 230,
             "label": "블록체인 기반 인증",
+            "label_full": "Blockchain-Based Authentication(블록체인 기반 인증)",
+            "label_en": "Blockchain-Based Authentication",
+            "label_ko": "블록체인 기반 인증",
+            "connected_labels": [
+                "예측 유지보수",
+                "생체 인식",
+                "보안 자동화",
+                "분산 원장 기술",
+                "에너지 블록체인",
+                "자율 ID 관리"
+            ],
             "x": -0.2381843968669859,
             "y": -0.39105686026469794
         },
         {
-            "id": 230,
+            "id": 231,
             "label": "AI 채용",
+            "label_full": "AI Recruiting(AI 채용)",
+            "label_en": "AI Recruiting",
+            "label_ko": "AI 채용",
+            "connected_labels": [
+                "AI 창작",
+                "AI 민주주의",
+                "AI 지원 물류",
+                "AI 기반 회계"
+            ],
             "x": 0.7810964432120697,
             "y": -0.03427288171628354
         },
         {
-            "id": 231,
+            "id": 232,
             "label": "스마트 이력서",
+            "label_full": "Smart Resume(스마트 이력서)",
+            "label_en": "Smart Resume",
+            "label_ko": "스마트 이력서",
+            "connected_labels": [
+                "스마트 면접",
+                "코딩 AI",
+                "AI 기반 학습",
+                "하이브리드 클라우드"
+            ],
             "x": 0.16227872773356516,
             "y": 0.18837297299731412
         },
         {
-            "id": 232,
+            "id": 233,
             "label": "스마트 면접",
+            "label_full": "Smart Interview(스마트 면접)",
+            "label_en": "Smart Interview",
+            "label_ko": "스마트 면접",
+            "connected_labels": [
+                "로보어드바이저",
+                "생산 최적화",
+                "인공지능 법률 분석",
+                "스마트 이력서",
+                "스마트 에너지",
+                "AI 교통 관리",
+                "AI 의사",
+                "디지털 콘텐츠 생성"
+            ],
             "x": 0.35863819005995506,
             "y": -0.20511518046665625
         },
         {
-            "id": 233,
+            "id": 234,
             "label": "데이터 신원",
+            "label_full": "Data Identity(데이터 신원)",
+            "label_en": "Data Identity",
+            "label_ko": "데이터 신원",
+            "connected_labels": [
+                "오픈 데이터",
+                "데이터 백업 및 복구",
+                "고객 경험 관리",
+                "자율 ID 관리",
+                "사이버 위협 인텔리전스"
+            ],
             "x": -0.4113472100317107,
             "y": 0.29545570582416714
         },
         {
-            "id": 234,
+            "id": 235,
             "label": "AI 기반 회계",
+            "label_full": "AI-Based Accounting(AI 기반 회계)",
+            "label_en": "AI-Based Accounting",
+            "label_ko": "AI 기반 회계",
+            "connected_labels": [
+                "AI 사이버 보안",
+                "AI 지원 법률",
+                "AI 채용",
+                "AI옵스",
+                "비디오 분석",
+                "스마트 주차"
+            ],
             "x": 0.6892034727185808,
             "y": -0.32597883036106734
         },
         {
-            "id": 235,
+            "id": 236,
             "label": "스마트 가정",
+            "label_full": "Smart Home(스마트 가정)",
+            "label_en": "Smart Home",
+            "label_ko": "스마트 가정",
+            "connected_labels": [
+                "자율 드론",
+                "스마트 홈",
+                "스마트 미디어",
+                "스마트 빌딩",
+                "스마트 전력",
+                "자율 농업"
+            ],
             "x": 0.49703431179771207,
             "y": -0.7246310506123443
         },
         {
-            "id": 236,
+            "id": 237,
             "label": "스마트 빌딩",
+            "label_full": "Smart Building(스마트 빌딩)",
+            "label_en": "Smart Building",
+            "label_ko": "스마트 빌딩",
+            "connected_labels": [
+                "스마트 시티",
+                "스마트 은행",
+                "스마트 플랜트",
+                "스마트 가정",
+                "스마트 폐기물 관리",
+                "스마트 에너지",
+                "자율 에너지 관리 시스템"
+            ],
             "x": 0.6312625182092437,
             "y": -0.6500985884678618
         },
         {
-            "id": 237,
+            "id": 238,
             "label": "스마트 전력",
+            "label_full": "Smart Power(스마트 전력)",
+            "label_en": "Smart Power",
+            "label_ko": "스마트 전력",
+            "connected_labels": [
+                "5G 네트워크",
+                "스마트 홈",
+                "스마트 가정",
+                "스마트 에너지",
+                "AI 창작",
+                "자율 에너지 관리 시스템"
+            ],
             "x": 0.5256924019824841,
             "y": -0.5720256785644132
         },
         {
-            "id": 238,
+            "id": 239,
             "label": "에너지 저장 시스템",
+            "label_full": "Energy Storage Systems(에너지 저장 시스템)",
+            "label_en": "Energy Storage Systems",
+            "label_ko": "에너지 저장 시스템",
+            "connected_labels": [
+                "수소 에너지",
+                "무선 전력 전송",
+                "데이터 레이크",
+                "실시간 분석",
+                "재생 가능한 에너지 기술"
+            ],
             "x": -0.16143939146034778,
             "y": -0.36853092001363474
         },
         {
-            "id": 239,
+            "id": 240,
             "label": "스마트 주차",
+            "label_full": "Smart Parking(스마트 주차)",
+            "label_en": "Smart Parking",
+            "label_ko": "스마트 주차",
+            "connected_labels": [
+                "스마트 에너지",
+                "AI 기반 학습",
+                "AI 교통 관리",
+                "AI 기반 회계"
+            ],
             "x": 0.8568674102581411,
             "y": -0.1677894587232784
         },
         {
-            "id": 240,
+            "id": 241,
             "label": "디지털 교실",
+            "label_full": "Digital Classroom(디지털 교실)",
+            "label_en": "Digital Classroom",
+            "label_ko": "디지털 교실",
+            "connected_labels": [
+                "스마트 러닝",
+                "글로벌 교육 네트워크",
+                "디지털 콘텐츠 생성",
+                "AI 기반 학습"
+            ],
             "x": 0.31510860086390563,
             "y": -0.05179484992026295
         },
         {
-            "id": 241,
+            "id": 242,
             "label": "AI 기반 학습",
+            "label_full": "AI-Based Learning(AI 기반 학습)",
+            "label_en": "AI-Based Learning",
+            "label_ko": "AI 기반 학습",
+            "connected_labels": [
+                "스마트 이력서",
+                "스마트 주차",
+                "디지털 교실",
+                "협동 학습",
+                "엣지 AI",
+                "코딩 AI",
+                "AI 사이버 보안"
+            ],
             "x": 0.4649746035399696,
             "y": 0.11014250492495264
         },
         {
-            "id": 242,
+            "id": 243,
             "label": "소셜 AI",
+            "label_full": "Social AI(소셜 AI)",
+            "label_en": "Social AI",
+            "label_ko": "소셜 AI",
+            "connected_labels": [
+                "자연어 처리",
+                "추천 시스템",
+                "뇌-컴퓨터 인터페이스",
+                "감정 인식 AI",
+                "코딩 AI"
+            ],
             "x": 0.4013157567126037,
             "y": 0.4967348938860023
         },
         {
-            "id": 243,
+            "id": 244,
             "label": "실시간 번역",
+            "label_full": "Real-Time Translation(실시간 번역)",
+            "label_en": "Real-Time Translation",
+            "label_ko": "실시간 번역",
+            "connected_labels": [
+                "AI 가속기",
+                "화상회의 기술",
+                "포그 컴퓨팅",
+                "지능형 필터링",
+                "지식 그래프"
+            ],
             "x": -0.2021882367239435,
             "y": 0.10960363640990015
         },
         {
-            "id": 244,
+            "id": 245,
             "label": "글로벌 교육 네트워크",
+            "label_full": "Global Education Network(글로벌 교육 네트워크)",
+            "label_en": "Global Education Network",
+            "label_ko": "글로벌 교육 네트워크",
+            "connected_labels": [
+                "스마트 러닝",
+                "디지털 교실",
+                "협동 학습",
+                "자동화 투자"
+            ],
             "x": 0.511544855355744,
             "y": 0.26976647906594775
         },
         {
-            "id": 245,
+            "id": 246,
             "label": "스마트 연구",
+            "label_full": "Smart Research(스마트 연구)",
+            "label_en": "Smart Research",
+            "label_ko": "스마트 연구",
+            "connected_labels": [
+                "전자 정부",
+                "비디오 분석",
+                "스마트 러닝",
+                "유전체학",
+                "AI 창작",
+                "AI 민주주의",
+                "코딩 AI",
+                "AI 의사",
+                "협동 학습"
+            ],
             "x": 0.4691091692264943,
             "y": -0.05948253272372608
         },
         {
-            "id": 246,
+            "id": 247,
             "label": "협동 학습",
+            "label_full": "Collaborative Learning(협동 학습)",
+            "label_en": "Collaborative Learning",
+            "label_ko": "협동 학습",
+            "connected_labels": [
+                "AI 기반 학습",
+                "글로벌 교육 네트워크",
+                "스마트 연구",
+                "스마트 러닝"
+            ],
             "x": 0.7682748929811397,
             "y": 0.19865811221741647
         },
         {
-            "id": 247,
+            "id": 248,
             "label": "코딩 AI",
+            "label_full": "AI Coding(코딩 AI)",
+            "label_en": "AI Coding",
+            "label_ko": "코딩 AI",
+            "connected_labels": [
+                "인공지능",
+                "가상 현실",
+                "빅데이터",
+                "AI 트러스트",
+                "엣지 AI",
+                "클라우드 네이티브",
+                "AI옵스",
+                "예측 분석",
+                "추천 시스템",
+                "데이터 시각화",
+                "증강 분석",
+                "AI 금융",
+                "자동화 투자",
+                "AI 의사",
+                "AI 창작",
+                "AI 지원 물류",
+                "AI 교통 관리",
+                "스마트 이력서",
+                "AI 기반 학습",
+                "소셜 AI",
+                "스마트 연구"
+            ],
             "x": 0.3108107352771392,
             "y": 0.14913403897254482
         },
         {
-            "id": 248,
+            "id": 249,
             "label": "디지털 농업",
+            "label_full": "Digital Agriculture(디지털 농업)",
+            "label_en": "Digital Agriculture",
+            "label_ko": "디지털 농업",
+            "connected_labels": [
+                "전자 정부",
+                "스마트 농업",
+                "스마트 보건",
+                "산업용 사물인터넷",
+                "스마트 에너지"
+            ],
             "x": 0.8749721316268128,
             "y": -0.3925074100019986
         },
         {
-            "id": 249,
+            "id": 250,
             "label": "자율 농업",
+            "label_full": "Autonomous Agriculture(자율 농업)",
+            "label_en": "Autonomous Agriculture",
+            "label_ko": "자율 농업",
+            "connected_labels": [
+                "자율 드론",
+                "스마트 가정",
+                "디지털 콘텐츠 생성",
+                "스마트 팩토리",
+                "스마트 농업"
+            ],
             "x": 0.3066049952585235,
             "y": -0.4314681058898972
         },
         {
-            "id": 250,
+            "id": 251,
             "label": "스마트 에너지",
+            "label_full": "Smart Energy(스마트 에너지)",
+            "label_en": "Smart Energy",
+            "label_ko": "스마트 에너지",
+            "connected_labels": [
+                "스마트 그리드",
+                "자율 에너지 관리 시스템",
+                "로보어드바이저",
+                "스마트 보건",
+                "AI 교통 관리",
+                "생산 최적화",
+                "스마트 면접",
+                "스마트 빌딩",
+                "스마트 전력",
+                "스마트 주차",
+                "디지털 농업"
+            ],
             "x": 0.5938158805544371,
             "y": -0.4584772453435351
         },
         {
-            "id": 251,
+            "id": 252,
             "label": "스마트 폐기물 관리",
+            "label_full": "Smart Waste Management(스마트 폐기물 관리)",
+            "label_en": "Smart Waste Management",
+            "label_ko": "스마트 폐기물 관리",
+            "connected_labels": [
+                "예측 유지보수",
+                "스마트 플랜트",
+                "스마트 빌딩",
+                "자율 에너지 관리 시스템",
+                "에너지 블록체인"
+            ],
             "x": 0.19103095916445592,
             "y": -0.800940628613362
         },
         {
-            "id": 252,
+            "id": 253,
             "label": "지속 가능한 기술",
+            "label_full": "Sustainable Technology(지속 가능한 기술)",
+            "label_en": "Sustainable Technology",
+            "label_ko": "지속 가능한 기술",
+            "connected_labels": [
+                "오픈 데이터",
+                "모빌리티 서비스",
+                "재생 가능한 에너지 기술",
+                "그린 IT"
+            ],
             "x": 0.20043195715657286,
             "y": -0.5995330093377608
         },
         {
-            "id": 253,
+            "id": 254,
             "label": "디지털 윤리",
+            "label_full": "Digital Ethics(디지털 윤리)",
+            "label_en": "Digital Ethics",
+            "label_ko": "디지털 윤리",
+            "connected_labels": [
+                "AI 윤리",
+                "AI 트러스트",
+                "디지털 아이덴티티",
+                "디지털 콘텐츠 생성"
+            ],
             "x": -0.030733550548910898,
             "y": -0.1137616700605703
         },
         {
-            "id": 254,
+            "id": 255,
             "label": "에너지 블록체인",
+            "label_full": "Energy Blockchain(에너지 블록체인)",
+            "label_en": "Energy Blockchain",
+            "label_ko": "에너지 블록체인",
+            "connected_labels": [
+                "수소 에너지",
+                "블록체인 기반 인증",
+                "스마트 폐기물 관리",
+                "자율 에너지 관리 시스템",
+                "4D 프린팅",
+                "디지털 콘텐츠 생성"
+            ],
             "x": 0.10751924214621408,
             "y": -0.45480277264696645
         }

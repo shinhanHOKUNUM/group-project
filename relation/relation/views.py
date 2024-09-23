@@ -61,17 +61,16 @@ def get_network_data(request):
 
 def get_node_data(request, node_label):
     try:
-        # ITKeyword에서 해당 노드를 term_ko 필드로 검색 (대소문자 구분 없이 정확한 일치 검색)
+        # ITKeyword에서 term_ko 필드를 기준으로 해당 노드를 찾음
         node = ITKeyword.objects.get(term_ko__iexact=node_label)
+
+        # 반환할 데이터
         data = {
-            'id': node.id,
-            'label_kor': node.term_ko,  # 'term_ko' 필드를 label로 사용
-            'label_en': node.term_en,
-            'label_full': node.term,
-            'mean': node.mean       # 설명을 mean으로 반환
+            'label_full': node.term,  # term을 label_full로 사용
+            'label_en': node.term_en,  # term_en을 label_en으로 사용
+            'label_kor': node.term_ko,  # term_ko를 label_kor으로 사용
+            'mean': node.mean
         }
         return JsonResponse(data)
     except ITKeyword.DoesNotExist:
-        # 노드를 찾지 못했을 경우 에러 반환
         return JsonResponse({'error': 'Node not found'}, status=404)
-

@@ -4,17 +4,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required  # 추가
 from relation.forms import CustomUserCreationForm
-import pandas as pd
-import torch
-from .kobert_tokenizer import KoBERTTokenizer
-from transformers import BertModel
-from sklearn.metrics.pairwise import cosine_similarity
-import networkx as nx
 from django.http import JsonResponse
 from .models import ITKeyword
 import os
 from django.conf import settings
 import json
+
 
 # 사용자 로그인 뷰
 class CustomLoginView(LoginView):
@@ -61,16 +56,33 @@ def get_network_data(request):
 
 def get_node_data(request, node_label):
     try:
-        # ITKeyword에서 term_ko 필드를 기준으로 해당 노드를 찾음
+        # 데이터베이스에서 term_ko 필드를 기준으로 해당 노드를 찾음
         node = ITKeyword.objects.get(term_ko__iexact=node_label)
 
-        # 반환할 데이터
+        # JSON 파일 경로 설정 (connected_labels 정보를 가져오기 위한 network_data.json)
+        json_file_path = os.path.join(settings.BASE_DIR, 'relation/static/network_data.json')
+
+        # JSON 파일을 읽어서 파싱
+        with open(json_file_path, 'r', encoding='utf-8') as f:
+            network_data = json.load(f)
+
+        # network_data.json에서 해당 노드를 찾고 connected_labels를 가져옴
+        json_node = next((n for n in network_data['nodes'] if n['label_ko'] == node_label), None)
+        connected_labels = json_node.get('connected_labels', []) if json_node else []
+
+        # 반환할 데이터 (label_full, label_en, label_kor, mean은 데이터베이스에서, connected_labels는 JSON에서)
         data = {
-            'label_full': node.term,  # term을 label_full로 사용
-            'label_en': node.term_en,  # term_en을 label_en으로 사용
-            'label_kor': node.term_ko,  # term_ko를 label_kor으로 사용
-            'mean': node.mean
+            'label_full': node.term,  # 데이터베이스에서 term을 label_full로 사용
+            'label_en': node.term_en,  # 데이터베이스에서 term_en을 label_en으로 사용
+            'label_kor': node.term_ko,  # 데이터베이스에서 term_ko를 label_kor으로 사용
+            'mean': node.mean,  # 데이터베이스에서 mean을 사용
+            'connected_labels': connected_labels  # JSON에서 가져온 connected_labels
         }
+
         return JsonResponse(data)
+
     except ITKeyword.DoesNotExist:
         return JsonResponse({'error': 'Node not found'}, status=404)
+
+    except FileNotFoundError:
+        return JsonResponse({'error': 'network_data.json file not found'}, status=404)

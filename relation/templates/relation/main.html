@@ -337,32 +337,16 @@
 
                     network = new vis.Network(container, {nodes: nodes, edges: edges}, options);
 
-                    // 노드 클릭 시 데이터를 가져와 사이드 패널에 표시
+                    // 노드 클릭 시 focusNode 함수 호출
                     network.on("click", function (params) {
                         if (params.nodes.length > 0) {
                             var nodeId = params.nodes[0];
-                            var nodeLabel = nodes.get(nodeId).label;  // term_ko (label) 값 가져옴
+                            var nodeLabel = nodes.get(nodeId).label;  // 클릭한 노드의 label 가져옴
 
-                            // term_ko 값을 기준으로 데이터를 가져옴
-                            fetch(`/get_node_data/${encodeURIComponent(nodeLabel)}/`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.error) {
-                                        console.error(data.error);
-                                    } else {
-                                        // label_full, label_en, label_kor 값을 표시
-                                        showSidePanel(data);
-                                        network.focus(nodeId, {
-                                            scale: 2.0,
-                                            animation: {
-                                                duration: 1000,
-                                                easingFunction: "easeInOutQuad"
-                                            }
-                                        });
-                                    }
-                                }).catch(error => console.error('Error fetching node data:', error));
+                            // focusNode 함수 호출하여 클릭한 노드를 확대하고 이동
+                            focusNode(nodeLabel);
                         } else {
-                            hideSidePanel();
+                            hideSidePanel();  // 노드가 아닌 곳을 클릭하면 사이드 패널 숨기기
                             network.fit({
                                 animation: {
                                     duration: 1000,
@@ -374,6 +358,7 @@
                 })
                 .catch(error => console.error('Error fetching network data:', error));
         }
+
 
         // 페이지 로드 시 네트워크 그래프 생성 함수 호출
         window.onload = function () {
@@ -492,18 +477,36 @@
                         console.error(data.error);
                     } else {
                         showSidePanel(data);  // 사이드 패널에 노드 데이터 표시
-                        network.focus(nodes.get({
+
+                        // 해당 노드를 찾음
+                        var nodeId = nodes.get({
                             filter: function (item) {
                                 return item.label === nodeLabel;
                             }
-                        })[0].id, {
-                            scale: 2.0,
-                            animation: {duration: 1000, easingFunction: "easeInOutQuad"}
+                        })[0].id;
+
+                        // 노드의 위치를 가져옴
+                        var nodePosition = network.getPositions([nodeId])[nodeId];
+
+                        // 확대된 상태에서 화면의 오른쪽 7분의 1 지점으로 이동 (scale = 2.0 기준)
+                        var scaleFactor = 2.0;  // 확대할 배율
+                        var targetX = nodePosition.x + (window.innerWidth / 7) / scaleFactor;  // scaleFactor를 적용하여 계산
+                        var targetY = nodePosition.y;  // y 좌표는 그대로 유지
+
+                        // 노드를 확대하고, 오른쪽 7분의 1 지점으로 이동
+                        network.moveTo({
+                            position: {x: targetX, y: targetY},  // 이동할 좌표 설정
+                            scale: scaleFactor,  // 확대 배율 설정
+                            animation: {
+                                duration: 1000,  // 애니메이션 지속 시간 (1초)
+                                easingFunction: "easeInOutQuad"  // 애니메이션 효과
+                            }
                         });
                     }
                 })
                 .catch(error => console.error('Error fetching node data:', error));
         }
+
 
         // 검색창에 키워드 입력 후 엔터 키를 눌렀을 때의 처리
         document.getElementById('search-bar').addEventListener('keydown', function (event) {

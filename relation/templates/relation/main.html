@@ -363,6 +363,23 @@
         // 페이지 로드 시 네트워크 그래프 생성 함수 호출
         window.onload = function () {
             showNetwork(); // 그래프 표시 함수 호출
+
+            // 네트워크가 완전히 로드된 후 중앙으로 이동하고 확대
+            setTimeout(function () {
+                // 네트워크의 중앙을 가져옴
+                var networkBounds = network.getViewPosition(); // 현재 뷰의 중앙 좌표 가져오기
+                var scaleFactor = 0.95; // 확대 비율
+
+                // 네트워크를 중앙으로 이동하고 확대
+                network.moveTo({
+                    position: {x: networkBounds.x, y: networkBounds.y},  // 현재 뷰의 중앙으로 이동
+                    scale: scaleFactor,  // 확대 비율 설정
+                    animation: {
+                        duration: 2000,  // 애니메이션 지속 시간 (1초)
+                        easingFunction: "easeInOutQuad"  // 애니메이션 효과
+                    }
+                });
+            }, 500); // 그래프가 완전히 렌더링된 후 0.5초 뒤에 실행
         };
 
         // 사이드 패널을 보여주는 함수
@@ -401,6 +418,7 @@
                         })[0];  // 일치하는 첫 번째 노드 선택
 
                         if (targetNode) {
+                            network.selectNodes([targetNode.id])
                             focusNode(targetNode.label);  // 해당 노드로 이동
                         }
                     };

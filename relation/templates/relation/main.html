@@ -161,6 +161,29 @@
             background-color: #45a049; /* 호버 시 배경색 */
         }
 
+        #previous-node-button {
+            position: absolute;
+            bottom: 90px;
+            left: 20px; /* 좌측 하단에 위치 */
+            padding: 10px 20px;
+            background-color: white; /* 버튼 배경색 */
+            color: #4CAF50;
+            border: 2px solid #4CAF50;
+            border-radius: 10px; /* 모서리를 둥글게 */
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #previous-node-button:hover {
+            background-color: #f0f0f0; /* 호버 시 배경색 */
+        }
+
+        #previous-node-button:disabled {
+            background-color: transparent;
+            border-color: white;
+            color: white;
+            cursor: not-allowed;
+        }
 
         /* 검색바 컨테이너 스타일 */
         .search-container {
@@ -230,6 +253,7 @@
             <p id="panel-description">Node description will be shown here.</p>
             <p id="panel-related-nodes">관련 노드: </p>
             <button id="save-button">저장</button>
+            <button id="previous-node-button" disabled>이전 노드</button>
         </div>
     </div>
     <div class="search-container"
@@ -243,6 +267,8 @@
     <script>
         var nodes;  // 전역 변수로 선언하여 검색에서도 접근 가능하게 함
         var network;  // 전역 변수로 선언하여 검색에서도 접근 가능하게 함
+        var nodeStack = [];  // 노드를 추적하기 위한 스택
+        var lastNode = null; // 마지막으로 클릭된 노드
 
         // 메뉴 버튼 클릭 시 메뉴를 토글하는 함수
         function toggleMenu() {
@@ -340,13 +366,23 @@
                     // 노드 클릭 시 focusNode 함수 호출
                     network.on("click", function (params) {
                         if (params.nodes.length > 0) {
+                            // 노드를 클릭했을 때의 동작
                             var nodeId = params.nodes[0];
-                            var nodeLabel = nodes.get(nodeId).label;  // 클릭한 노드의 label 가져옴
+                            addNodeToStack(nodeId);  // 스택에 노드 추가
 
-                            // focusNode 함수 호출하여 클릭한 노드를 확대하고 이동
-                            focusNode(nodeLabel);
+                            var nodeLabel = nodes.get(nodeId).label;  // 클릭한 노드의 label 가져옴
+                            focusNode(nodeLabel);  // 클릭한 노드를 확대하고 이동
+                        } else if (params.edges.length > 0) {
+                            // 엣지를 클릭했을 때의 동작
+                            var edgeId = params.edges[0];  // 클릭한 엣지의 ID
+                            var edge = edges.get(edgeId);  // 클릭한 엣지의 데이터를 가져옴
+                            var weight = edge.weight;      // 엣지의 가중치 가져옴
+
+                            // 팝업 창 생성
+                            showEdgePopup(params.pointer.DOM, weight);
                         } else {
-                            hideSidePanel();  // 노드가 아닌 곳을 클릭하면 사이드 패널 숨기기
+                            // 아무것도 클릭하지 않았을 때
+                            hideSidePanel();  // 사이드 패널 숨기기
                             network.fit({
                                 animation: {
                                     duration: 1000,
@@ -357,6 +393,36 @@
                     });
                 })
                 .catch(error => console.error('Error fetching network data:', error));
+        }
+
+        // 엣지 클릭 시 팝업을 띄우는 함수
+        function showEdgePopup(clickPosition, weight) {
+            var popup = document.getElementById('edge-popup');
+
+            if (!popup) {
+                // 팝업이 없으면 새로 생성
+                popup = document.createElement('div');
+                popup.id = 'edge-popup';
+                popup.style.position = 'absolute';
+                popup.style.backgroundColor = '#333';
+                popup.style.color = 'white';
+                popup.style.padding = '10px';
+                popup.style.borderRadius = '5px';
+                popup.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
+                popup.style.zIndex = 1000;
+                document.body.appendChild(popup);
+            }
+
+            // 팝업 내용 및 위치 설정
+            popup.innerHTML = `<p>Weight: ${weight.toFixed(2)}</p>`;
+            popup.style.left = clickPosition.x + 'px';
+            popup.style.top = clickPosition.y + 'px';
+            popup.style.display = 'block';
+
+            // 일정 시간 후 팝업 자동으로 사라지게 설정 (선택 사항)
+            setTimeout(function () {
+                popup.style.display = 'none';
+            }, 1300);
         }
 
 
@@ -419,6 +485,7 @@
 
                         if (targetNode) {
                             network.selectNodes([targetNode.id])
+                            addNodeToStack(targetNode.id);  // 스택에 노드 추가
                             focusNode(targetNode.label);  // 해당 노드로 이동
                         }
                     };
@@ -474,6 +541,7 @@
                     li.textContent = node.label_full;  // 추천 목록에는 term (label)만 표시
                     li.onclick = function () {
                         network.selectNodes([node.id]);  // 클릭 시 해당 노드를 선택
+                        addNodeToStack(node.id);  // 스택에 노드 추가
                         focusNode(node.label);  // 해당 노드의 label로 포커스 이동
                         suggestionBox.style.display = 'none';  // 추천 목록 숨기기
                         document.getElementById('search-bar').value = node.label;  // 검색창에 term 표시
@@ -546,6 +614,7 @@
                 if (matchedNode) {
                     // 노드가 있을 경우 해당 노드로 이동
                     network.selectNodes([matchedNode.id]);
+                    addNodeToStack(matchedNode.id);  // 스택에 노드 추가
                     focusNode(matchedNode.label);  // 노드 포커싱
                 } else {
                     // 검색 결과가 없을 경우 경고 메시지 표시
@@ -565,6 +634,43 @@
                 suggestionBox.style.display = 'none'; // 제안 목록 숨기기
             }
         });
+
+        // 공통 함수: 새로운 노드를 스택에 기록
+        function addNodeToStack(nodeId) {
+            if (lastNode !== nodeId) {
+                nodeStack.push(lastNode);
+                lastNode = nodeId;
+            }
+
+            // 스택 상태에 따라 버튼 활성화/비활성화 처리
+            updatePreviousButtonState();
+        }
+
+        // 이전 노드 버튼 활성화/비활성화 처리 함수
+        function updatePreviousButtonState() {
+            var previousButton = document.getElementById('previous-node-button');
+            if (nodeStack.length === 0 || nodeStack.length === 1) {
+                previousButton.disabled = true;  // 스택이 비었거나 하나의 노드만 있을 때 버튼 비활성화
+            } else {
+                previousButton.disabled = false; // 그 외의 경우 버튼 활성화
+            }
+        }
+
+        // 이전 노드로 이동
+        document.getElementById('previous-node-button').addEventListener('click', function () {
+            if (nodeStack.length > 1) {
+                var previousNodeId = nodeStack.pop(); // 스택에서 이전 노드를 가져옴
+                if (previousNodeId !== null) {
+                    var targetNode = nodes.get(previousNodeId);
+                    network.selectNodes([previousNodeId]); // 노드 선택
+                    focusNode(targetNode.label); // 해당 노드로 이동
+                }
+
+                // 스택 상태에 따라 버튼 활성화/비활성화 처리
+                updatePreviousButtonState();
+            }
+        });
+        ;
     </script>
 
 </body>

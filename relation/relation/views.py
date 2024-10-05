@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required  # 추가
+from django.views.decorators.csrf import csrf_exempt
 from relation.forms import CustomUserCreationForm
 from django.http import JsonResponse
 from .models import ITKeyword
@@ -86,3 +87,22 @@ def get_node_data(request, node_label):
 
     except FileNotFoundError:
         return JsonResponse({'error': 'network_data.json file not found'}, status=404)
+
+    # 추적된 데이터 저장
+def save_tracked_data(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            request.session['tracked_data'] = data  # 세션에 데이터 저장
+            return JsonResponse({'message': 'Data saved successfully'})
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+# word-directory 페이지에서 추적된 데이터 전달
+def word_directory(request):
+    tracked_data = request.session.get('tracked_data', {'nodes': [], 'edges': []})
+    print(tracked_data)  # 콘솔에서 tracked_data 확인
+    return render(request, 'mypage/word-directory.html', {'tracked_data': json.dumps(tracked_data)})
+
+

@@ -223,8 +223,11 @@
 </head>
 <body>
 <header>
-    <!-- 새로고침 아이콘 -->
-    <div id="refresh-icon" onclick="refreshPage()">&#x21bb;</div>
+    
+    <!-- 추적 시작 버튼을 헤더 왼쪽으로 이동 -->
+    <button id="tracking-button" onclick="toggleTracking()" style="font-size: 18px; color: white; background: none; border: none; cursor: pointer; margin-right: 20px;">
+        <i class="fas fa-crosshairs"></i> 추적 시작
+    </button>
     <!-- 메뉴 버튼과 메뉴 항목 -->
     <div id="menu">
         <button onclick="toggleMenu()">

@@ -1,60 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Font Awesome CDN -->
     <title>Word Directory</title>
     <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <!-- vis-network 사용 -->
     <style>
-        /* 전체 페이지 레이아웃과 폰트 설정 */
+        /* 페이지 기본 설정 */
         body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+        }
+
+        /* 네비게이션 바 설정 */
+        .navbar {
             display: flex;
-            flex-direction: column; /* 헤더와 메인 콘텐츠를 세로로 정렬 */
-            height: 100vh; /* 뷰포트의 전체 높이를 사용 */
-            margin: 0; /* 기본 마진을 제거 */
-            font-family: Arial, sans-serif; /* 기본 폰트 설정 */
-            background-color: black; /* 페이지 배경을 검정색으로 설정 */
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            position: relative;
         }
 
-        /* 헤더 스타일 설정 */
-        header {
-            width: 100%; /* 헤더가 페이지 전체 너비를 차지하도록 설정 */
-            padding: 20px; /* 헤더 안쪽 여백 설정 */
-            background-color: #333; /* 헤더 배경색을 어두운 회색으로 설정 */
-            color: white; /* 텍스트 색상을 흰색으로 설정 */
-            text-align: center; /* 텍스트를 중앙 정렬 */
-            font-size: 24px; /* 폰트 크기 설정 */
-            font-weight: bold; /* 폰트 두께 설정 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 헤더 아래에 그림자 효과 추가 */
+        .nav-left {
+            position: absolute;
+            left: 10px;
         }
 
-        /* 네트워크 그래프 컨테이너 스타일 */
+        .nav-center {
+            text-align: center;
+        }
+
+        .home-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Topbox 설정 */
+        .topbox {
+            background-color: #666;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            width: 90%;
+            height: 50px;
+            margin: 15px auto 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Bottombox 설정 */
+        .bottombox {
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            width: 90%;
+            height: 700px; /* 높이를 고정 */
+            margin: 20px auto 0;
+            border: 2px solid white;
+            position: relative; /* bottombox를 기준으로 사이드 패널 배치 */
+            display: flex;
+            flex-direction: row;
+            overflow: hidden; /* 내용이 벗어나지 않도록 설정 */
+        }
+
+        /* 네트워크 그래프 설정 */
         #network {
-            flex: 1; /* 화면의 남은 부분을 모두 차지 */
-            background-color: #000; /* 그래프 배경을 검정색으로 설정 */
-            width: 100%; /* 가로 전체 사용 */
-            height: 100%; /* 세로 전체 사용 */
+            flex: 1;
+            background-color: #000;
+            width: 75%; /* 네트워크 그래프가 75% 차지 */
+            height: 100%;
         }
 
-        /* 사이드 페이지 스타일 */
+        /* 사이드 패널 설정 */
         #side-panel {
-            position: fixed;
+            position: absolute;
             top: 0;
             right: -100%; /* 처음에는 화면 밖에 위치 */
             width: 25%;
-            height: 100%;
+            height: 100%; /* bottombox와 동일한 높이 설정 */
             background-color: #222;
             color: white;
-            transition: right 0.7s ease; /* 슬라이드 효과 */
-            z-index: 1000;
-            margin-top: 40px;
+            transition: right 0.7s ease;
+            z-index: 100;
+            margin-top: 0;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            text-align: left; /* 글 내용을 왼쪽 정렬 */
         }
 
-        /* 사이드 패널 내용 */
         #side-panel h2 {
             font-size: 24px;
             margin-bottom: 10px;
@@ -64,21 +105,69 @@
             font-size: 16px;
             margin-bottom: 20px;
         }
+
+        /* 드롭다운 설정 */
+        .dropdown {
+            display: none; /* 기본적으로 드롭다운은 숨김 */
+            background-color: #444;
+            color: white;
+            width: 90%; /* topbox와 동일한 폭 */
+            margin: 0 auto;
+            position: absolute; /* topbox 아래에 위치 */
+            top: 16%;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            max-height: 200px; /* 최대 5개 항목 표시 */
+            overflow-y: auto; /* 항목이 많으면 스크롤 생김 */
+        }
+
+        /* 드롭다운 리스트 설정 */
+        .dropdown ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown li:hover {
+            background-color: #555;
+        }
+
     </style>
 </head>
-
 <body>
-    <!-- 헤더 영역: 페이지 상단에 고정된 제목 -->
-    <header style="display: flex; align-items: center; justify-content: space-between;">
-        <button id="main-page-btn" onclick="navigateToMain()" style="background: none; border: none; color: white; cursor: pointer; font-size: 24px;">
+<!-- 네비게이션 바 -->
+<div class="navbar">
+    <div class="nav-left">
+        <!-- 홈 버튼 -->
+        <button id="main-page-btn" onclick="navigateToMain()"
+                style="background: none; border: none; color: white; cursor: pointer; font-size: 24px;">
             <i class="fas fa-home"></i> <!-- Font Awesome 홈 아이콘 -->
         </button>
-        <div style="flex-grow: 1; text-align: center; font-size: 24px; font-weight: bold; color: white;">
-            My Vocabulary Book
-        </div>
-    </header>
-    
-    <!-- 네트워크 그래프를 표시할 div 추가 -->
+    </div>
+    <div class="nav-center">
+        <h1>My Vocabulary Book</h1>
+    </div>
+</div>
+
+<!-- Topbox: 카테고리 선택 -->
+<div class="topbox" onclick="toggleDropdown()">
+    <h2>Click to select tracked node</h2>
+</div>
+
+<!-- Dropdown Menu: 추적된 노드 목록 -->
+<div class="dropdown" id="dropdown-menu">
+    <ul id="node-list"></ul> <!-- 추적된 노드 제목이 표시될 목록 -->
+</div>
+
+<!-- Bottombox: 네트워크 그래프 -->
+<div class="bottombox">
+    <!-- 네트워크 그래프를 표시할 div -->
     <div id="network"></div>
 
     <!-- 사이드 패널 -->
@@ -87,144 +176,142 @@
         <p id="panel-description">Node description will be shown here.</p>
         <p id="panel-related-nodes">관련 노드: </p>
     </div>
-    
-    <script>
-        function navigateToMain() {
-            window.location.href = "{% url 'main' %}"; // main.html로 이동
-        }
-    
-        // 서버에서 전달된 추적 데이터 받기
-        var trackedData = {{ tracked_data|safe }};  // Django에서 전달받은 데이터
-    
-        // trackedData를 콘솔에 출력하여 확인
-        console.log(trackedData);  // trackedData 값 출력
-    
-        // trackedData가 비어있는지 확인하고, 그래프 생성 또는 경고 메시지 출력
-        if (trackedData.nodes.length === 0 || trackedData.edges.length === 0) {
-            console.warn('No data to display.');
-        } else {
-            var nodes = new vis.DataSet(trackedData.nodes);
-            var edges = new vis.DataSet(trackedData.edges);
-    
-            var container = document.getElementById('network');  // 그래프를 렌더링할 div
-            var networkData = { nodes: nodes, edges: edges };
-            var options = {
-                physics: {
-                    enabled: false  // 물리 엔진 비활성화
+</div>
+
+<script>
+    function navigateToMain() {
+        window.location.href = "{% url 'main' %}"; // main.html로 이동
+    }
+
+    // 서버에서 전달된 추적 데이터 받기
+    var trackedData = {{ tracked_data|safe }};  // Django에서 전달받은 데이터
+
+    // trackedData가 비어있는지 확인하고, 그래프 생성 또는 경고 메시지 출력
+    if (trackedData.nodes.length === 0 || trackedData.edges.length === 0) {
+        console.warn('No data to display.');
+    } else {
+        var nodes = new vis.DataSet(trackedData.nodes);
+        var edges = new vis.DataSet(trackedData.edges);
+
+        var container = document.getElementById('network');  // 그래프를 렌더링할 div
+        var networkData = {nodes: nodes, edges: edges};
+        var options = {
+            physics: {
+                enabled: false  // 물리 엔진 비활성화
+            },
+            interaction: {
+                dragNodes: true,  // 노드를 드래그할 수 있도록 설정
+                hover: true,      // 노드에 마우스 올리면 강조
+                selectable: true, // 노드를 선택할 수 있음
+            },
+            edges: {
+                color: {
+                    color: '#737373',
+                    highlight: '#87CEFA',
+                    hover: '#FFFFFF'
                 },
-                interaction: {
-                    dragNodes: true,  // 노드를 드래그할 수 있도록 설정
-                    hover: true,      // 노드에 마우스 올리면 강조
-                    selectable: true, // 노드를 선택할 수 있음
-                },
-                edges: {
-                    color: {
-                        color: '#737373',
-                        highlight: '#87CEFA',
-                        hover: '#FFFFFF'
+                smooth: {
+                    type: 'dynamic',  // 엣지를 부드럽게 보여줌
+                }
+            },
+            nodes: {
+                shape: 'dot',
+                size: 8,
+                color: {
+                    border: '#FFFFFF',
+                    background: '#000000',
+                    highlight: {
+                        border: '#2B7CE9',
+                        background: '#D2E5FF'
                     },
-                    smooth: {
-                        type: 'dynamic',  // 엣지를 부드럽게 보여줌
+                    hover: {
+                        border: '#2B7CE9',
+                        background: '#D2E5FF'
                     }
                 },
-                nodes: {
-                    shape: 'dot',
-                    size: 8,
-                    color: {
-                        border: '#FFFFFF',
-                        background: '#000000',
-                        highlight: {
-                            border: '#2B7CE9',
-                            background: '#D2E5FF'
-                        },
-                        hover: {
-                            border: '#2B7CE9',
-                            background: '#D2E5FF'
-                        }
-                    },
-                    font: {
-                        color: '#FFFFFF',
-                        size: 7,
-                        face: 'Arial',
-                        align: 'center',
-                        strokeWidth: 3,
-                        strokeColor: '#000000'
-                    },
-                    scaling: {
-                        min: 10,
-                        max: 30
-                    },
-                    borderWidth: 1
-                }
-            };
-    
-            var network = new vis.Network(container, networkData, options);
+                font: {
+                    color: '#FFFFFF',
+                    size: 7,
+                    face: 'Arial',
+                    align: 'center',
+                    strokeWidth: 3,
+                    strokeColor: '#000000'
+                },
+                scaling: {
+                    min: 10,
+                    max: 30
+                },
+                borderWidth: 1
+            }
+        };
 
-            // 사이드 패널을 보여주는 함수
-            function showSidePanel(nodeData) {
-                var sidePanel = document.getElementById('side-panel');
-                document.getElementById('panel-title').textContent = nodeData.label_full || nodeData.label;
-                document.getElementById('panel-description').textContent = nodeData.mean || "No description available.";
-                
-                // 관련 노드를 추가하는 로직
-                var relatedNodesContainer = document.getElementById('panel-related-nodes');
-                relatedNodesContainer.innerHTML = '관련 노드: ';
-                
-                if (nodeData.connected_labels && nodeData.connected_labels.length > 0) {
-                    nodeData.connected_labels.forEach(function (label) {
-                        var link = document.createElement('span');
-                        link.textContent = label + ', ';
-                        relatedNodesContainer.appendChild(link);
-                    });
-                    relatedNodesContainer.removeChild(relatedNodesContainer.lastChild);  // 마지막 쉼표 제거
-                } else {
-                    relatedNodesContainer.textContent = '관련 노드: 없음';
-                }
-                
-                sidePanel.style.right = '0';  // 사이드 패널 보이기
+        var network = new vis.Network(container, networkData, options);
+
+        // 사이드 패널을 보여주는 함수
+        function showSidePanel(nodeData) {
+            var sidePanel = document.getElementById('side-panel');
+            document.getElementById('panel-title').textContent = nodeData.label_full || nodeData.label;
+            document.getElementById('panel-description').textContent = nodeData.mean || "No description available.";
+
+            // 관련 노드를 추가하는 로직
+            var relatedNodesContainer = document.getElementById('panel-related-nodes');
+            relatedNodesContainer.innerHTML = '관련 노드: ';
+
+            if (nodeData.connected_labels && nodeData.connected_labels.length > 0) {
+                nodeData.connected_labels.forEach(function (label) {
+                    var link = document.createElement('span');
+                    link.textContent = label + ', ';
+                    relatedNodesContainer.appendChild(link);
+                });
+                relatedNodesContainer.removeChild(relatedNodesContainer.lastChild);  // 마지막 쉼표 제거
+            } else {
+                relatedNodesContainer.textContent = '관련 노드: 없음';
             }
 
-            // 사이드 패널을 숨기는 함수
-            function hideSidePanel() {
-                var sidePanel = document.getElementById('side-panel');
-                sidePanel.style.right = '-100%';  // 사이드 패널 숨기기
+            sidePanel.style.right = '0';  // 사이드 패널 보이기
+        }
+
+        // 사이드 패널을 숨기는 함수
+        function hideSidePanel() {
+            var sidePanel = document.getElementById('side-panel');
+            sidePanel.style.right = '-100%';  // 사이드 패널 숨기기
+        }
+
+        // 노드 클릭 시 focusNode 함수 호출 및 사이드 패널 열기
+        network.on("click", function (params) {
+            if (params.nodes.length > 0) {
+                var nodeId = params.nodes[0];
+                var nodeData = nodes.get(nodeId);
+
+                showSidePanel(nodeData);  // 클릭한 노드의 정보로 사이드 패널 업데이트
+                focusNode(nodeData.label);  // 노드를 확대하고 이동
+            } else {
+                hideSidePanel();  // 아무것도 클릭하지 않았을 때 사이드 패널 숨김
             }
+        });
 
-            // 노드 클릭 시 focusNode 함수 호출 및 사이드 패널 열기
-            network.on("click", function (params) {
-                if (params.nodes.length > 0) {
-                    var nodeId = params.nodes[0];
-                    var nodeData = nodes.get(nodeId);
+        // 노드 포커스 및 확대 기능
+        function focusNode(nodeLabel) {
+            var nodeId = nodes.get({
+                filter: function (item) {
+                    return item.label === nodeLabel;
+                }
+            })[0].id;
 
-                    showSidePanel(nodeData);  // 클릭한 노드의 정보로 사이드 패널 업데이트
-                    focusNode(nodeData.label);  // 노드를 확대하고 이동
-                } else {
-                    hideSidePanel();  // 아무것도 클릭하지 않았을 때 사이드 패널 숨김
+            var nodePosition = network.getPositions([nodeId])[nodeId];
+            var scaleFactor = 2.0;  // 확대 배율
+
+            network.moveTo({
+                position: {x: nodePosition.x, y: nodePosition.y},
+                scale: scaleFactor,
+                animation: {
+                    duration: 1000,
+                    easingFunction: "easeInOutQuad"
                 }
             });
-
-            // 노드 포커스 및 확대 기능
-            function focusNode(nodeLabel) {
-                var nodeId = nodes.get({
-                    filter: function (item) {
-                        return item.label === nodeLabel;
-                    }
-                })[0].id;
-
-                var nodePosition = network.getPositions([nodeId])[nodeId];
-                var scaleFactor = 2.0;  // 확대 배율
-
-                network.moveTo({
-                    position: {x: nodePosition.x, y: nodePosition.y}, 
-                    scale: scaleFactor,  
-                    animation: {
-                        duration: 1000,  
-                        easingFunction: "easeInOutQuad"  
-                    }
-                });
-            }
         }
-        
-    </script>
+    }
+
+</script>
 </body>
 </html>

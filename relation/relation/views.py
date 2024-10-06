@@ -88,21 +88,44 @@ def get_node_data(request, node_label):
     except FileNotFoundError:
         return JsonResponse({'error': 'network_data.json file not found'}, status=404)
 
-    # 추적된 데이터 저장
+@csrf_exempt  # CSRF 보호 비활성화 (Ajax POST 요청)
 def save_tracked_data(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            request.session['tracked_data'] = data  # 세션에 데이터 저장
+
+            # 제목을 포함하여 데이터를 받음
+            title = data.get('title', 'No Title')  # 제목을 받지 않았을 때 기본값으로 'No Title'
+
+            # 세션에 저장된 데이터와 함께 mean 값을 추가
+            nodes_with_mean = []
+            for node in data['nodes']:
+                try:
+                    node_data = ITKeyword.objects.get(term_ko__iexact=node['label_kor'])
+                    node['mean'] = node_data.mean  # mean 값을 추가
+                except ITKeyword.DoesNotExist:
+                    node['mean'] = 'Mean not found'  # 해당 노드가 없으면 기본 메시지
+
+                nodes_with_mean.append(node)
+
+            # 추적된 데이터로 세션을 업데이트
+            request.session['tracked_data'] = {
+                'title': title,  # 세션에 제목 추가
+                'nodes': nodes_with_mean,
+                'edges': data['edges']
+            }
+
             return JsonResponse({'message': 'Data saved successfully'})
+
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-# word-directory 페이지에서 추적된 데이터 전달
+
 def word_directory(request):
-    tracked_data = request.session.get('tracked_data', {'nodes': [], 'edges': []})
-    print(tracked_data)  # 콘솔에서 tracked_data 확인
+    # 세션에서 추적한 데이터와 제목을 가져옴
+    tracked_data = request.session.get('tracked_data', {'title': '', 'nodes': [], 'edges': []})
     return render(request, 'mypage/word-directory.html', {'tracked_data': json.dumps(tracked_data)})
 
 

@@ -2,14 +2,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.contrib.auth.decorators import login_required  # 추가
-from django.views.decorators.csrf import csrf_exempt
 from relation.forms import CustomUserCreationForm
-from django.http import JsonResponse
 from .models import ITKeyword
 import os
 from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 import json
+from mypage.models import TrackedData
+from django.contrib.auth.decorators import login_required
+
 
 
 # 사용자 로그인 뷰
@@ -89,13 +91,14 @@ def get_node_data(request, node_label):
         return JsonResponse({'error': 'network_data.json file not found'}, status=404)
 
 @csrf_exempt  # CSRF 보호 비활성화 (Ajax POST 요청)
+@login_required  # 로그인이 필요한 함수
 def save_tracked_data(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
 
             # 제목을 포함하여 데이터를 받음
-            title = data.get('title', 'No Title')  # 제목을 받지 않았을 때 기본값으로 'No Title'
+            title = data.get('title', 'No Title')
 
             # 세션에 저장된 데이터와 함께 mean 값을 추가
             nodes_with_mean = []
@@ -104,16 +107,17 @@ def save_tracked_data(request):
                     node_data = ITKeyword.objects.get(term_ko__iexact=node['label_kor'])
                     node['mean'] = node_data.mean  # mean 값을 추가
                 except ITKeyword.DoesNotExist:
-                    node['mean'] = 'Mean not found'  # 해당 노드가 없으면 기본 메시지
+                    node['mean'] = 'Mean not found'
 
                 nodes_with_mean.append(node)
 
-            # 추적된 데이터로 세션을 업데이트
-            request.session['tracked_data'] = {
-                'title': title,  # 세션에 제목 추가
-                'nodes': nodes_with_mean,
-                'edges': data['edges']
-            }
+            # 로그인한 사용자와 함께 데이터를 저장
+            TrackedData.objects.create(
+                user=request.user,  # 로그인한 사용자
+                title=title,
+                nodes=nodes_with_mean,
+                edges=data['edges']
+            )
 
             return JsonResponse({'message': 'Data saved successfully'})
 
@@ -123,9 +127,28 @@ def save_tracked_data(request):
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
+@login_required
 def word_directory(request):
-    # 세션에서 추적한 데이터와 제목을 가져옴
-    tracked_data = request.session.get('tracked_data', {'title': '', 'nodes': [], 'edges': []})
-    return render(request, 'mypage/word-directory.html', {'tracked_data': json.dumps(tracked_data)})
+    # 로그인한 사용자와 연관된 데이터만 가져옴
+    tracked_data = TrackedData.objects.filter(user=request.user)
+
+    # QuerySet을 리스트 형태로 변환하여 직렬화 가능하게 처리
+    tracked_data_list = []
+    for data in tracked_data:
+        # 이미 리스트 형태인 nodes와 edges를 그대로 사용
+        nodes = data.nodes  # 그대로 사용
+        edges = data.edges  # 그대로 사용
+
+        tracked_data_list.append({
+            'title': data.title,
+            'nodes': nodes,  # 직렬화된 nodes
+            'edges': edges   # 직렬화된 edges
+        })
+
+    # 리스트를 JSON으로 직렬화
+    tracked_data_json = json.dumps(tracked_data_list)
+
+    # JSON 데이터를 템플릿으로 전달
+    return render(request, 'mypage/word-directory.html', {'tracked_data': tracked_data_json})
 
 

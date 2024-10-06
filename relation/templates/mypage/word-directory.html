@@ -62,20 +62,20 @@
             color: white;
             text-align: center;
             width: 90%;
-            height: 700px; /* 높이를 고정 */
+            height: 700px;
             margin: 20px auto 0;
             border: 2px solid white;
-            position: relative; /* bottombox를 기준으로 사이드 패널 배치 */
+            position: relative;
             display: flex;
             flex-direction: row;
-            overflow: hidden; /* 내용이 벗어나지 않도록 설정 */
+            overflow: hidden;
         }
 
         /* 네트워크 그래프 설정 */
         #network {
             flex: 1;
             background-color: #000;
-            width: 75%; /* 네트워크 그래프가 75% 차지 */
+            width: 75%;
             height: 100%;
         }
 
@@ -83,17 +83,17 @@
         #side-panel {
             position: absolute;
             top: 0;
-            right: -100%; /* 처음에는 화면 밖에 위치 */
+            right: -100%;
             width: 25%;
-            height: 100%; /* bottombox와 동일한 높이 설정 */
+            height: 100%;
             background-color: #222;
             color: white;
             transition: right 0.7s ease;
-            z-index: 100;
+            z-index: 100; /* 사이드바 z-index */
             margin-top: 0;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-            text-align: left; /* 글 내용을 왼쪽 정렬 */
+            text-align: left;
         }
 
         #side-panel h2 {
@@ -108,18 +108,18 @@
 
         /* 드롭다운 설정 */
         .dropdown {
-            display: none; /* 기본적으로 드롭다운은 숨김 */
+            display: none;
             background-color: #444;
             color: white;
-            width: 90%; /* topbox와 동일한 폭 */
+            width: 90%;
             margin: 0 auto;
-            position: absolute; /* topbox 아래에 위치 */
+            position: absolute;
             top: 16%;
             left: 0;
             right: 0;
-            z-index: 1;
-            max-height: 200px; /* 최대 5개 항목 표시 */
-            overflow-y: auto; /* 항목이 많으면 스크롤 생김 */
+            z-index: 101; /* 드롭다운 z-index, 사이드바보다 높게 설정 */
+            max-height: 200px;
+            overflow-y: auto;
         }
 
         /* 드롭다운 리스트 설정 */
@@ -132,12 +132,27 @@
         .dropdown li {
             padding: 10px;
             cursor: pointer;
+            border-bottom: 1px solid #888;
+            position: relative; /* 아이콘을 오른쪽 끝에 배치하기 위해 추가 */
+        }
+
+        .dropdown li:last-child {
+            border-bottom: none; /* 마지막 항목에는 구분선 제거 */
         }
 
         .dropdown li:hover {
             background-color: #555;
         }
 
+        .dropdown li i {
+            position: absolute;
+            right: 10px; /* 아이콘을 오른쪽 끝에 위치 */
+            color: #ccc; /* 아이콘 색상 설정 */
+        }
+
+        .dropdown li:hover i {
+            color: #fff; /* 항목을 호버할 때 아이콘 색상을 변경 */
+        }
     </style>
 </head>
 <body>
@@ -162,12 +177,11 @@
 
 <!-- Dropdown Menu: 추적된 노드 목록 -->
 <div class="dropdown" id="dropdown-menu">
-    <ul id="node-list"></ul> <!-- 추적된 노드 제목이 표시될 목록 -->
+    <ul id="node-list"></ul>
 </div>
 
 <!-- Bottombox: 네트워크 그래프 -->
 <div class="bottombox">
-    <!-- 네트워크 그래프를 표시할 div -->
     <div id="network"></div>
 
     <!-- 사이드 패널 -->
@@ -178,56 +192,99 @@
     </div>
 </div>
 
+<script type="application/json" id="tracked-data">
+    {{ tracked_data|safe }}
+</script>
+
 <script>
     function navigateToMain() {
-        window.location.href = "{% url 'main' %}"; // main.html로 이동
+        window.location.href = "{% url 'main' %}";
     }
 
-    // 서버에서 전달된 추적 데이터 받기
-    var trackedData = {{ tracked_data|safe }};  // Django에서 전달받은 데이터
+    // Django 템플릿에서 안전하게 JSON 데이터를 읽어옴
+    var trackedData = JSON.parse(document.getElementById('tracked-data').textContent);
+    console.log(trackedData);
 
-    // trackedData가 비어있는지 확인하고, 그래프 생성 또는 경고 메시지 출력
-    if (trackedData.nodes.length === 0 || trackedData.edges.length === 0) {
-        console.warn('No data to display.');
-    } else {
-        var nodes = new vis.DataSet(trackedData.nodes);
-        var edges = new vis.DataSet(trackedData.edges);
+        // Dropdown 메뉴에 제목 표시
+    var dropdownMenu = document.getElementById('node-list');
+    trackedData.forEach(function (data) {
+        var listItem = document.createElement('li');
+        listItem.textContent = data.title;
 
-        var container = document.getElementById('network');  // 그래프를 렌더링할 div
+        // 쓰레기통 아이콘 추가
+        var deleteIcon = document.createElement('i');
+        deleteIcon.className = 'fas fa-trash'; // Font Awesome 쓰레기통 아이콘
+        deleteIcon.style.float = 'right'; // 오른쪽에 아이콘 배치
+        deleteIcon.style.cursor = 'pointer'; // 클릭 가능하도록 설정
+
+        // 삭제 아이콘 클릭 이벤트
+        deleteIcon.onclick = function (event) {
+            event.stopPropagation(); // 아이콘 클릭 시 리스트 아이템의 클릭 이벤트가 실행되지 않도록 함
+
+            // 삭제 요청을 서버로 보냄
+            if (confirm('Are you sure you want to delete "' + data.title + '"?')) {
+                fetch('delete_tracked_data/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}' // Django의 CSRF 토큰
+                    },
+                    body: JSON.stringify({ id: data.id }) // 삭제할 항목의 ID 전송
+                }).then(response => {
+                    if (response.ok) {
+                        // 삭제 성공 시 UI 업데이트
+                        listItem.remove(); // 목록에서 해당 항목 제거
+                        document.querySelector('.topbox h2').textContent = 'Click to select tracked node'; // Topbox 초기화
+                        document.getElementById('network').innerHTML = ''; // Bottombox 초기화
+                        alert('Deleted "' + data.title + '" successfully.');
+                    } else {
+                        alert('Failed to delete "' + data.title + '".');
+                    }
+                }).catch(error => console.error('Error:', error));
+            }
+        };
+
+        listItem.appendChild(deleteIcon); // 리스트 아이템에 아이콘 추가
+        listItem.onclick = function () {
+            document.querySelector('.topbox h2').textContent = data.title;
+            loadGraphData(data.nodes, data.edges);
+            toggleDropdown(); // 드롭다운 메뉴 숨김
+        };
+        dropdownMenu.appendChild(listItem);
+    });
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdown-menu');
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // 드롭다운 외부를 클릭하면 드롭다운을 숨기기
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdown-menu');
+        const topbox = document.querySelector('.topbox');
+        if (!dropdown.contains(event.target) && !topbox.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    function loadGraphData(nodesData, edgesData) {
+        var nodes = new vis.DataSet(nodesData);
+        var edges = new vis.DataSet(edgesData);
+
+        var container = document.getElementById('network');
         var networkData = {nodes: nodes, edges: edges};
         var options = {
-            physics: {
-                enabled: false  // 물리 엔진 비활성화
-            },
-            interaction: {
-                dragNodes: true,  // 노드를 드래그할 수 있도록 설정
-                hover: true,      // 노드에 마우스 올리면 강조
-                selectable: true, // 노드를 선택할 수 있음
-            },
-            edges: {
-                color: {
-                    color: '#737373',
-                    highlight: '#87CEFA',
-                    hover: '#FFFFFF'
-                },
-                smooth: {
-                    type: 'dynamic',  // 엣지를 부드럽게 보여줌
-                }
-            },
+            physics: {enabled: false},
+            interaction: {dragNodes: true, hover: true, selectable: true},
+            edges: {color: {color: '#737373', highlight: '#87CEFA', hover: '#FFFFFF'}, smooth: {type: 'dynamic'}},
             nodes: {
                 shape: 'dot',
                 size: 8,
                 color: {
                     border: '#FFFFFF',
                     background: '#000000',
-                    highlight: {
-                        border: '#2B7CE9',
-                        background: '#D2E5FF'
-                    },
-                    hover: {
-                        border: '#2B7CE9',
-                        background: '#D2E5FF'
-                    }
+                    highlight: {border: '#2B7CE9', background: '#D2E5FF'},
+                    hover: {border: '#2B7CE9', background: '#D2E5FF'}
                 },
                 font: {
                     color: '#FFFFFF',
@@ -237,81 +294,35 @@
                     strokeWidth: 3,
                     strokeColor: '#000000'
                 },
-                scaling: {
-                    min: 10,
-                    max: 30
-                },
+                scaling: {min: 10, max: 30},
                 borderWidth: 1
             }
         };
 
         var network = new vis.Network(container, networkData, options);
 
-        // 사이드 패널을 보여주는 함수
-        function showSidePanel(nodeData) {
-            var sidePanel = document.getElementById('side-panel');
-            document.getElementById('panel-title').textContent = nodeData.label_full || nodeData.label;
-            document.getElementById('panel-description').textContent = nodeData.mean || "No description available.";
-
-            // 관련 노드를 추가하는 로직
-            var relatedNodesContainer = document.getElementById('panel-related-nodes');
-            relatedNodesContainer.innerHTML = '관련 노드: ';
-
-            if (nodeData.connected_labels && nodeData.connected_labels.length > 0) {
-                nodeData.connected_labels.forEach(function (label) {
-                    var link = document.createElement('span');
-                    link.textContent = label + ', ';
-                    relatedNodesContainer.appendChild(link);
-                });
-                relatedNodesContainer.removeChild(relatedNodesContainer.lastChild);  // 마지막 쉼표 제거
-            } else {
-                relatedNodesContainer.textContent = '관련 노드: 없음';
-            }
-
-            sidePanel.style.right = '0';  // 사이드 패널 보이기
-        }
-
-        // 사이드 패널을 숨기는 함수
-        function hideSidePanel() {
-            var sidePanel = document.getElementById('side-panel');
-            sidePanel.style.right = '-100%';  // 사이드 패널 숨기기
-        }
-
-        // 노드 클릭 시 focusNode 함수 호출 및 사이드 패널 열기
         network.on("click", function (params) {
             if (params.nodes.length > 0) {
                 var nodeId = params.nodes[0];
                 var nodeData = nodes.get(nodeId);
-
-                showSidePanel(nodeData);  // 클릭한 노드의 정보로 사이드 패널 업데이트
-                focusNode(nodeData.label);  // 노드를 확대하고 이동
+                showSidePanel(nodeData);
             } else {
-                hideSidePanel();  // 아무것도 클릭하지 않았을 때 사이드 패널 숨김
+                hideSidePanel();
             }
         });
 
-        // 노드 포커스 및 확대 기능
-        function focusNode(nodeLabel) {
-            var nodeId = nodes.get({
-                filter: function (item) {
-                    return item.label === nodeLabel;
-                }
-            })[0].id;
+        function showSidePanel(nodeData) {
+            document.getElementById('panel-title').textContent = nodeData.label_full || nodeData.label;
+            document.getElementById('panel-description').textContent = nodeData.mean || "No description available.";
+            var relatedNodesContainer = document.getElementById('panel-related-nodes');
+            relatedNodesContainer.innerHTML = '관련 노드: ' + (nodeData.connected_labels ? nodeData.connected_labels.join(', ') : '없음');
+            document.getElementById('side-panel').style.right = '0';
+        }
 
-            var nodePosition = network.getPositions([nodeId])[nodeId];
-            var scaleFactor = 2.0;  // 확대 배율
-
-            network.moveTo({
-                position: {x: nodePosition.x, y: nodePosition.y},
-                scale: scaleFactor,
-                animation: {
-                    duration: 1000,
-                    easingFunction: "easeInOutQuad"
-                }
-            });
+        function hideSidePanel() {
+            document.getElementById('side-panel').style.right = '-100%';
         }
     }
-
 </script>
 </body>
 </html>

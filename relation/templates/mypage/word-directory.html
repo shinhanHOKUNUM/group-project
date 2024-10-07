@@ -309,6 +309,17 @@
             if (params.nodes.length > 0) {
                 var nodeId = params.nodes[0];
                 var nodeData = nodes.get(nodeId);
+
+                // 노드를 75% 영역의 정중앙에 배치하며 확대
+                network.focus(nodeId, {
+                    scale: 2,  // 확대 비율
+                    animation: {
+                        duration: 1000, // 애니메이션 시간
+                        easingFunction: "easeInOutQuad"
+                    },
+                    position: {x: -container.offsetWidth * 0.125, y: 0}  // 75% 영역의 중앙으로 이동
+                });
+
                 showSidePanel(nodeData);
             } else {
                 hideSidePanel();

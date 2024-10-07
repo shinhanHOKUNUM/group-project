@@ -302,6 +302,9 @@
 
         var network = new vis.Network(container, networkData, options);
 
+        // 그래프가 새로 로드될 때 사이드 패널 숨기기
+        hideSidePanel();
+
         network.on("click", function (params) {
             if (params.nodes.length > 0) {
                 var nodeId = params.nodes[0];
@@ -324,6 +327,7 @@
             document.getElementById('side-panel').style.right = '-100%';
         }
     }
+
 </script>
 </body>
 </html>

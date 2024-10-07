@@ -120,7 +120,7 @@
         /* 사이드 페이지 스타일 */
         #side-panel {
             position: fixed;
-            top: 0;
+            top: 13px;
             right: -100%; /* 처음에는 화면 밖에 위치 */
             width: 25%;
             height: 100%;
@@ -227,33 +227,38 @@
             transform: translate(-50%, -50%);
             width: 300px;
             padding: 20px;
-            background-color: white;
+            color: white; /* 팝업 안의 모든 텍스트 색상 흰색 */
+            background-color: black; /* 배경색을 검정색으로 변경 */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 3px solid white; /* 테두리를 굵은 흰색으로 설정 */
             border-radius: 10px;
             display: none; /* 초기에는 보이지 않도록 설정 */
             z-index: 2000;
         }
-
+        
         #popup input {
-            width: 100%;
+            width: 93%;
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            background-color: #222; /* 입력 필드 배경을 어두운 색으로 변경 */
+            color: white; /* 입력 필드 글씨 색상을 흰색으로 변경 */
         }
-
+        
         #popup button {
             padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
+            background-color: black; /* 버튼 배경색을 흰색으로 설정 */
+            color: white; /* 버튼 글씨는 검정색으로 설정 */
+            border: 2px solid white; /* 버튼 테두리를 흰색으로 설정 */
             border-radius: 5px;
             cursor: pointer;
         }
-
+        
         #popup button:hover {
-            background-color: #45a049;
+            background-color: #f0f0f0; /* 버튼 호버 시 밝은 색상으로 변경 */
         }
+        
 
     </style>
 </head>
@@ -298,8 +303,8 @@
 
     <!-- 팝업 창 (제목 입력) -->
     <div id="popup">
-        <h3>추적한 데이터를 저장할 제목을 입력하세요</h3>
-        <input type="text" id="tracking-title" placeholder="제목 입력">
+        <h3>추적한 그래프 제목을 입력하세요</h3>
+        <input type="text" id="tracking-title" placeholder="">
         <button onclick="saveTracking()">저장</button>
     </div>
 
@@ -647,7 +652,7 @@
                         var nodePosition = network.getPositions([nodeId])[nodeId];
 
                         // 확대된 상태에서 화면의 오른쪽 7분의 1 지점으로 이동 (scale = 2.0 기준)
-                        var scaleFactor = 2.0;  // 확대할 배율
+                        var scaleFactor = 1.6;  // 확대할 배율
                         var targetX = nodePosition.x + (window.innerWidth / 7) / scaleFactor;  // scaleFactor를 적용하여 계산
                         var targetY = nodePosition.y;  // y 좌표는 그대로 유지
 

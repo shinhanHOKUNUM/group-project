@@ -205,7 +205,7 @@
     var trackedData = JSON.parse(document.getElementById('tracked-data').textContent);
     console.log(trackedData);
 
-        // Dropdown 메뉴에 제목 표시
+    // Dropdown 메뉴에 제목 표시
     var dropdownMenu = document.getElementById('node-list');
     trackedData.forEach(function (data) {
         var listItem = document.createElement('li');
@@ -223,13 +223,13 @@
 
             // 삭제 요청을 서버로 보냄
             if (confirm('Are you sure you want to delete "' + data.title + '"?')) {
-                fetch('delete_tracked_data/', {
+                fetch('/mypage/word-directory/delete_tracked_data/', {  // 경로를 '/mypage/word-directory/delete_tracked_data/'로 수정
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRFToken': '{{ csrf_token }}' // Django의 CSRF 토큰
                     },
-                    body: JSON.stringify({ id: data.id }) // 삭제할 항목의 ID 전송
+                    body: JSON.stringify({id: data.id}) // 삭제할 항목의 ID 전송
                 }).then(response => {
                     if (response.ok) {
                         // 삭제 성공 시 UI 업데이트
@@ -243,6 +243,7 @@
                 }).catch(error => console.error('Error:', error));
             }
         };
+
 
         listItem.appendChild(deleteIcon); // 리스트 아이템에 아이콘 추가
         listItem.onclick = function () {
@@ -259,7 +260,7 @@
     }
 
     // 드롭다운 외부를 클릭하면 드롭다운을 숨기기
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         const dropdown = document.getElementById('dropdown-menu');
         const topbox = document.querySelector('.topbox');
         if (!dropdown.contains(event.target) && !topbox.contains(event.target)) {

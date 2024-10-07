@@ -4,5 +4,5 @@ from mypage.views import delete_tracked_data
 
 urlpatterns = [
     path('word-directory/', word_directory, name='mypage'),
-    path('word-directory/delete_tracked_data/', delete_tracked_data, name='delete_tracked_data'),
+    path('delete_tracked_data/', delete_tracked_data, name='delete_tracked_data'),  # 경로 수정
 ]

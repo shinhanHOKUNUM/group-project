@@ -106,6 +106,24 @@
             margin-bottom: 20px;
         }
 
+        /* 삭제 버튼 스타일 */
+        #delete-button {
+            position: absolute;
+            bottom: 90px; /* 이전 버튼과 동일한 위치 */
+            right: 20px;
+            padding: 10px 20px;
+            background-color: red; /* 버튼 배경색 빨간색 */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #delete-button:hover {
+            background-color: darkred; /* 호버 시 배경색을 어두운 빨간색으로 변경 */
+        }
+
         /* 드롭다운 설정 */
         .dropdown {
             display: none;
@@ -189,6 +207,7 @@
         <h2 id="panel-title">Node Title</h2>
         <p id="panel-description">Node description will be shown here.</p>
         <p id="panel-related-nodes">관련 노드: </p>
+        <button id="delete-button" onclick="deleteNode()">삭제</button> <!-- 삭제 버튼 추가 -->
     </div>
 </div>
 
@@ -312,7 +331,7 @@
 
                 // 노드를 75% 영역의 정중앙에 배치하며 확대
                 network.focus(nodeId, {
-                    scale: 2,  // 확대 비율
+                    scale: 1.5,  // 확대 비율
                     animation: {
                         duration: 1000, // 애니메이션 시간
                         easingFunction: "easeInOutQuad"
@@ -338,6 +357,18 @@
             document.getElementById('side-panel').style.right = '-100%';
         }
     }
+
+    function deleteNode() {
+        const nodeTitle = document.getElementById('panel-title').textContent;
+
+        if (confirm(`Are you sure you want to delete "${nodeTitle}"?`)) {
+            // 삭제 로직 추가
+            alert(`"${nodeTitle}" has been deleted.`);
+            // 여기서 실제 삭제 로직을 구현하고 필요 시 UI 업데이트
+            hideSidePanel(); // 삭제 후 사이드 패널을 숨김
+        }
+    }
+
 
 </script>
 </body>

@@ -22,47 +22,6 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* 메뉴를 오른쪽으로 정렬 */
-        #menu {
-            margin-left: auto;
-        }
-
-        #menu button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        #menu button img {
-            width: 35px;
-            height: 35px;
-        }
-
-        #menu button:hover img {
-            opacity: 0.7;
-        }
-
-        #menu-items {
-            position: absolute;
-            right: 0;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ccc;
-            margin-top: 10px;
-            padding: 10px;
-            display: none;
-            flex-direction: row;
-            gap: 10px;
-        }
-
-        #menu-items a {
-            text-decoration: none;
-            color: black;
-            font-size: 16px;
-            text-align: center;
-        }
-
         /* Welcome 메시지 스타일 */
         #welcome-message {
             position: absolute;
@@ -194,14 +153,6 @@
 </head>
 <body>
 <header>
-    <div id="menu">
-        <button onclick="toggleMenu()">
-            <i class="fas fa-bars" style="font-size: 35px; color: white;"></i>
-        </button>
-        <div id="menu-items" class="hidden">
-            <a href="#" id="login" onclick="navigateToLogin()">로그인</a>
-        </div>
-    </div>
 </header>
 <main>
     <div id="welcome-message">
@@ -218,11 +169,7 @@
 
             <!-- 숨겨진 콘텐츠 -->
             <div id="hidden-content">
-                <p>NetworkX는 한국어 자연어 처리 모델 중 하나인 KoBERT를 활용하여 
-                    사용자가 키워드의 의미를 효과적으로 학습할 수 있도록 설계된 웹 애플리케이션입니다. 
-                    KoBERT 모델의 텍스트 임베딩 기술과 코사인 유사도를 통한 관계성 계산 후 텍스트 네트워크 분석을 제공합니다. 
-                    이는 직관적인 검색과 네트워크 시각화를 통해 사용자 경험을 극대화하며, 용어 간의 의미적 관계를 쉽게 파악할 수 있습니다.
-                     본 프로젝트에서는 복잡한 IT 신기술 용어를 네트워크 분석을 통해 시각화 하였습니다.</p>
+                <p></p>
             </div>
         </div>
     </div>
@@ -246,17 +193,43 @@
     }
 
     // 숨겨진 콘텐츠 토글 함수
+    function typeText(element, text, speed) {
+        let i = 0;
+        element.innerHTML = ""; // 기존 텍스트를 비우고 시작
+        const typingInterval = setInterval(() => {
+            if (i < text.length) {
+                element.innerHTML += text[i];
+                i++;
+            } else {
+                clearInterval(typingInterval); // 타이핑이 끝나면 인터벌 중지
+            }
+        }, speed);
+    }
+    
+    function showTypingEffect() {
+        const textElement = document.querySelector("#hidden-content p");
+        const textContent = `NetworkX는 한국어 자연어 처리 모델 중 하나인 KoBERT를 활용하여 
+        사용자가 키워드의 의미를 효과적으로 학습할 수 있도록 설계된 웹 애플리케이션입니다. 
+        KoBERT 모델의 텍스트 임베딩 기술과 코사인 유사도를 통한 관계성 계산 후 텍스트 네트워크 분석을 제공합니다. 
+        이는 직관적인 검색과 네트워크 시각화를 통해 사용자 경험을 극대화하며, 용어 간의 의미적 관계를 쉽게 파악할 수 있습니다.
+        본 프로젝트에서는 복잡한 IT 신기술 용어를 네트워크 분석을 통해 시각화 하였습니다.`;
+        typeText(textElement, textContent, 50); // 글자당 50ms 속도로 타이핑
+    }
+    
+    // 버튼 클릭 시 숨겨진 콘텐츠와 타이핑 애니메이션 실행
     function toggleContent() {
         const hiddenContent = document.getElementById('hidden-content');
         const toggleBtn = document.getElementById('toggle-btn');
         if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
             hiddenContent.style.display = 'block';
             toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            showTypingEffect(); // 타이핑 애니메이션 시작
         } else {
             hiddenContent.style.display = 'none';
             toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
         }
     }
+    
 </script>
 </body>
 </html>

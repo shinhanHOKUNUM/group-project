@@ -179,38 +179,21 @@
             margin-bottom: 20px;
         }
 
-        #save-button {
+        #previous-node-button {
             position: absolute;
             bottom: 90px;
             right: 20px;
             padding: 10px 20px;
             background-color: #4CAF50; /* 버튼 배경색 */
             color: white;
-            border: none;
-            border-radius: 10px; /* 모서리를 둥글게 */
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #save-button:hover {
-            background-color: #45a049; /* 호버 시 배경색 */
-        }
-
-        #previous-node-button {
-            position: absolute;
-            bottom: 90px;
-            left: 20px; /* 좌측 하단에 위치 */
-            padding: 10px 20px;
-            background-color: white; /* 버튼 배경색 */
-            color: #4CAF50;
-            border: 2px solid #4CAF50;
+            border: 2px solid white; /* 테두리를 굵은 흰색으로 설정 */
             border-radius: 10px; /* 모서리를 둥글게 */
             font-size: 16px;
             cursor: pointer;
         }
 
         #previous-node-button:hover {
-            background-color: #f0f0f0; /* 호버 시 배경색 */
+            background-color: #45a049; /* 호버 시 배경색 */
         }
 
         #previous-node-button:disabled {
@@ -359,7 +342,6 @@
             <h2 id="panel-title">Node Title</h2>
             <p id="panel-description">Node description will be shown here.</p>
             <p id="panel-related-nodes">관련 노드: </p>
-            <button id="save-button">저장</button>
             <button id="previous-node-button" disabled>이전 노드</button>
         </div>
     </div>

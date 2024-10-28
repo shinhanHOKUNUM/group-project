@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Welcome Page</title>
     <style>
         /* 기본 스타일 설정 */
         body {
-            background-color: rgb(0, 0, 0);
-            margin: 0;
-            font-family: Arial, sans-serif;
+        background-color: rgb(0, 0, 0);
+        margin: 0;
+        font-family: Arial, sans-serif;
+
         }
 
         /* 헤더 스타일 설정 */
@@ -17,49 +19,8 @@
             display: flex;
             justify-content: space-between;
             padding: 10px;
-            background-color: #fff;
+            background-color: black;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 메뉴를 오른쪽으로 정렬 */
-        #menu {
-            margin-left: auto; /* 자동으로 왼쪽 여백을 채워서 오른쪽 정렬 */
-        }
-
-        #menu button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        #menu button img {
-            width: 35px;
-            height: 35px;
-        }
-
-        #menu button:hover img {
-            opacity: 0.7;
-        }
-
-        #menu-items {
-            position: absolute;
-            right: 0;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ccc;
-            margin-top: 10px;
-            padding: 10px;
-            display: none;
-            flex-direction: row;
-            gap: 10px;
-        }
-
-        #menu-items a {
-            text-decoration: none;
-            color: black;
-            font-size: 16px;
-            text-align: center;
         }
 
         /* Welcome 메시지 스타일 */
@@ -79,9 +40,92 @@
         }
 
         #welcome-message p {
-            font-size: 25px;
+            font-size: 25px; /* 이 스타일이 문제의 원인 */
             margin: 10px 0 0 0;
             animation: fade-up 4s;
+        }
+
+        /* sign in 스타일 */
+        #welcome-message a {
+            color: blue;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #welcome-message a:hover {
+            text-decoration: underline;
+        }
+
+        /* Get Started 버튼 스타일 */
+        #get-started {
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+            animation: fade-up 4s;
+        }
+
+        #get-started:hover {
+            background-color: white;
+            color: black;
+            transition: 0.3s;
+        }
+
+        /* 접기/펼치기 버튼 및 숨겨진 내용 그룹 */
+        #toggle-section {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* 접기/펼치기 버튼 스타일 */
+        #toggle-btn {
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            padding: 5px 14px;
+            font-size: 10px;
+            cursor: pointer;
+            margin-top: 10px; /* 여백을 조정 */
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        #toggle-btn:hover {
+            background-color: white;
+            color: black;
+            transition: 0.3s;
+        }
+
+        /* 숨겨진 콘텐츠 스타일 */
+        #hidden-content {
+            display: none;
+            color: white;
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid white;
+            border-radius: 5px;
+
+            /* 너비 조정 */
+            width: 80%; /* 화면 너비의 80%로 설정 (반응형) */
+            max-width: 600px; /* 최대 너비를 600px로 설정 */
+            min-width: 300px; /* 최소 너비를 300px로 설정 */
+            margin-left: auto; /* 가로 중앙 정렬 */
+            margin-right: auto; /* 가로 중앙 정렬 */
+        }
+
+
+        /* 숨겨진 콘텐츠 안의 p 스타일을 따로 지정 */
+        #hidden-content p {
+            font-size: 18px !important; /* 폰트 크기 강제 적용 */
+            color: white;
         }
 
         /* 애니메이션 */
@@ -110,21 +154,25 @@
 </head>
 <body>
 <header>
-    <!-- 메뉴 버튼과 메뉴 항목 -->
-    <div id="menu">
-        <button onclick="toggleMenu()">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hlW3yb43CG_IoTpC4KEJFqUfumXpmhppag&s" alt="Menu Icon" style="width: 35px; height: 35px;">
-        </button>
-        <div id="menu-items" class="hidden">
-            <a href="#" id="login" onclick="navigateToLogin()">로그인</a>
-        </div>
-    </div>
 </header>
 <main>
-    <!-- Welcome 메시지 -->
     <div id="welcome-message">
-        <h1>Welcome NetworkX!</h1>
-        <p>Please, sign in</p>
+        <h1>TechNet insight</h1>
+
+        <p>Please, <a onclick="navigateToLogin()">sign in</a></p>
+        <button id="get-started" onclick="navigateToMain()">Get Started</button>
+
+        <!-- 접기/펼치기 버튼과 숨겨진 콘텐츠가 함께 있는 섹션 -->
+        <div id="toggle-section">
+            <button id="toggle-btn" onclick="toggleContent()">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+
+            <!-- 숨겨진 콘텐츠 -->
+            <div id="hidden-content">
+                <p></p>
+            </div>
+        </div>
     </div>
 </main>
 <script>
@@ -138,6 +186,51 @@
     function navigateToLogin() {
         window.location.href = "{% url 'login' %}";
     }
+
+    // main.html로 이동하는 함수 (비로그인 상태로 이동)
+    function navigateToMain() {
+        sessionStorage.setItem('is_logged_in', 'false');
+        window.location.href = "{% url 'main' %}";
+    }
+
+    // 숨겨진 콘텐츠 토글 함수
+    function typeText(element, text, speed) {
+        let i = 0;
+        element.innerHTML = ""; // 기존 텍스트를 비우고 시작
+        const typingInterval = setInterval(() => {
+            if (i < text.length) {
+                element.innerHTML += text[i];
+                i++;
+            } else {
+                clearInterval(typingInterval); // 타이핑이 끝나면 인터벌 중지
+            }
+        }, speed);
+    }
+
+    function showTypingEffect() {
+        const textElement = document.querySelector("#hidden-content p");
+        const textContent = `TechNet insight는 한국어 자연어 처리 모델 중 하나인 KoBERT를 활용하여 
+        사용자가 키워드의 의미를 효과적으로 학습할 수 있도록 설계된 웹 애플리케이션입니다. 
+        KoBERT 모델의 텍스트 임베딩 기술과 코사인 유사도를 통한 관계성 계산 후 텍스트 네트워크 분석을 제공합니다. 
+        이는 직관적인 검색과 네트워크 시각화를 통해 사용자 경험을 극대화하며, 용어 간의 의미적 관계를 쉽게 파악할 수 있습니다.
+        본 프로젝트에서는 복잡한 IT 신기술 용어를 네트워크 분석을 통해 시각화 하였습니다.`;
+        typeText(textElement, textContent, 30); // 글자당 50ms 속도로 타이핑
+    }
+
+    // 버튼 클릭 시 숨겨진 콘텐츠와 타이핑 애니메이션 실행
+    function toggleContent() {
+        const hiddenContent = document.getElementById('hidden-content');
+        const toggleBtn = document.getElementById('toggle-btn');
+        if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
+            hiddenContent.style.display = 'block';
+            toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            showTypingEffect(); // 타이핑 애니메이션 시작
+        } else {
+            hiddenContent.style.display = 'none';
+            toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+        }
+    }
+
 </script>
 </body>
 </html>

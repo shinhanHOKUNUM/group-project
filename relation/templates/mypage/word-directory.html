@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>추적 그래프</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <style>
+        /* 페이지 기본 설정 */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+        }
+
+        /* 네비게이션 바 설정 */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+            position: relative;
+        }
+
+        .nav-left {
+            position: absolute;
+            left: 10px;
+        }
+
+        .nav-center {
+            text-align: center;
+        }
+
+        .home-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Topbox 설정 */
+        .topbox {
+            background-color: #666;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            width: 90%;
+            height: 50px;
+            margin: 15px auto 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Bottombox 설정 */
+        .bottombox {
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            width: 90%;
+            height: 700px;
+            margin: 20px auto 0;
+            border: 2px solid white;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+        }
+
+        /* 네트워크 그래프 설정 */
+        #network {
+            flex: 1;
+            background-color: #000;
+            width: 75%;
+            height: 100%;
+        }
+
+        /* 사이드 패널 설정 */
+        #side-panel {
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 25%;
+            height: 100%;
+            background-color: #222;
+            color: white;
+            transition: right 0.7s ease;
+            z-index: 100; /* 사이드바 z-index */
+            margin-top: 0;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            text-align: left;
+        }
+
+        #side-panel h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #side-panel p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        #delete-button:hover {
+            background-color: darkred; /* 호버 시 배경색을 어두운 빨간색으로 변경 */
+        }
+
+        /* 드롭다운 설정 */
+        .dropdown {
+            display: none;
+            background-color: #444;
+            color: white;
+            width: 90%;
+            margin: 0 auto;
+            position: absolute;
+            top: 16%;
+            left: 0;
+            right: 0;
+            z-index: 101; /* 드롭다운 z-index, 사이드바보다 높게 설정 */
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* 드롭다운 리스트 설정 */
+        .dropdown ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown li {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #888;
+            position: relative; /* 아이콘을 오른쪽 끝에 배치하기 위해 추가 */
+        }
+
+        .dropdown li:last-child {
+            border-bottom: none; /* 마지막 항목에는 구분선 제거 */
+        }
+
+        .dropdown li:hover {
+            background-color: #555;
+        }
+
+        .dropdown li i {
+            position: absolute;
+            right: 10px; /* 아이콘을 오른쪽 끝에 위치 */
+            color: #ccc; /* 아이콘 색상 설정 */
+        }
+
+        .dropdown li:hover i {
+            color: #fff; /* 항목을 호버할 때 아이콘 색상을 변경 */
+        }
+    </style>
+    <script>
+        // CSRF 토큰을 가져오는 함수 정의
+        function getCSRFToken() {
+            return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        }
+    </script>
+</head>
+<body>
+<!-- 네비게이션 바 -->
+<div class="navbar">
+    <div class="nav-left">
+        <!-- 홈 버튼 -->
+        <button id="main-page-btn" onclick="navigateToMain()"
+                style="background: none; border: none; color: white; cursor: pointer; font-size: 24px;">
+            <i class="fas fa-home"></i> <!-- Font Awesome 홈 아이콘 -->
+        </button>
+    </div>
+    <div class="nav-center">
+        <h1>추적 그래프</h1>
+    </div>
+</div>
+
+<!-- Topbox: 카테고리 선택 -->
+<div class="topbox" onclick="toggleDropdown()">
+    <h2>그래프를 선택해주세요</h2>
+</div>
+
+<!-- Dropdown Menu: 추적된 노드 목록 -->
+<div class="dropdown" id="dropdown-menu">
+    <ul id="node-list"></ul>
+</div>
+
+<!-- Bottombox: 네트워크 그래프 -->
+<div class="bottombox">
+    <div id="network"></div>
+
+    <!-- 사이드 패널 -->
+    <div id="side-panel">
+        <h2 id="panel-title">Node Title</h2>
+        <p id="panel-description">Node description will be shown here.</p>
+        <p id="panel-related-nodes">관련 노드: </p>
+    </div>
+</div>
+
+<script type="application/json" id="tracked-data">
+    {{ tracked_data|safe }}
+</script>
+
+<script>
+    function navigateToMain() {
+        window.location.href = "{% url 'main' %}";
+    }
+
+    // Django 템플릿에서 JSON 데이터를 읽어옴
+    var trackedData = JSON.parse(document.getElementById('tracked-data').textContent);
+    console.log(trackedData);
+
+    // Dropdown 메뉴에 제목 표시
+    var dropdownMenu = document.getElementById('node-list');
+    trackedData.forEach(function (data) {
+        var listItem = document.createElement('li');
+        listItem.textContent = data.title;
+
+        // 쓰레기통 아이콘 추가
+        var deleteIcon = document.createElement('i');
+        deleteIcon.className = 'fas fa-trash';
+        deleteIcon.style.float = 'right';
+        deleteIcon.style.cursor = 'pointer';
+
+        // 삭제 아이콘 클릭 이벤트
+        deleteIcon.onclick = function (event) {
+            event.stopPropagation();
+
+            if (confirm(`"${data.title}" 이 항목을 정말 삭제하시겠습니까?`)) {
+                // data.id가 존재하는지 확인
+                if (!data.id) {
+                    alert("Error: Data ID not found.");
+                    return;
+                }
+
+                // Ajax 요청으로 삭제 요청을 보냄
+                fetch(`/mypage/delete/${data.id}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCSRFToken(),
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'success') {
+                            alert(`"${data.title}" 항목이 성공적으로 삭제 되었습니다.`);
+                            window.location.reload();  // 페이지를 새로고침하여 변경사항 반영
+                        } else {
+                            alert('Error occurred while deleting.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error occurred while deleting.');
+                    });
+            }
+        };
+
+        listItem.appendChild(deleteIcon);
+        listItem.onclick = function () {
+            document.querySelector('.topbox h2').textContent = data.title;
+            loadGraphData(data.nodes, data.edges);
+            toggleDropdown(); // 드롭다운 메뉴 숨김
+        };
+        dropdownMenu.appendChild(listItem);
+    });
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdown-menu');
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // 드롭다운 외부를 클릭하면 드롭다운을 숨기기
+    document.addEventListener('click', function (event) {
+        const dropdown = document.getElementById('dropdown-menu');
+        const topbox = document.querySelector('.topbox');
+        if (!dropdown.contains(event.target) && !topbox.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    function loadGraphData(nodesData, edgesData) {
+        var nodes = new vis.DataSet(nodesData);
+        var edges = new vis.DataSet(edgesData);
+
+        var container = document.getElementById('network');
+        var networkData = {nodes: nodes, edges: edges};
+        var options = {
+            physics: {enabled: false},
+            interaction: {dragNodes: true, hover: true, selectable: true},
+            edges: {color: {color: '#737373', highlight: '#87CEFA', hover: '#FFFFFF'}, smooth: {type: 'dynamic'}},
+            nodes: {
+                shape: 'dot',
+                size: 8,
+                color: {
+                    border: '#FFFFFF',
+                    background: '#000000',
+                    highlight: {border: '#2B7CE9', background: '#D2E5FF'},
+                    hover: {border: '#2B7CE9', background: '#D2E5FF'}
+                },
+                font: {
+                    color: '#FFFFFF',
+                    size: 7,
+                    face: 'Arial',
+                    align: 'center',
+                    strokeWidth: 3,
+                    strokeColor: '#000000'
+                },
+                scaling: {min: 10, max: 30},
+                borderWidth: 1
+            }
+        };
+
+        var network = new vis.Network(container, networkData, options);
+
+        // 그래프가 새로 로드될 때 사이드 패널 숨기기
+        hideSidePanel();
+
+        network.on("click", function (params) {
+            if (params.nodes.length > 0) {
+                var nodeId = params.nodes[0];
+                var nodeData = nodes.get(nodeId);
+
+                network.focus(nodeId, {
+                    scale: 1.5,
+                    animation: {
+                        duration: 1000,
+                        easingFunction: "easeInOutQuad"
+                    },
+                    position: {x: -container.offsetWidth * 0.125, y: 0}
+                });
+
+                showSidePanel(nodeData);
+            } else {
+                hideSidePanel();
+            }
+        });
+
+        function showSidePanel(nodeData) {
+            document.getElementById('panel-title').textContent = nodeData.label_full || nodeData.label;
+            document.getElementById('panel-description').textContent = nodeData.mean || "No description available.";
+            var relatedNodesContainer = document.getElementById('panel-related-nodes');
+            relatedNodesContainer.innerHTML = '관련 노드: ' + (nodeData.connected_labels ? nodeData.connected_labels.join(', ') : '없음');
+            document.getElementById('side-panel').style.right = '0';
+        }
+
+        function hideSidePanel() {
+            document.getElementById('side-panel').style.right = '-100%';
+        }
+    }
+
+    function deleteNode() {
+        const nodeTitle = document.getElementById('panel-title').textContent;
+
+        if (confirm(`Are you sure you want to delete "${nodeTitle}"?`)) {
+            alert(`"${nodeTitle}" has been deleted.`);
+            hideSidePanel();
+        }
+    }
+</script>
+</body>
+</html>

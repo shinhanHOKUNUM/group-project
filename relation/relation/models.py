@@ -1,7 +1,10 @@
 from django.db import models
 
+class ITKeyword(models.Model):
+    term = models.CharField(max_length=255)
+    term_en = models.CharField(max_length=255)
+    term_ko = models.CharField(max_length=255)
+    mean = models.TextField()
 
-# Create your models here.
-class Relation(models.Model):
-    user_ID = models.TextField()
-    user_name = models.TextField()
+    def __str__(self):
+        return self.term

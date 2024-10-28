@@ -127,13 +127,39 @@
             border: 2px solid red;
         }
     </style>
+         <!-- 비밀번호 확인을 위한 JavaScript 함수 -->
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("id_password1").value;
+            var confirmPassword = document.getElementById("id_password2").value;
+
+            // 비밀번호가 일치하지 않을 경우 경고창 띄우기
+            if (password !== confirmPassword) {
+                alert("비밀번호가 일치하지 않습니다.");  // 팝업창
+                return false;  // 폼 제출 중단
+            }
+            return true;  // 폼 제출 허용
+        }
+    </script>
 </head>
 <body>
 <div class="form-container">
     <h2>회원가입</h2>
-    <form method="POST">
+    <form method="POST" onsubmit="return validatePassword();">
         {% csrf_token %}
         {{ form.as_p }}
+                      <!-- 에러 메시지 표시 -->
+            {% if form.errors %}
+            <div class="error-messages">
+                <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
         <button type="submit">회원가입</button>
     </form>
     <p>이미 계정이 있으신가요? <a href="{% url 'login' %}">로그인</a></p>

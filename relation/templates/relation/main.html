@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Network Graph</title>
     <style>
         /* 기본 스타일 설정 */
@@ -10,6 +11,7 @@
             background-color: rgb(0, 0, 0);
             margin: 0;
             font-family: Arial, sans-serif;
+            overflow: hidden; /* 상하좌우 스크롤바 비활성화 */
         }
 
         /* 헤더 스타일 설정 */
@@ -17,16 +19,20 @@
             display: flex;
             justify-content: space-between;
             padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #black;
+            box-shadow: none;
+            z-index: 1100; /* 메뉴바가 사이드바보다 위에 위치 */
+            position: relative; /* 메뉴바를 최상단에 고정 */
+            margin-bottom: 0;
         }
 
         #network {
-            width: 100%;
-            height: 800px;
-            border: 1px solid rgb(61, 57, 57);
+            width: 100vw; /* 뷰포트 너비에 맞춤 */
+            height: calc(100vh - 50px); /* 뷰포트 높이에서 헤더 높이를 뺀 값 */
+            border: none;
             margin: 0 auto;
             display: block;
+            background-color: #000;
         }
 
         /* 새로고침 아이콘 스타일 */
@@ -35,55 +41,91 @@
             font-size: 24px;
         }
 
-        /* 메뉴 스타일 설정 */
         #menu {
             position: relative;
         }
-
+        
         #menu button {
             background: none;
             border: none;
             cursor: pointer;
             padding: 0;
         }
-
-        #menu button img {
-            width: 35px;
-            height: 35px;
-        }
-
-        #menu button:hover img {
-            opacity: 0.7;
-        }
-
+        
         #menu-items {
             position: absolute;
             right: 0;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ccc;
+            background-color: black;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
             margin-top: 10px;
+        
+            /* 메뉴 박스 크기 설정 */
+            width: 350px; /* 고정 너비 설정 */
+            max-width: 450%; /* 반응형 너비 */
             padding: 10px;
+            border: 2px solid white;
+        
+            /* 리스트 항목이 메뉴 박스를 넘어서지 않도록 설정 */
+            box-sizing: border-box;
+            overflow: auto; /* 스크롤 추가 */
+            max-height: 400px; /* 최대 높이 설정 (원하는 값으로 조절 가능) */
+        
             display: none;
             flex-direction: column;
             align-items: flex-end;
             gap: 10px;
-            z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
         }
-
+        
+        
+        
+        /* 메뉴 아이템이 표시될 때 애니메이션 효과 */
+        #menu-items.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0); /* 원래 위치로 슬라이드 */
+        }
+        
         #menu-items a, #menu-items button {
             text-decoration: none;
             color: black;
-            background: none;
-            border: none;
-            cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
+        
+            /* 고정된 너비 및 높이 설정 */
+            width: 115px;
+            height: 40px;
+        
+            /* 패딩과 테두리를 포함하도록 설정 */
+            box-sizing: border-box;
+        
             text-align: right;
-            width: 100%; /* 버튼이 부모 요소의 너비를 채우도록 설정 */
             padding: 10px;
-            background-color: transparent; /* 배경색 투명 */
-            border-radius: 4px; /* 버튼에 약간의 테두리 둥글기를 추가 */
-            display: block; /* 버튼이 블록 요소로 표시되도록 설정 */
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center; /* 텍스트 수직 가운데 정렬 */
+            justify-content: flex-start; /* 텍스트 오른쪽 정렬 */
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+            overflow: hidden; /* 텍스트가 넘칠 경우 숨기기 */
+            text-overflow: ellipsis; /* 넘친 텍스트에 말줄임표 추가 */
+        }
+        
+        
+        /* 호버 효과 */
+        #menu-items a:hover, #menu-items button:hover {
+            background-color: #e0e0e0;
+        }
+        
+        
+        /* 호버 효과 */
+        #menu-items a:hover, #menu-items button:hover {
+            background-color: #e0e0e0; /* 호버 시 색상 변경 */
         }
 
         /* 노드 팝업 스타일 */
@@ -110,6 +152,57 @@
             font-size: 16px;
         }
 
+        /* 사이드 페이지 스타일 */
+        #side-panel {
+            position: fixed;
+            top: 13px;
+            right: -100%; /* 처음에는 화면 밖에 위치 */
+            width: 25%;
+            height: 100%;
+            background-color: #222;
+            color: white;
+            transition: right 0.7s ease; /* 슬라이드 효과 */
+            z-index: 1000;
+            margin-top: 40px;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 사이드 패널 내용 */
+        #side-panel h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #side-panel p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        #previous-node-button {
+            position: absolute;
+            bottom: 90px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50; /* 버튼 배경색 */
+            color: white;
+            border: 2px solid white; /* 테두리를 굵은 흰색으로 설정 */
+            border-radius: 10px; /* 모서리를 둥글게 */
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #previous-node-button:hover {
+            background-color: #45a049; /* 호버 시 배경색 */
+        }
+
+        #previous-node-button:disabled {
+            background-color: transparent;
+            border-color: white;
+            color: white;
+            cursor: not-allowed;
+        }
+
         /* 검색바 컨테이너 스타일 */
         .search-container {
             position: absolute;
@@ -121,167 +214,714 @@
 
         #search-bar {
             width: 100%;
-            padding: 10px;
+            padding: 5px;
             border: 3px solid #00000098;
             border-radius: 5px;
         }
+
+        #suggestions {
+            background-color: white; /* 추천 목록 배경 색상 */
+            border: 1px solid #ccc; /* 테두리 */
+            list-style: none; /* 목록 스타일 제거 */
+            padding: 0; /* 패딩 제거 */
+            position: absolute; /* 위치 고정 */
+            bottom: 70%; /* 위치 설정 */
+            width: 105%; /* 추천 목록 너비 */
+        }
+
+        #suggestions li {
+            padding: 10px; /* 목록 항목에 패딩 추가 */
+            cursor: pointer; /* 마우스 커서 변경 */
+        }
+
+        #suggestions li:hover {
+            background-color: #f0f0f0; /* 마우스 오버 시 배경 색상 */
+        }
+
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            color: white; /* 팝업 안의 모든 텍스트 색상 흰색 */
+            background-color: black; /* 배경색을 검정색으로 변경 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 3px solid white; /* 테두리를 굵은 흰색으로 설정 */
+            border-radius: 10px;
+            display: none; /* 초기에는 보이지 않도록 설정 */
+            z-index: 2000;
+        }
+        
+        #popup input {
+            width: 93%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #222; /* 입력 필드 배경을 어두운 색으로 변경 */
+            color: white; /* 입력 필드 글씨 색상을 흰색으로 변경 */
+        }
+
+        /* 버튼을 감싸는 Flex 컨테이너 스타일 */
+        .popup-buttons {
+            display: flex;
+            justify-content: space-between; /* 버튼을 양쪽 끝에 배치 */
+            margin-top: 10px;
+        }
+        
+        #popup button {
+            padding: 10px 20px;
+            background-color: black; /* 버튼 배경색을 흰색으로 설정 */
+            color: white; /* 버튼 글씨는 검정색으로 설정 */
+            border: 2px solid white; /* 버튼 테두리를 흰색으로 설정 */
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #popup button:hover {
+            background-color: #f0f0f0; /* 버튼 호버 시 밝은 색상으로 변경 */
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+            display: none; /* 기본으로 숨김 */
+            opacity: 0;
+            transition: opacity 0.3s ease; /* 페이드 인/아웃 애니메이션 */
+            z-index: 999; /* 메뉴 뒤에 표시되도록 설정 */
+        }
+        
+        /* 오버레이 표시될 때 */
+        #overlay.show {
+            display: block;
+            opacity: 1;
+        }
+        
+
     </style>
 </head>
 <body>
 <header>
-    <!-- 새로고침 아이콘 -->
-    <div id="refresh-icon" onclick="refreshPage()">&#x21bb;</div>
+
+    <!-- 추적 시작 버튼을 헤더 왼쪽으로 이동 -->
+    <button id="tracking-button" onclick="toggleTracking()" style="font-size: 18px; color: white; background: none; border: none; cursor: pointer; margin-right: 20px;">
+        <i class="fas fa-crosshairs"></i> 추적 시작
+    </button>
     <!-- 메뉴 버튼과 메뉴 항목 -->
     <div id="menu">
-    <button onclick="toggleMenu()">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hlW3yb43CG_IoTpC4KEJFqUfumXpmhppag&s" alt="Menu Icon" style="width: 35px; height: 35px;">
-    </button>
-    <div id="menu-items" class="hidden">
-        <a href="{% url 'mypage' %}" id="mypage">마이페이지</a>
-        <form id="logout-form" action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" id="logout">로그아웃</button>
-        </form>
+        <button onclick="toggleMenu()">
+            <i class="fas fa-bars" style="font-size: 35px; color: white;"></i> <!-- Font Awesome 아이콘 사용 -->
+        </button>
+        <div id="overlay" class="hidden" onclick="toggleMenu()"></div> <!-- 오버레이 추가 -->
+        <div id="menu-items" class="hidden">
+            <!-- 로그인 상태에 따라 메뉴 표시 -->
+            {% if user.is_authenticated %}
+                <a href="{% url 'word_directory' %}" id="mypage">추적 그래프</a>
+                <form id="logout-form" action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" id="logout">로그아웃</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" id="login">로그인</a> <!-- 비로그인 상태에서 로그인 메뉴 표시 -->
+            {% endif %}
+        </div>
     </div>
-</div>
+    
 </header>
 <main>
     <div class="content">
         <!-- 네트워크 그래프를 표시할 div -->
         <div id="network"></div>
-        <div id="node-popup">
-            <h2 id="node-title">Node Title</h2>
-            <p id="node-description">Node description will be shown here.</p>
+        <div id="side-panel">
+            <h2 id="panel-title">Node Title</h2>
+            <p id="panel-description">Node description will be shown here.</p>
+            <p id="panel-related-nodes">관련 노드: </p>
+            <button id="previous-node-button" disabled>이전 노드</button>
         </div>
     </div>
-    <div class="search-container">
-        <input type="text" id="search-bar" placeholder="Search...">
+
+    <!-- 팝업 창 (제목 입력) -->
+    <div id="popup">
+        <h3>추적한 그래프 제목을 입력하세요</h3>
+        <input type="text" id="tracking-title" placeholder="">
+        <div class="popup-buttons">
+            <button onclick="saveTracking()">저장</button>
+            <button onclick="cancelTracking()">취소</button>
+        </div>
     </div>
-<script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
-<script>
-    // 메뉴 버튼 클릭 시 메뉴를 토글하는 함수
-    function toggleMenu() {
-        const menuItems = document.getElementById('menu-items');
-        menuItems.style.display = menuItems.style.display === 'flex' ? 'none' : 'flex';
-    }
+    <div id="overlay" onclick="saveTracking()"></div>
 
-    // 새로고침 아이콘 클릭 시 페이지를 새로고침하는 함수
-    function refreshPage() {
-        location.reload();
-    }
-    
-    // 로그아웃 함수
-    function logout() {
-        document.getElementById('logout-form').submit();
-    }
+    <div class="search-container"
+         style="position: absolute; bottom: 2%; left: 50%; transform: translateX(-50%); width: 25%;">
+        <ul id="suggestions"
+            style="display: none; background-color: white; border: 1px solid #ccc; list-style: none; padding: 0; position: absolute; bottom: 70%; width: 105%;"></ul>
+        <input type="text" id="search-bar" placeholder="Search..."
+               style="width: 100%; padding: 10px; border: 3px solid #00000098; border-radius: 5px;">
+    </div>
+    <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <script>
+        var nodes;  // 전역 변수로 선언하여 검색에서도 접근 가능하게 함
+        var edges;  // 전역 변수로 선언하여 추적 기능에서도 접근 가능하게 함
+        var network;  // 전역 변수로 선언하여 검색에서도 접근 가능하게 함
+        var nodeStack = [];  // 노드를 추적하기 위한 스택
+        var lastNode = null; // 마지막으로 클릭된 노드
+        var isTracking = false;  // 추적 여부를 나타내는 변수
+        var trackedNodes = [];   // 추적한 노드들을 저장할 배열
+        var trackedEdges = [];   // 추적한 엣지들을 저장할 배열
 
-    // Vis.js를 사용하여 네트워크 그래프를 동적으로 생성
-    function showNetwork() {
-        fetch('/static/json/nodes2.json')
-            .then(response => response.json())
-            .then(nodes => {
-                fetch('/static/json/edges2.json')
-                    .then(response => response.json())
-                    .then(edges => {
-                        var container = document.getElementById('network');
-                        var data = {
-                            nodes: new vis.DataSet(nodes),
-                            edges: new vis.DataSet(edges)
-                        };
-                        var options = {
-                            physics: {
-                                enabled: true,
-                                repulsion: {
-                                    centralGravity: -1,
-                                    springLength: 10000,
-                                    springConstant: 0.01,
-                                    nodeDistance: 15000,
-                                    damping: 0.1
-                                },
-                                maxVelocity: 50,
-                                minVelocity: 0.1,
-                                solver: 'repulsion',
-                            },
-                            layout: {
-                                improvedLayout: true,
-                                randomSeed: 42
-                            },
-                            edges: {
-                                scaling: {
-                                    min: 1,
-                                    max: 10
-                                },
-                                color: { 
-                                    color: '#FFFFFF',
-                                    highlight: '#87CEFA', //하늘색
-                                    hover: '#FFFFFF'
-                                 },
-                                smooth: true
-                            },
-                            nodes: {
-                                shape: 'dot',
-                                size: 8, // 노드 크기
-                                color: {
-                                    border: '#FFFFFF',
-                                    background: '#000000',
-                                    highlight: {
-                                        border: '#2B7CE9',
-                                        background: '#D2E5FF'
-                                    },
-                                    hover: {
-                                        border: '#2B7CE9',
-                                        background: '#D2E5FF'
-                                    }
-                                },
-                                font: {
-                                    color: '#FFFFFF',
-                                    size: 7,
-                                    face: 'Arial',
-                                    align: 'center',
-                                    vadjust: 9, //노드와 텍스트 사이 거리
-                                    strokeWidth: 3, // 글자 테두리 두께
-                                    strokeColor: '#000000'
-                                },
-                                scaling: {
-                                    min: 10,
-                                    max: 30
-                                },
-                                borderWidth: 1
-                            },
-                            physics: {
-                                enabled: true
+        // 메뉴 버튼 클릭 시 메뉴를 토글하는 함수
+        function toggleMenu() {
+            const menuItems = document.getElementById("menu-items");
+            const overlay = document.getElementById("overlay");
+            menuItems.classList.toggle("show"); // 'show' 클래스 토글
+            overlay.classList.toggle("show"); // 오버레이 표시/숨기기
+        }
+
+        // 네트워크 그래프 생성
+        function showNetwork() {
+            // 서버에서 노드 및 엣지 데이터를 가져옴
+            fetch('/get_network_data/')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);  // 데이터를 확인하기 위해 콘솔에 출력
+                    var container = document.getElementById('network');
+                    nodes = new vis.DataSet(data.nodes.map(node => ({
+                        id: node.id,
+                        label: node.label,
+                        label_kor: node.label_ko,
+                        label_full: node.label_full,
+                        label_en: node.label_en,
+                        connected_labels: node.connected_labels,  // connected_labels 받아옴
+                        x: node.x * 1000,  // 좌표 값이 작을 수 있으니 적절히 스케일 조정
+                        y: node.y * 1000,  // 좌표 값 스케일 조정
+                        fixed: true  // 노드의 위치를 고정
+                    })));
+
+                    // 엣지 생성 시 label을 id로 변환하여 사용
+                    edges = new vis.DataSet(data.edges.map(edge => ({
+                        from: nodes.get({
+                            filter: function (item) {
+                                return item.label === edge.from;  // from label을 id로 변환
                             }
-                        };
-                        var network = new vis.Network(container, data, options);
+                        })[0].id,
+                        to: nodes.get({
+                            filter: function (item) {
+                                return item.label === edge.to;  // to label을 id로 변환
+                            }
+                        })[0].id,
+                        weight: edge.weight
+                    })));
 
-                        // 노드 클릭 시 해당 노드를 중심으로 확대
-                        network.on("click", function (params) {
-                            if (params.nodes.length > 0) {
-                                var nodeId = params.nodes[0];
-                                network.focus(nodeId, {
-                                    scale: 2.0,
-                                    animation: {
-                                        duration: 1000,
-                                        easingFunction: "easeInOutQuad"
+                    var options = {
+                        physics: {
+                            enabled: false  // 물리 엔진을 비활성화하여 고정된 좌표 사용
+                        },
+                        interaction: {
+                            dragNodes: true,  // 노드를 드래그할 수 있도록 설정
+                            hover: true,      // 노드에 마우스 올리면 강조
+                            selectable: true, // 노드를 선택할 수 있음
+                        },
+                        edges: {
+                            color: {
+                                color: '#737373',
+                                highlight: '#87CEFA',
+                                hover: '#FFFFFF'
+                            },
+                            smooth: {
+                                type: 'dynamic',  // 엣지를 부드럽게 보여줌
+                            }
+                        },
+                        nodes: {
+                            shape: 'dot',
+                            size: 8,
+                            color: {
+                                border: '#FFFFFF',
+                                background: '#000000',
+                                highlight: {
+                                    border: '#2B7CE9',
+                                    background: '#D2E5FF'
+                                },
+                                hover: {
+                                    border: '#2B7CE9',
+                                    background: '#D2E5FF'
+                                }
+                            },
+                            font: {
+                                color: '#FFFFFF',
+                                size: 7,
+                                face: 'Arial',
+                                align: 'center',
+                                strokeWidth: 3,
+                                strokeColor: '#000000'
+                            },
+                            scaling: {
+                                min: 10,
+                                max: 30
+                            },
+                            borderWidth: 1
+                        }
+                    };
+
+                    network = new vis.Network(container, {nodes: nodes, edges: edges}, options);
+
+                    network.on("click", function (params) {
+                        if (params.nodes.length > 0) {
+                            // 노드를 클릭했을 때의 동작
+                            var nodeId = params.nodes[0];
+                            addNodeToStack(nodeId);  // 스택에 노드 추가
+                    
+                            var nodeLabel = nodes.get(nodeId).label;  // 클릭한 노드의 label 가져옴
+                            focusNode(nodeLabel);  // 클릭한 노드를 확대하고 이동
+                    
+                            // 추적된 노드와 엣지를 저장할 때 mean 값도 포함
+                            if (isTracking) {
+                                var nodeData = nodes.get(nodeId);
+                                console.log("Node clicked:", nodeData);
+                    
+                                trackedNodes.push(nodeData);  // 추적 중이면 노드 저장
+                    
+                                highlightNodeAndEdges(nodeId);  // 클릭된 노드 하이라이트
+                    
+                                // 해당 노드에 연결된 엣지들을 추적
+                                var connectedEdges = network.getConnectedEdges(nodeId);
+                                connectedEdges.forEach(function (edgeId) {
+                                    var edgeData = edges.get(edgeId);
+                                    
+                                    // 해당 엣지가 이미 추적되지 않았으면 추적 목록에 추가
+                                    if (!trackedEdges.includes(edgeData)) {
+                                        trackedEdges.push(edgeData);
+                                        console.log("Edge tracked:", edgeData);
+                                    }
+                    
+                                    // 추적된 노드와 연결된 엣지만 하이라이트
+                                    var fromNode = edgeData.from;
+                                    var toNode = edgeData.to;
+                    
+                                    // 두 노드가 모두 추적된 노드라면 엣지 색을 노란색으로 변경
+                                    if (trackedNodes.some(node => node.id === fromNode) && trackedNodes.some(node => node.id === toNode)) {
+                                        edges.update({
+                                            id: edgeId,
+                                            color: {
+                                                color: '#FFD700',  // 노란색 엣지
+                                                highlight: '#FFD700',  // 노란색 하이라이트
+                                                hover: '#FFD700'  // 노란색 hover 효과
+                                            }
+                                        });
                                     }
                                 });
-                            } else {
-                                network.fit({
-                                    animation: {
-                                        duration: 1000,
-                                        easingFunction: "easeInOutQuad"
-                                    }
-                                });
+                            }
+                    
+                        } else if (params.edges.length > 0) {
+                            // 엣지를 클릭했을 때의 동작
+                            var edgeId = params.edges[0];  // 클릭한 엣지의 ID
+                            var edge = edges.get(edgeId);  // 클릭한 엣지의 데이터를 가져옴
+                            var weight = edge.weight;      // 엣지의 가중치 가져옴
+                    
+                            // 팝업 창 생성
+                            showEdgePopup(params.pointer.DOM, weight);
+                        } else {
+                            // 아무것도 클릭하지 않았을 때
+                            hideSidePanel();  // 사이드 패널 숨기기
+                            network.fit({
+                                animation: {
+                                    duration: 1000,
+                                    easingFunction: "easeInOutQuad"
+                                }
+                            });
+                        }
+                    });
+                    
+
+                })
+                .catch(error => console.error('Error fetching network data:', error));
+        }
+
+        // 엣지 클릭 시 팝업을 띄우는 함수
+        function showEdgePopup(clickPosition, weight) {
+            var popup = document.getElementById('edge-popup');
+
+            if (!popup) {
+                // 팝업이 없으면 새로 생성
+                popup = document.createElement('div');
+                popup.id = 'edge-popup';
+                popup.style.position = 'absolute';
+                popup.style.backgroundColor = '#333';
+                popup.style.color = 'white';
+                popup.style.padding = '10px';
+                popup.style.borderRadius = '5px';
+                popup.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
+                popup.style.zIndex = 1000;
+                document.body.appendChild(popup);
+            }
+
+            // 팝업 내용 및 위치 설정
+            popup.innerHTML = `<p>Weight: ${weight.toFixed(2)}</p>`;
+            popup.style.left = clickPosition.x + 'px';
+            popup.style.top = clickPosition.y + 'px';
+            popup.style.display = 'block';
+
+            // 일정 시간 후 팝업 자동으로 사라지게 설정 (선택 사항)
+            setTimeout(function () {
+                popup.style.display = 'none';
+            }, 1300);
+        }
+
+
+        // 페이지 로드 시 네트워크 그래프 생성 함수 호출
+        window.onload = function () {
+            showNetwork(); // 그래프 표시 함수 호출
+
+            // 네트워크가 완전히 로드된 후 중앙으로 이동하고 확대
+            setTimeout(function () {
+                // 네트워크의 중앙을 가져옴
+                var networkBounds = network.getViewPosition(); // 현재 뷰의 중앙 좌표 가져오기
+                var scaleFactor = 0.95; // 확대 비율
+
+                // 네트워크를 중앙으로 이동하고 확대
+                network.moveTo({
+                    position: {x: networkBounds.x, y: networkBounds.y},  // 현재 뷰의 중앙으로 이동
+                    scale: scaleFactor,  // 확대 비율 설정
+                    animation: {
+                        duration: 2000,  // 애니메이션 지속 시간 (1초)
+                        easingFunction: "easeInOutQuad"  // 애니메이션 효과
+                    }
+                });
+            }, 500); // 그래프가 완전히 렌더링된 후 0.5초 뒤에 실행
+        };
+
+        // 사이드 패널을 보여주는 함수
+        function showSidePanel(nodeData) {
+            var sidePanel = document.getElementById('side-panel');
+            document.getElementById('panel-title').textContent = nodeData.label_full;
+            document.getElementById('panel-description').textContent = nodeData.mean;  // DB에서 가져온 'mean' 값 표시
+
+            // connected_labels 배열을 링크로 표시
+            var relatedNodesContainer = document.getElementById('panel-related-nodes');
+            relatedNodesContainer.innerHTML = ''; // 기존 내용 초기화
+
+            // "관련 노드: " 텍스트를 먼저 추가하고 굵게 설정
+            var relatedNodesText = document.createElement('span');
+            relatedNodesText.textContent = '관련 노드 : ';
+            relatedNodesText.style.fontWeight = 'bold';  // 굵은 글씨로 설정
+            relatedNodesContainer.appendChild(relatedNodesText);
+
+            if (nodeData.connected_labels && nodeData.connected_labels.length > 0) {
+                nodeData.connected_labels.forEach(function (label) {
+                    // 각 관련 노드를 클릭 가능한 링크로 생성하고 굵게 설정
+                    var link = document.createElement('a');
+                    link.href = '#';  // 기본적으로 링크로 만듬
+                    link.textContent = label;  // 링크 텍스트는 관련 노드 이름
+                    link.style.color = 'skyblue';  // 파란색으로 스타일 지정
+                    link.style.cursor = 'pointer';  // 클릭 가능하도록 설정
+                    link.style.textDecoration = 'none';  // 밑줄 제거
+                    link.style.fontWeight = 'bold';  // 굵은 글씨로 설정
+
+                    // 클릭 이벤트 추가: 해당 노드로 이동
+                    link.onclick = function () {
+                        var targetNode = nodes.get({
+                            filter: function (item) {
+                                return item.label === label;  // 노드의 label이 관련 노드와 일치하는지 확인
+                            }
+                        })[0];  // 일치하는 첫 번째 노드 선택
+
+                        if (targetNode) {
+                            network.selectNodes([targetNode.id])
+                            addNodeToStack(targetNode.id);  // 스택에 노드 추가
+                            focusNode(targetNode.label);  // 해당 노드로 이동
+                        }
+                    };
+
+                    // 쉼표와 함께 노드를 표시
+                    relatedNodesContainer.appendChild(link);
+                    relatedNodesContainer.appendChild(document.createTextNode(', '));
+                });
+
+                // 마지막 쉼표 제거
+                relatedNodesContainer.removeChild(relatedNodesContainer.lastChild);
+            } else {
+                // 관련 노드가 없을 때 굵은 텍스트로 표시
+                relatedNodesContainer.textContent = '관련 노드: 관련 노드가 없습니다.';
+                relatedNodesContainer.style.fontWeight = 'bold';  // 굵은 글씨로 설정
+            }
+
+            sidePanel.style.right = '0';  // 슬라이드 애니메이션을 위한 위치 변경
+        }
+
+        // 사이드 패널을 숨기는 함수
+        function hideSidePanel() {
+            var sidePanel = document.getElementById('side-panel');
+            sidePanel.style.right = '-100%'; // 다시 오른쪽으로 슬라이드
+        }
+
+        // 검색창에 입력이 있을 때 유사한 노드 목록을 표시하는 이벤트 처리
+        document.getElementById('search-bar').addEventListener('input', function () {
+            var query = this.value.toLowerCase(); //입력값을 소문자로 변환하여 검색
+            showSuggestions(query);
+        });
+
+        function showSuggestions(query) {
+            var suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = ''; // 기존 추천 목록 초기화
+
+            if (query.length === 0) {
+                suggestionBox.style.display = 'none';
+                return;
+            }
+
+            // 입력된 검색어와 일치하는 최대 5개의 term을 찾음 (term, term_en, term_ko에서 검색)
+            var matches = nodes.get().filter(n =>
+                n.label.toLowerCase().includes(query) ||  // term과 일치
+                n.label_en.toLowerCase().includes(query) ||  // term_en과 일치
+                n.label_kor.toLowerCase().includes(query)  // term_ko과 일치
+            ).slice(0, 5);  // 최대 5개 항목만 표시
+
+            if (matches.length > 0) {
+                suggestionBox.style.display = 'block';
+                matches.forEach(node => {
+                    var li = document.createElement('li');
+                    li.textContent = node.label_full;  // 추천 목록에는 term (label)만 표시
+                    li.onclick = function () {
+                        network.selectNodes([node.id]);  // 클릭 시 해당 노드를 선택
+                        addNodeToStack(node.id);  // 스택에 노드 추가
+                        focusNode(node.label);  // 해당 노드의 label로 포커스 이동
+                        suggestionBox.style.display = 'none';  // 추천 목록 숨기기
+                        document.getElementById('search-bar').value = node.label;  // 검색창에 term 표시
+                    };
+
+                    suggestionBox.appendChild(li);
+                });
+            } else {
+                suggestionBox.style.display = 'none';
+            }
+        }
+
+        function focusNode(nodeLabel) {
+            // 노드 선택 시 확대 및 사이드 패널 열기
+            fetch(`/get_node_data/${encodeURIComponent(nodeLabel)}/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                    } else {
+                        showSidePanel(data);  // 사이드 패널에 노드 데이터 표시
+
+                        // 해당 노드를 찾음
+                        var nodeId = nodes.get({
+                            filter: function (item) {
+                                return item.label === nodeLabel;
+                            }
+                        })[0].id;
+
+                        // 노드의 위치를 가져옴
+                        var nodePosition = network.getPositions([nodeId])[nodeId];
+
+                        // 확대된 상태에서 화면의 오른쪽 이동 (scale = 1.6 기준)
+                        var scaleFactor = 1.6;  // 확대할 배율
+                        var targetX = nodePosition.x + (window.innerWidth / 7) / scaleFactor;  // scaleFactor를 적용하여 계산
+                        var targetY = nodePosition.y;  // y 좌표는 그대로 유지
+
+                        // 노드를 확대하고, 오른쪽 7분의 1 지점으로 이동
+                        network.moveTo({
+                            position: {x: targetX, y: targetY},  // 이동할 좌표 설정
+                            scale: scaleFactor,  // 확대 배율 설정
+                            animation: {
+                                duration: 1000,  // 애니메이션 지속 시간 (1초)
+                                easingFunction: "easeInOutQuad"  // 애니메이션 효과
                             }
                         });
-                    });
-            });
-    }
+                    }
+                })
+                .catch(error => console.error('Error fetching node data:', error));
+        }
 
-    // 페이지 로드 시 네트워크 그래프 생성 함수 호출
-    window.onload = function () {
-        showNetwork();
-    };
-</script>
+
+        // 검색창에 키워드 입력 후 엔터 키를 눌렀을 때의 처리
+        document.getElementById('search-bar').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();  // 기본 엔터 동작을 막음
+                var query = this.value.toLowerCase();  // 검색어를 소문자로 변환하여 검색
+                var suggestionBox = document.getElementById('suggestions');  // 추천 키워드 창 요소
+
+                // 검색어와 일치하는 노드 찾기
+                var matchedNode = nodes.get().find(n =>
+                    n.label.toLowerCase().includes(query) ||  // term과 일치
+                    n.label_en.toLowerCase().includes(query) ||  // term_en과 일치
+                    n.label_kor.toLowerCase().includes(query)  // term_ko과 일치
+                );
+
+                // 추천 키워드 창을 숨김
+                suggestionBox.style.display = 'none';
+
+                if (matchedNode) {
+                    // 노드가 있을 경우 해당 노드로 이동
+                    network.selectNodes([matchedNode.id]);
+                    addNodeToStack(matchedNode.id);  // 스택에 노드 추가
+                    focusNode(matchedNode.label);  // 노드 포커싱
+                } else {
+                    // 검색 결과가 없을 경우 경고 메시지 표시
+                    alert('해당하는 키워드가 없습니다. 정확하게 입력해주세요!');
+                }
+            }
+        });
+
+        // 검색창 외의 여백을 클릭하면 검색창을 비우는 기능
+        document.addEventListener('click', function (event) {
+            var searchBar = document.getElementById('search-bar');
+            var suggestionBox = document.getElementById('suggestions');
+
+            // 클릭한 대상이 검색창 또는 제안 목록이 아니면 검색창 비우기
+            if (!searchBar.contains(event.target) && !suggestionBox.contains(event.target)) {
+                searchBar.value = ''; // 검색창 비우기
+                suggestionBox.style.display = 'none'; // 제안 목록 숨기기;
+            }
+        });
+
+        // 공통 함수: 새로운 노드를 스택에 기록
+        function addNodeToStack(nodeId) {
+            if (lastNode !== nodeId) {
+                nodeStack.push(lastNode);
+                lastNode = nodeId;
+            }
+
+            // 스택 상태에 따라 버튼 활성화/비활성화 처리
+            updatePreviousButtonState();
+        }
+
+        // 이전 노드 버튼 활성화/비활성화 처리 함수
+        function updatePreviousButtonState() {
+            var previousButton = document.getElementById('previous-node-button');
+            if (nodeStack.length === 0 || nodeStack.length === 1) {
+                previousButton.disabled = true;  // 스택이 비었거나 하나의 노드만 있을 때 버튼 비활성화
+            } else {
+                previousButton.disabled = false; // 그 외의 경우 버튼 활성화
+            }
+        }
+
+        // 이전 노드로 이동
+        document.getElementById('previous-node-button').addEventListener('click', function () {
+            if (nodeStack.length > 1) {
+                var previousNodeId = nodeStack.pop(); // 스택에서 이전 노드를 가져옴
+                if (previousNodeId !== null) {
+                    var targetNode = nodes.get(previousNodeId);
+                    network.selectNodes([previousNodeId]); // 노드 선택
+                    focusNode(targetNode.label); // 해당 노드로 이동
+                }
+
+                // 스택 상태에 따라 버튼 활성화/비활성화 처리
+                updatePreviousButtonState();
+            }
+        });
+
+        // 추적 버튼을 클릭했을 때 추적 시작/중지 동작
+        function toggleTracking() {
+            isTracking = !isTracking;
+            const trackingButton = document.getElementById('tracking-button');
+
+            if (isTracking) {
+                trackingButton.innerHTML = '<i class="fas fa-stop"></i> 추적 중지';
+            } else {
+                trackingButton.innerHTML = '<i class="fas fa-crosshairs"></i> 추적 시작';
+                showPopup(); // 추적 중지 시 팝업을 표시
+            }
+        }
+
+        // 추적한 데이터 서버로 전송
+        function sendTrackedData(title) {
+            console.log("Sending tracked data:", trackedNodes);
+            fetch('/save_tracked_data/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  // Django의 CSRF 토큰 사용
+                },
+                body: JSON.stringify({
+                    title: title,  // 제목 추가
+                    nodes: trackedNodes,
+                    edges: trackedEdges
+                })
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '/word-directory';  // 데이터 전송 후 word-directory.html로 이동
+                    console.log('Data saved successfully');
+                } else {
+                    console.error('Error saving tracked data');
+                }
+            }).catch(error => console.error('Error sending data:', error));
+        }
+
+         // 팝업 표시
+         function showPopup() {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'block';
+            overlay.classList.add('show'); // 오버레이 표시
+        }
+
+        // 팝업 닫기 및 데이터 전송
+        function saveTracking() {
+            const title = document.getElementById('tracking-title').value;
+            if (!title) {
+                alert('제목을 입력해주세요!');
+                return;
+            }
+        
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'none'; // 팝업 숨기기
+            overlay.classList.remove('show'); // 오버레이 숨기기
+        
+            sendTrackedData(title); // 제목과 함께 데이터 전송
+        }
+
+        // 노드와 엣지를 하이라이트하는 함수 추가
+        function highlightNodeAndEdges(nodeId) {
+            // 노드를 하이라이트
+            nodes.update({
+                id: nodeId,
+                color: {
+                    border: '#FFD700',  // 노란색 테두리
+                    background: '#FFD700'  // 노란색 배경
+                }
+            });
+        }
+        
+        function cancelTracking() {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'none'; // 팝업 숨기기
+            overlay.classList.remove('show'); // 오버레이 숨기기
+        }
+
+        // 노드와 연결된 엣지들 중에서 추적된 노드들끼리 연결된 엣지만 하이라이트
+        function highlightConnectedEdges(nodeId) {
+            var connectedEdges = network.getConnectedEdges(nodeId);
+            connectedEdges.forEach(function (edgeId) {
+                var edge = edges.get(edgeId);
+                var fromNode = edge.from;
+                var toNode = edge.to;
+
+                // 두 노드가 모두 추적된 노드라면 엣지 색을 노란색으로 변경
+                if (trackedNodes.some(node => node.id === fromNode) && trackedNodes.some(node => node.id === toNode)) {
+                    edges.update({
+                        id: edgeId,
+                        color: {
+                            color: '#FFD700',  // 노란색 엣지
+                            highlight: '#FFD700',  // 노란색 하이라이트
+                            hover: '#FFD700'  // 노란색 hover 효과
+                        }
+                    });
+                }
+            });
+        }
+        
+
+
+    </script>
 </body>
 </html>

@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Font Awesome CDN -->
     <title>추적 그래프</title>
     <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
-    <!-- vis-network 사용 -->
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <style>
         /* 페이지 기본 설정 */
         body {
@@ -158,6 +157,12 @@
             color: #fff; /* 항목을 호버할 때 아이콘 색상을 변경 */
         }
     </style>
+    <script>
+        // CSRF 토큰을 가져오는 함수 정의
+        function getCSRFToken() {
+            return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        }
+    </script>
 </head>
 <body>
 <!-- 네비게이션 바 -->
@@ -176,7 +181,7 @@
 
 <!-- Topbox: 카테고리 선택 -->
 <div class="topbox" onclick="toggleDropdown()">
-    <h2>그래프를 선택해주세요.</h2>
+    <h2>그래프를 선택해주세요</h2>
 </div>
 
 <!-- Dropdown Menu: 추적된 노드 목록 -->
@@ -205,7 +210,7 @@
         window.location.href = "{% url 'main' %}";
     }
 
-    // Django 템플릿에서 안전하게 JSON 데이터를 읽어옴
+    // Django 템플릿에서 JSON 데이터를 읽어옴
     var trackedData = JSON.parse(document.getElementById('tracked-data').textContent);
     console.log(trackedData);
 
@@ -217,39 +222,46 @@
 
         // 쓰레기통 아이콘 추가
         var deleteIcon = document.createElement('i');
-        deleteIcon.className = 'fas fa-trash'; // Font Awesome 쓰레기통 아이콘
-        deleteIcon.style.float = 'right'; // 오른쪽에 아이콘 배치
-        deleteIcon.style.cursor = 'pointer'; // 클릭 가능하도록 설정
+        deleteIcon.className = 'fas fa-trash';
+        deleteIcon.style.float = 'right';
+        deleteIcon.style.cursor = 'pointer';
 
         // 삭제 아이콘 클릭 이벤트
         deleteIcon.onclick = function (event) {
-            event.stopPropagation(); // 아이콘 클릭 시 리스트 아이템의 클릭 이벤트가 실행되지 않도록 함
+            event.stopPropagation();
 
-            // 삭제 요청을 서버로 보냄
-            if (confirm('Are you sure you want to delete "' + data.title + '"?')) {
-                fetch('/mypage/word-directory/delete_tracked_data/', {  // 경로를 '/mypage/word-directory/delete_tracked_data/'로 수정
+            if (confirm(`"${data.title}" 이 항목을 정말 삭제하시겠습니까?`)) {
+                // data.id가 존재하는지 확인
+                if (!data.id) {
+                    alert("Error: Data ID not found.");
+                    return;
+                }
+
+                // Ajax 요청으로 삭제 요청을 보냄
+                fetch(`/mypage/delete/${data.id}/`, {
                     method: 'POST',
                     headers: {
+                        'X-CSRFToken': getCSRFToken(),
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}' // Django의 CSRF 토큰
                     },
-                    body: JSON.stringify({id: data.id}) // 삭제할 항목의 ID 전송
-                }).then(response => {
-                    if (response.ok) {
-                        // 삭제 성공 시 UI 업데이트
-                        listItem.remove(); // 목록에서 해당 항목 제거
-                        document.querySelector('.topbox h2').textContent = 'Click to select tracked node'; // Topbox 초기화
-                        document.getElementById('network').innerHTML = ''; // Bottombox 초기화
-                        alert('Deleted "' + data.title + '" successfully.');
-                    } else {
-                        alert('Failed to delete "' + data.title + '".');
-                    }
-                }).catch(error => console.error('Error:', error));
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'success') {
+                            alert(`"${data.title}" 항목이 성공적으로 삭제 되었습니다.`);
+                            window.location.reload();  // 페이지를 새로고침하여 변경사항 반영
+                        } else {
+                            alert('Error occurred while deleting.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error occurred while deleting.');
+                    });
             }
         };
 
-
-        listItem.appendChild(deleteIcon); // 리스트 아이템에 아이콘 추가
+        listItem.appendChild(deleteIcon);
         listItem.onclick = function () {
             document.querySelector('.topbox h2').textContent = data.title;
             loadGraphData(data.nodes, data.edges);
@@ -314,14 +326,13 @@
                 var nodeId = params.nodes[0];
                 var nodeData = nodes.get(nodeId);
 
-                // 노드를 75% 영역의 정중앙에 배치하며 확대
                 network.focus(nodeId, {
-                    scale: 1.5,  // 확대 비율
+                    scale: 1.5,
                     animation: {
-                        duration: 1000, // 애니메이션 시간
+                        duration: 1000,
                         easingFunction: "easeInOutQuad"
                     },
-                    position: {x: -container.offsetWidth * 0.125, y: 0}  // 75% 영역의 중앙으로 이동
+                    position: {x: -container.offsetWidth * 0.125, y: 0}
                 });
 
                 showSidePanel(nodeData);
@@ -347,14 +358,10 @@
         const nodeTitle = document.getElementById('panel-title').textContent;
 
         if (confirm(`Are you sure you want to delete "${nodeTitle}"?`)) {
-            // 삭제 로직 추가
             alert(`"${nodeTitle}" has been deleted.`);
-            // 여기서 실제 삭제 로직을 구현하고 필요 시 UI 업데이트
-            hideSidePanel(); // 삭제 후 사이드 패널을 숨김
+            hideSidePanel();
         }
     }
-
-
 </script>
 </body>
 </html>

@@ -8,9 +8,10 @@
     <style>
         /* 기본 스타일 설정 */
         body {
-            background-color: rgb(0, 0, 0);
-            margin: 0;
-            font-family: Arial, sans-serif;
+        background-color: rgb(0, 0, 0);
+        margin: 0;
+        font-family: Arial, sans-serif;
+
         }
 
         /* 헤더 스타일 설정 */
@@ -111,7 +112,7 @@
             padding: 15px;
             border: 2px solid white;
             border-radius: 5px;
-            
+
             /* 너비 조정 */
             width: 80%; /* 화면 너비의 80%로 설정 (반응형) */
             max-width: 600px; /* 최대 너비를 600px로 설정 */
@@ -156,7 +157,7 @@
 </header>
 <main>
     <div id="welcome-message">
-        <h1>Welcome NetworkX!</h1>
+        <h1>TechNet insight</h1>
 
         <p>Please, <a onclick="navigateToLogin()">sign in</a></p>
         <button id="get-started" onclick="navigateToMain()">Get Started</button>
@@ -205,17 +206,17 @@
             }
         }, speed);
     }
-    
+
     function showTypingEffect() {
         const textElement = document.querySelector("#hidden-content p");
-        const textContent = `NetworkX는 한국어 자연어 처리 모델 중 하나인 KoBERT를 활용하여 
+        const textContent = `TechNet insight는 한국어 자연어 처리 모델 중 하나인 KoBERT를 활용하여 
         사용자가 키워드의 의미를 효과적으로 학습할 수 있도록 설계된 웹 애플리케이션입니다. 
         KoBERT 모델의 텍스트 임베딩 기술과 코사인 유사도를 통한 관계성 계산 후 텍스트 네트워크 분석을 제공합니다. 
         이는 직관적인 검색과 네트워크 시각화를 통해 사용자 경험을 극대화하며, 용어 간의 의미적 관계를 쉽게 파악할 수 있습니다.
         본 프로젝트에서는 복잡한 IT 신기술 용어를 네트워크 분석을 통해 시각화 하였습니다.`;
-        typeText(textElement, textContent, 50); // 글자당 50ms 속도로 타이핑
+        typeText(textElement, textContent, 30); // 글자당 50ms 속도로 타이핑
     }
-    
+
     // 버튼 클릭 시 숨겨진 콘텐츠와 타이핑 애니메이션 실행
     function toggleContent() {
         const hiddenContent = document.getElementById('hidden-content');
@@ -229,7 +230,7 @@
             toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
         }
     }
-    
+
 </script>
 </body>
 </html>

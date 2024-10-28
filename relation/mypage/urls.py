@@ -1,8 +1,7 @@
 from django.urls import path
-from mypage.views import word_directory
-from mypage.views import delete_tracked_data
+from . import views
 
 urlpatterns = [
-    path('word-directory/', word_directory, name='mypage'),
-    path('delete_tracked_data/', delete_tracked_data, name='delete_tracked_data'),  # 경로 수정
+    path('word-directory/', views.word_directory, name='word_directory'),
+    path('delete/<int:pk>/', views.delete_tracked_data, name='delete_tracked_data'),  # pk 전달
 ]

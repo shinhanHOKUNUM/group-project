@@ -778,7 +778,7 @@
             // 클릭한 대상이 검색창 또는 제안 목록이 아니면 검색창 비우기
             if (!searchBar.contains(event.target) && !suggestionBox.contains(event.target)) {
                 searchBar.value = ''; // 검색창 비우기
-                suggestionBox.style.display = 'none'; // 제안 목록 숨기기
+                suggestionBox.style.display = 'none'; // 제안 목록 숨기기;
             }
         });
 

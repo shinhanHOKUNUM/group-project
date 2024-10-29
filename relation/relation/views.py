@@ -126,6 +126,9 @@ def save_tracked_data(request):
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+def word_directory(request):
+    return render(request, 'mypage/word-directory.html')
+
 
 
 
